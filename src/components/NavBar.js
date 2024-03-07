@@ -99,9 +99,8 @@ function NavBar () {
   const styles = StyleSheet.create({
     nav: {
       backgroundColor: "#2FDA74",
-      position: "relative",
+      position: "absolute",
       height: 72,
-      elevation: 0,
       bottom: 25,
       left: 30,
       width: 336,
