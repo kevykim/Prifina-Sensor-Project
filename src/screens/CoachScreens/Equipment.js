@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexDirection: "column",
     marginTop: 55,
-    height: "100%",
+    height: "auto",
     padding: 15,
   },
   header: {
