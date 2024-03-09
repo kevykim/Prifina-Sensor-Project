@@ -52,7 +52,7 @@ function NavBar () {
                     style={{
                       color: focused ? "white" : "black",
                       fontSize: 8,
-                      fontFamily: "Quicksand-Bold",
+                      fontFamily: "Quicksand-SemiBold",
                     }}
                   >
                     Home
@@ -78,7 +78,7 @@ function NavBar () {
                     style={{
                       color: focused ? "white" : "black",
                       fontSize: 8,
-                      fontFamily: "Quicksand-Bold",
+                      fontFamily: "Quicksand-SemiBold",
                     }}
                   >
                     Coach
@@ -107,7 +107,7 @@ function NavBar () {
                         fontSize: 12,
                         position: "absolute",
                         top: 70,
-                        fontFamily: "Quicksand-Bold",
+                        fontFamily: "Quicksand-SemiBold",
                       }}
                     >
                       Play
@@ -134,7 +134,7 @@ function NavBar () {
                     style={{
                       color: focused ? "white" : "black",
                       fontSize: 8,
-                      fontFamily: "Quicksand-Bold",
+                      fontFamily: "Quicksand-SemiBold",
                     }}
                   >
                     Book
@@ -160,7 +160,7 @@ function NavBar () {
                     style={{
                       color: focused ? "white" : "black",
                       fontSize: 8,
-                      fontFamily: "Quicksand-Bold",
+                      fontFamily: "Quicksand-SemiBold",
                     }}
                   >
                     History
