@@ -140,10 +140,9 @@ function Coach({ navigation }) {
 
 const styles = StyleSheet.create({
   main: {
-    flex: 1,
+    flexGrow: 1,
     flexDirection: "column",
     marginTop: 55,
-    height: "100%",
     padding: 15,
   },
   header: {
@@ -247,7 +246,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   progressContainer: {
-    flexDirection: "column",
+    marginBottom: 250
   },
   progressCards: {
     height: 106,
