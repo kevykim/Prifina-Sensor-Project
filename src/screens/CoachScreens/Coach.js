@@ -6,17 +6,19 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import { useCustomFonts } from "../utils/CustomFonts";
+import { useCustomFonts } from "../../utils/CustomFonts";
 
-import leftArrow from "../assets/Misc/leftArrow.png";
-import righty from "../assets/Misc/righty.png";
-import Avatar from "../assets/Misc/Avatar.png";
+import leftArrow from "../../assets/Misc/leftArrow.png";
+import righty from "../../assets/Misc/righty.png";
+import Avatar from "../../assets/Misc/Avatar.png";
 
-import Arc from '../assets/Golf/Arc.png';
-import Chip from '../assets/Golf/Chip.png';
-import Putt from '../assets/Golf/Putt.png';
+import Arc from '../../assets/Golf/Arc.png';
+import Chip from '../../assets/Golf/Chip.png';
+import Putt from '../../assets/Golf/Putt.png';
+
 
 function Coach({ navigation }) {
+
   const fontsLoaded = useCustomFonts();
 
   if (!fontsLoaded) {
@@ -52,13 +54,22 @@ function Coach({ navigation }) {
       </View>
 
       <View style={styles.topButtonContainer}>
-        <TouchableOpacity style={styles.topButtons}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("equipment")}
+          style={styles.topButtons}
+        >
           <Text style={styles.topButtonsText}>Equipment</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.topButtons}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("practice")}
+          style={styles.topButtons}
+        >
           <Text style={styles.topButtonsText}>Practice</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.topButtons}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("tutorials")}
+          style={styles.topButtons}
+        >
           <Text style={styles.topButtonsText}>Tutorials</Text>
         </TouchableOpacity>
       </View>
@@ -74,15 +85,15 @@ function Coach({ navigation }) {
         </Text>
       </View>
 
-      <TouchableOpacity style={styles.practicePlansBT}>
+      <TouchableOpacity onPress={() => navigation.navigate('practice')} style={styles.practicePlansBT}>
         <Text style={styles.practicePlansBTText}>View Practice Plans</Text>
       </TouchableOpacity>
 
       <View style={styles.equipContainer}>
         <Text style={styles.equipText}>Equipment Manager</Text>
-        <TouchableOpacity style={styles.equipButton}>
+        <TouchableOpacity onPress={() => navigation.navigate('equipment')} style={styles.equipButton}>
           <Text style={styles.equipButtonText}>View My Bag</Text>
-          <Image source={righty} style={{ color: "white" }} />
+          <Image source={righty} />
         </TouchableOpacity>
       </View>
 
@@ -97,8 +108,10 @@ function Coach({ navigation }) {
               Turning your swing angle by focusing on stance, posture, and grip
               techniques
             </Text>
-            <TouchableOpacity style={styles.progressCardsButton}>
-              <Text style={styles.progressCardsButtonText}>Continue Practice</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('practice')} style={styles.progressCardsButton}>
+              <Text style={styles.progressCardsButtonText}>
+                Continue Practice
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -113,12 +126,13 @@ function Coach({ navigation }) {
               Turning your swing angle by focusing on stance, posture, and grip
               techniques
             </Text>
-            <TouchableOpacity style={styles.progressCardsButton}>
-              <Text style={styles.progressCardsButtonText}>Continue Practice</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('practice')} style={styles.progressCardsButton}>
+              <Text style={styles.progressCardsButtonText}>
+                Continue Practice
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
-
       </View>
     </ScrollView>
   );
