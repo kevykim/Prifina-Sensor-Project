@@ -14,8 +14,10 @@ import Putt from '../../../assets/Golf/Putt.png'
 
 import { LineChart } from "react-native-gifted-charts";
 
-
+import CalibScreen from "../../../utils/calibScreen";
 import { useRoute } from "@react-navigation/native";
+import { useState } from "react";
+
 
 function Putting({ navigation }) {
   const route = useRoute();
@@ -35,6 +37,9 @@ function Putting({ navigation }) {
     { value: 51 },
     { value: 60 },
   ];
+
+ const [showModal, setShowModal] = useState(false);
+
   return (
     <ScrollView contentContainerStyle={styles.main}>
       <View style={styles.header}>
@@ -72,12 +77,18 @@ function Putting({ navigation }) {
         </TouchableOpacity>
         <TouchableOpacity
           style={{
-            backgroundColor:
-              route.name === "putting" ? "#2FDA74" : "#D3D3D3",
+            backgroundColor: route.name === "putting" ? "#2FDA74" : "#D3D3D3",
             ...styles.topButtons,
           }}
         >
-          <Text style={styles.topButtonsText}>Practice</Text>
+          <Text
+            style={{
+              color: route.name === "putting" ? "white" : "black",
+              ...styles.topButtonsText,
+            }}
+          >
+            Practice
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigation.navigate("tutorials")}
@@ -96,9 +107,21 @@ function Putting({ navigation }) {
         </Text>
       </View>
 
-      <TouchableOpacity style={styles.startPracticeButton}>
+      <TouchableOpacity
+        onPress={() => setShowModal(true)}
+        style={styles.startPracticeButton}
+      >
         <Text style={styles.startPracticeButtonText}>Start Practice</Text>
       </TouchableOpacity>
+
+      {showModal && (
+        <CalibScreen
+          modalShown={showModal}
+          closeModal={setShowModal}
+          navigation={navigation}
+          navVar={"putttrack"}
+        />
+      )}
 
       <Text style={styles.PCHeader}>Progress</Text>
       <View style={styles.PCChart}>
@@ -112,7 +135,7 @@ function Putting({ navigation }) {
           hideDataPoints
           width={270}
           yAxisLabelTexts={[0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60]}
-          xAxisLabelTexts={["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"]}
+          xAxisLabelTexts={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
           yAxisColor="lightgray"
           xAxisColor="lightgray"
           yAxisTextStyle={{
@@ -170,7 +193,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   topButtonsText: {
-    fontFamily: "Quicksand-Reg",
+    fontFamily: "Quicksand-Med",
     fontSize: 12,
   },
   puttHeader: {

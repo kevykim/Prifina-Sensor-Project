@@ -17,6 +17,9 @@ import { LineChart } from "react-native-gifted-charts";
 
 import { useRoute } from "@react-navigation/native";
 
+import CalibScreen from "../../../utils/calibScreen";
+import { useState } from "react";
+
 function ArcAdjustment({ navigation }) {
   const route = useRoute();
 
@@ -27,6 +30,8 @@ function ArcAdjustment({ navigation }) {
   }
 
  const data = [{ value: 15 }, { value: 30 }, { value: 26 }, { value: 40 }, {value : 49}, {value: 51}, {value: 60}];
+
+ const [showModal, setShowModal] = useState(false);
   return (
     <ScrollView contentContainerStyle={styles.main}>
       <View style={styles.header}>
@@ -69,7 +74,14 @@ function ArcAdjustment({ navigation }) {
             ...styles.topButtons,
           }}
         >
-          <Text style={styles.topButtonsText}>Practice</Text>
+          <Text
+            style={{
+              color: route.name === "arcadjustment" ? "white" : "black",
+              ...styles.topButtonsText,
+            }}
+          >
+            Practice
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigation.navigate("tutorials")}
@@ -88,9 +100,21 @@ function ArcAdjustment({ navigation }) {
         </Text>
       </View>
 
-      <TouchableOpacity style={styles.startPracticeButton}>
+      <TouchableOpacity
+        onPress={() => setShowModal(true)}
+        style={styles.startPracticeButton}
+      >
         <Text style={styles.startPracticeButtonText}>Start Practice</Text>
       </TouchableOpacity>
+
+      {showModal && (
+        <CalibScreen
+          modalShown={showModal}
+          closeModal={setShowModal}
+          navigation={navigation}
+          navVar={'arctrack'}
+        />
+      )}
 
       <Text style={styles.PCHeader}>Progress</Text>
       <View style={styles.PCChart}>
@@ -104,7 +128,7 @@ function ArcAdjustment({ navigation }) {
           hideDataPoints
           width={270}
           yAxisLabelTexts={[0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60]}
-          xAxisLabelTexts={["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"]}
+          xAxisLabelTexts={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
           yAxisColor="lightgray"
           xAxisColor="lightgray"
           yAxisTextStyle={{
@@ -162,7 +186,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   topButtonsText: {
-    fontFamily: "Quicksand-Reg",
+    fontFamily: "Quicksand-Med",
     fontSize: 12,
   },
   arcHeader: {

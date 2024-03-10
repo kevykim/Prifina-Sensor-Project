@@ -65,7 +65,14 @@ function Practice({ navigation }) {
             ...styles.topButtons,
           }}
         >
-          <Text style={styles.topButtonsText}>Practice</Text>
+          <Text
+            style={{
+              color: route.name === "practice" ? "white" : "black",
+              ...styles.topButtonsText,
+            }}
+          >
+            Practice
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigation.navigate("tutorials")}
@@ -96,10 +103,11 @@ function Practice({ navigation }) {
               Turning your swing angle by focusing on stance, posture, and grip
               techniques
             </Text>
-            <TouchableOpacity onPress={() => navigation.navigate('arcadjustment')} style={styles.exerciseCardsButton}>
-              <Text style={styles.exerciseCardsButtonText}>
-                Set Goals
-              </Text>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("arcadjustment")}
+              style={styles.exerciseCardsButton}
+            >
+              <Text style={styles.exerciseCardsButtonText}>Set Goals</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -114,10 +122,11 @@ function Practice({ navigation }) {
               Turning your swing angle by focusing on stance, posture, and grip
               techniques
             </Text>
-            <TouchableOpacity onPress={() => navigation.navigate('putting')} style={styles.exerciseCardsButton}>
-              <Text style={styles.exerciseCardsButtonText}>
-                Set Goals
-              </Text>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("putting")}
+              style={styles.exerciseCardsButton}
+            >
+              <Text style={styles.exerciseCardsButtonText}>Set Goals</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -167,7 +176,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   topButtonsText: {
-    fontFamily: "Quicksand-Reg",
+    fontFamily: "Quicksand-Med",
     fontSize: 12,
   },
   practiceHeader: {

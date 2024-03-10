@@ -63,7 +63,14 @@ function Equipment({ navigation }) {
             ...styles.topButtons,
           }}
         >
-          <Text style={styles.topButtonsText}>Equipment</Text>
+          <Text
+            style={{
+              color: route.name === "equipment" ? "white" : "black",
+              ...styles.topButtonsText,
+            }}
+          >
+            Equipment
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigation.navigate("practice")}
@@ -173,7 +180,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   topButtonsText: {
-    fontFamily: "Quicksand-Reg",
+    fontFamily: "Quicksand-Med",
     fontSize: 12,
   },
   equipmentHeader: {

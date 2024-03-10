@@ -73,7 +73,14 @@ function Tutorials({ navigation }) {
             ...styles.topButtons,
           }}
         >
-          <Text style={styles.topButtonsText}>Tutorials</Text>
+          <Text
+            style={{
+              color: route.name === "tutorials" ? "white" : "black",
+              ...styles.topButtonsText,
+            }}
+          >
+            Tutorials
+          </Text>
         </TouchableOpacity>
       </View>
 
@@ -118,7 +125,7 @@ function Tutorials({ navigation }) {
         />
       </View>
 
-            <View style={{ flexGrow: 1 }}>
+      <View style={{ flexGrow: 1 }}>
         <ScrollView horizontal style={styles.tutContainer}>
           <View style={styles.tutCard}>
             <View style={styles.tutTimeContainer}>
@@ -165,12 +172,11 @@ function Tutorials({ navigation }) {
             </View>
           </View>
         </ScrollView>
-            </View>
+      </View>
 
-        <Text style={styles.favoritesHeader}>Favorites</Text>
+      <Text style={styles.favoritesHeader}>Favorites</Text>
 
-
-<View style={{ flexGrow: 1, marginBottom: 150}}>
+      <View style={{ flexGrow: 1, marginBottom: 150 }}>
         <ScrollView horizontal style={styles.tutContainer}>
           <View style={styles.tutCard}>
             <View style={styles.tutTimeContainer}>
@@ -216,10 +222,8 @@ function Tutorials({ navigation }) {
               </Text>
             </View>
           </View>
-        </ScrollView> 
-
-</View>
-        
+        </ScrollView>
+      </View>
     </ScrollView>
   );
 }
@@ -265,7 +269,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   topButtonsText: {
-    fontFamily: "Quicksand-Reg",
+    fontFamily: "Quicksand-Med",
     fontSize: 12,
   },
   tutorialsHeader: {
