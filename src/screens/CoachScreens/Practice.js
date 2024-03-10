@@ -9,15 +9,14 @@ import {
 import { useCustomFonts } from "../../utils/CustomFonts";
 
 import leftArrow from "../../assets/Misc/leftArrow.png";
-import righty from "../../assets/Misc/righty.png";
 import Avatar from "../../assets/Misc/Avatar.png";
 
-import Arc from '../../assets/Golf/Arc.png';
-import Chip from '../../assets/Golf/Chip.png';
-import Putt from '../../assets/Golf/Putt.png';
+import Arc from "../../assets/Golf/Arc.png";
+import Putt from "../../assets/Golf/Putt.png";
+import { useRoute } from "@react-navigation/native";
 
-
-function Coach({ navigation }) {
+function Practice({ navigation }) {
+  const route = useRoute();
 
   const fontsLoaded = useCustomFonts();
 
@@ -30,8 +29,8 @@ function Coach({ navigation }) {
       <View style={styles.header}>
         <View>
           <TouchableOpacity
-            style={styles.backHome}
-            onPress={() => navigation.navigate("Home")}
+            style={styles.backTraining}
+            onPress={() => navigation.navigate("coach")}
           >
             <Image source={leftArrow} />
             <Text
@@ -41,7 +40,7 @@ function Coach({ navigation }) {
                 fontSize: 12,
               }}
             >
-              Home
+              Training
             </Text>
           </TouchableOpacity>
         </View>
@@ -61,8 +60,10 @@ function Coach({ navigation }) {
           <Text style={styles.topButtonsText}>Equipment</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate("practice")}
-          style={styles.topButtons}
+          style={{
+            backgroundColor: route.name === "practice" ? "#2FDA74" : "#D3D3D3",
+            ...styles.topButtons,
+          }}
         >
           <Text style={styles.topButtonsText}>Practice</Text>
         </TouchableOpacity>
@@ -74,43 +75,30 @@ function Coach({ navigation }) {
         </TouchableOpacity>
       </View>
 
-      <Text style={styles.trainingHeader}>Training</Text>
+      <Text style={styles.practiceHeader}>Practice</Text>
 
       <View>
-        <Text style={styles.trainingInfo}>
+        <Text style={styles.practiceInfo}>
           Welcome to your personalized training hub. Here you can set and
           customize your equipment, practice specific skills and drills, and
-          view tutorials catered towards your personal feedback needs.
-          Personalized coaching is available 24/7.
+          view tutorials catered towards your goals.
         </Text>
       </View>
 
-      <TouchableOpacity onPress={() => navigation.navigate('practice')} style={styles.practicePlansBT}>
-        <Text style={styles.practicePlansBTText}>View Practice Plans</Text>
-      </TouchableOpacity>
+      <Text style={styles.exerciseHeader}>Select an exercise</Text>
 
-      <View style={styles.equipContainer}>
-        <Text style={styles.equipText}>Equipment Manager</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('equipment')} style={styles.equipButton}>
-          <Text style={styles.equipButtonText}>View My Bag</Text>
-          <Image source={righty} />
-        </TouchableOpacity>
-      </View>
-
-      <Text style={styles.progressText}>In progress</Text>
-
-      <View style={styles.progressContainer}>
-        <View style={styles.progressCards}>
-          <Image style={styles.progressImage} source={Arc} />
-          <View style={styles.progressCardsTContainer}>
-            <Text style={styles.progressCardsTHeader}>Arc Adjustment</Text>
-            <Text style={styles.progressCardsText}>
+      <View style={styles.exerciseContainer}>
+        <View style={styles.exerciseCards}>
+          <Image style={styles.exerciseImage} source={Arc} />
+          <View style={styles.exerciseCardsTContainer}>
+            <Text style={styles.exerciseCardsTHeader}>Arc Adjustment</Text>
+            <Text style={styles.exerciseCardsText}>
               Turning your swing angle by focusing on stance, posture, and grip
               techniques
             </Text>
-            <TouchableOpacity onPress={() => navigation.navigate('practice')} style={styles.progressCardsButton}>
-              <Text style={styles.progressCardsButtonText}>
-                Continue Practice
+            <TouchableOpacity onPress={() => navigation.navigate('arcadjustment')} style={styles.exerciseCardsButton}>
+              <Text style={styles.exerciseCardsButtonText}>
+                Set Goals
               </Text>
             </TouchableOpacity>
           </View>
@@ -118,17 +106,17 @@ function Coach({ navigation }) {
 
         {/* <View style={{borderBottomWidth: 0.5, marginBottom: 4}}></View> */}
 
-        <View style={styles.progressCards}>
-          <Image style={styles.progressImage} source={Putt} />
-          <View style={styles.progressCardsTContainer}>
-            <Text style={styles.progressCardsTHeader}>Putting</Text>
-            <Text style={styles.progressCardsText}>
+        <View style={styles.exerciseCards}>
+          <Image style={styles.exerciseImage} source={Putt} />
+          <View style={styles.exerciseCardsTContainer}>
+            <Text style={styles.exerciseCardsTHeader}>Putting</Text>
+            <Text style={styles.exerciseCardsText}>
               Turning your swing angle by focusing on stance, posture, and grip
               techniques
             </Text>
-            <TouchableOpacity onPress={() => navigation.navigate('practice')} style={styles.progressCardsButton}>
-              <Text style={styles.progressCardsButtonText}>
-                Continue Practice
+            <TouchableOpacity onPress={() => navigation.navigate('putting')} style={styles.exerciseCardsButton}>
+              <Text style={styles.exerciseCardsButtonText}>
+                Set Goals
               </Text>
             </TouchableOpacity>
           </View>
@@ -143,17 +131,18 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexDirection: "column",
     marginTop: 55,
+    height: "auto",
     padding: 15,
   },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  backHome: {
+  backTraining: {
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    width: 60,
+    width: 70,
     justifyContent: "space-between",
   },
   nameHeader: {
@@ -181,13 +170,13 @@ const styles = StyleSheet.create({
     fontFamily: "Quicksand-Reg",
     fontSize: 12,
   },
-  trainingHeader: {
+  practiceHeader: {
     marginTop: 25,
     marginBottom: 25,
     fontFamily: "Quicksand-SemiBold",
     fontSize: 32,
   },
-  trainingInfo: {
+  practiceInfo: {
     fontFamily: "Quicksand-Light",
     borderWidth: 1,
     color: "#202020",
@@ -195,60 +184,20 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     paddingHorizontal: 24,
     borderRadius: 8,
-    height: 142,
+    height: 122,
+    lineHeight: 22
   },
-  practicePlansBT: {
-    marginVertical: 25,
-    height: 40,
-    width: 361,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#2FDA74",
-    paddingVertical: 10,
-    paddingHorizontal: 12,
-    borderRadius: 8,
-  },
-  practicePlansBTText: {
-    color: "white",
-    fontFamily: "Quicksand-SemiBold",
-    fontSize: 16,
-  },
-  equipContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    height: 24,
-    marginBottom: 45,
-  },
-  equipText: {
-    fontFamily: "Quicksand-Med",
-    fontSize: 18,
-  },
-  equipButton: {
-    backgroundColor: "#358DD1",
-    width: 106,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    borderRadius: 4,
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    height: 24,
-  },
-  equipButtonText: {
-    color: "white",
-    fontFamily: "Quicksand-SemiBold",
-    fontSize: 12,
-  },
-  progressText: {
+ 
+  exerciseHeader: {
     fontFamily: "Quicksand-Med",
     fontSize: 16,
+    marginTop: 25,
     marginBottom: 15,
   },
-  progressContainer: {
+  exerciseContainer: {
     marginBottom: 250,
   },
-  progressCards: {
+  exerciseCards: {
     height: 106,
     flexDirection: "row",
     alignItems: "center",
@@ -256,24 +205,24 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.2,
     borderColor: "#AFAFAF",
   },
-  progressImage: {
+  exerciseImage: {
     width: 80,
     height: 88,
-    borderRadius: 8,
+    borderRadius: 8
   },
-  progressCardsTContainer: {
+  exerciseCardsTContainer: {
     flexDirection: "column",
     justifyContent: "space-between",
     width: 265,
     height: 88,
   },
-  progressCardsTHeader: {
+  exerciseCardsTHeader: {
     fontFamily: "Quicksand-Med",
-    height: 16,
+    height: 20,
     fontSize: 16,
-    lineHeight: 20,
+    marginBottom: 1,
   },
-  progressCardsText: {
+  exerciseCardsText: {
     fontFamily: "Quicksand-Reg",
     color: "#202020",
     // padding: 4,
@@ -281,20 +230,21 @@ const styles = StyleSheet.create({
     fontSize: 12,
     lineHeight: 20,
   },
-  progressCardsButton: {
+  exerciseCardsButton: {
     backgroundColor: "#2FDA74",
     height: 24,
-    width: 117,
+    width: 70,
     borderRadius: 4,
+    paddingHorizontal: 8,
     padding: 4,
     alignItems: "center",
     justifyContent: "center",
   },
-  progressCardsButtonText: {
+  exerciseCardsButtonText: {
     fontFamily: "Quicksand-SemiBold",
     fontSize: 12,
     color: "white",
   },
 });
 
-export default Coach;
+export default Practice;
