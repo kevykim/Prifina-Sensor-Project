@@ -8,6 +8,8 @@ import Putting from "./PracticeScreens/Putting";
 import ArcAdjustment from "./PracticeScreens/ArcAdjustment";
 import ArcTrack from "./TrackScreens/ArcTrack";
 import PuttTrack from "./TrackScreens/PuttTrack";
+import ArcResult from "./ResultScreens/ArcResult";
+import PuttResult from "./ResultScreens/PuttResult";
 
 
 
@@ -29,6 +31,8 @@ function CoachStack({ navigation }) {
       <Stack.Screen name='arcadjustment' component={ArcAdjustment} />
       <Stack.Screen name='arctrack' component={ArcTrack} />
       <Stack.Screen name='putttrack' component={PuttTrack} />
+      <Stack.Screen name='arcresult' component={ArcResult} />
+      <Stack.Screen name='puttresult' component={PuttResult} />
     </Stack.Navigator>
   );
 }

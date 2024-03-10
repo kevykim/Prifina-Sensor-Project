@@ -20,6 +20,8 @@ import GrayXCheck from '../../../assets/Shots/GrayXCheck.png';
 
 import { useRoute } from "@react-navigation/native";
 
+import { useState } from "react";
+
 function ArcTrack({ navigation }) {
   const route = useRoute();
 
@@ -28,6 +30,8 @@ function ArcTrack({ navigation }) {
   if (!fontsLoaded) {
     return null;
   }
+
+  const [showView, setShowView] = useState(false)
 
   return (
     <ScrollView contentContainerStyle={styles.main}>
@@ -131,14 +135,21 @@ function ArcTrack({ navigation }) {
         </View>
 
         <View style={styles.shotCard}>
-          <View style={styles.shotBlue}>
+          <TouchableOpacity onPress={() => setShowView(!showView)} style={styles.shotBlue}>
             <Text style={styles.shotText}>Shot 5</Text>
-          </View>
+          </TouchableOpacity>
           <View style={styles.shotCXImage}>
             <Image source={GrayCheck} />
             <Image source={GrayXCheck} />
           </View>
         </View>
+        {showView && 
+                <TouchableOpacity onPress={() => navigation.navigate('arcresult')} style={styles.toResultsButton}>
+            <Text style={styles.toResultsButtonText}>
+              Adjust grip upwards, add a bit more power 
+            </Text>
+                </TouchableOpacity>
+                }
 
         <View style={styles.shotCard}>
           <View style={styles.newShot}>
@@ -318,6 +329,21 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+  },
+  toResultsButton: {
+    height: 80,
+    width: 355,
+    marginBottom: 15,
+    borderRadius: 15,
+    backgroundColor: "#358DD1",
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  toResultsButtonText: {
+    fontFamily: 'Quicksand-Med',
+    fontSize: 12,
+    textAlign: 'center',
+    color: 'white'
   },
 });
 

@@ -108,7 +108,7 @@ function Coach({ navigation }) {
               Turning your swing angle by focusing on stance, posture, and grip
               techniques
             </Text>
-            <TouchableOpacity onPress={() => navigation.navigate('practice')} style={styles.progressCardsButton}>
+            <TouchableOpacity onPress={() => navigation.navigate('arcadjustment')} style={styles.progressCardsButton}>
               <Text style={styles.progressCardsButtonText}>
                 Continue Practice
               </Text>
@@ -126,7 +126,7 @@ function Coach({ navigation }) {
               Turning your swing angle by focusing on stance, posture, and grip
               techniques
             </Text>
-            <TouchableOpacity onPress={() => navigation.navigate('practice')} style={styles.progressCardsButton}>
+            <TouchableOpacity onPress={() => navigation.navigate('putting')} style={styles.progressCardsButton}>
               <Text style={styles.progressCardsButtonText}>
                 Continue Practice
               </Text>
