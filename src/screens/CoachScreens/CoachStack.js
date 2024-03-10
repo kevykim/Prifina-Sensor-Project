@@ -6,6 +6,10 @@ import Practice from "./Practice";
 import Tutorials from "./Tutorials";
 import Putting from "./PracticeScreens/Putting";
 import ArcAdjustment from "./PracticeScreens/ArcAdjustment";
+import ArcTrack from "./TrackScreens/ArcTrack";
+import PuttTrack from "./TrackScreens/PuttTrack";
+
+
 
 
 const Stack = createStackNavigator();
@@ -23,6 +27,8 @@ function CoachStack({ navigation }) {
       <Stack.Screen name='tutorials' component={Tutorials}/>
       <Stack.Screen name='putting' component={Putting}/>
       <Stack.Screen name='arcadjustment' component={ArcAdjustment} />
+      <Stack.Screen name='arctrack' component={ArcTrack} />
+      <Stack.Screen name='putttrack' component={PuttTrack} />
     </Stack.Navigator>
   );
 }
