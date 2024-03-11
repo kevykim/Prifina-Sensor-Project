@@ -8,7 +8,7 @@ import NavBar from './src/components/NavBar';
 
 export default function App() {
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider style={styles.container}>
     <NavigationContainer>
       <NavBar />
     </NavigationContainer>
@@ -19,8 +19,5 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });

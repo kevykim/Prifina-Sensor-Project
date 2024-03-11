@@ -9,12 +9,13 @@ import HomeIcon from '../assets/NavIcons/HomeIcon.png'
 import PlayIcon from '../assets/NavIcons/PlayIcon.png'
 
 import HomePage from '../screens/HomePage';
-import Coach from '../screens/Coach';
+import Coach from '../screens/CoachScreens/Coach';
 import Play from '../screens/Play';
 import Book from '../screens/Book';
 import History from '../screens/History';
 
 import { useCustomFonts } from "../utils/CustomFonts";
+import CoachStack from "../screens/CoachScreens/CoachStack";
 
 
 const Tab = createBottomTabNavigator();
@@ -52,7 +53,7 @@ function NavBar () {
                     style={{
                       color: focused ? "white" : "black",
                       fontSize: 8,
-                      fontFamily: "Quicksand-Bold",
+                      fontFamily: "Quicksand-SemiBold",
                     }}
                   >
                     Home
@@ -78,7 +79,7 @@ function NavBar () {
                     style={{
                       color: focused ? "white" : "black",
                       fontSize: 8,
-                      fontFamily: "Quicksand-Bold",
+                      fontFamily: "Quicksand-SemiBold",
                     }}
                   >
                     Coach
@@ -87,7 +88,7 @@ function NavBar () {
               ),
             }}
             name="Coach"
-            component={Coach}
+            component={CoachStack}
           />
           <Tab.Screen
             options={{
@@ -107,7 +108,7 @@ function NavBar () {
                         fontSize: 12,
                         position: "absolute",
                         top: 70,
-                        fontFamily: "Quicksand-Bold",
+                        fontFamily: "Quicksand-SemiBold",
                       }}
                     >
                       Play
@@ -134,7 +135,7 @@ function NavBar () {
                     style={{
                       color: focused ? "white" : "black",
                       fontSize: 8,
-                      fontFamily: "Quicksand-Bold",
+                      fontFamily: "Quicksand-SemiBold",
                     }}
                   >
                     Book
@@ -160,7 +161,7 @@ function NavBar () {
                     style={{
                       color: focused ? "white" : "black",
                       fontSize: 8,
-                      fontFamily: "Quicksand-Bold",
+                      fontFamily: "Quicksand-SemiBold",
                     }}
                   >
                     History
