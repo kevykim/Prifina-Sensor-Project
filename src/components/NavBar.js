@@ -4,18 +4,19 @@ import React from "react";
 
 import BookingIcon from '../assets/NavIcons/BookingIcon.png'
 import CoachIcon from '../assets/NavIcons/CoachIcon.png'
-import HistoryIcon from '../assets/NavIcons/HistoryIcon.png'
+import ScorecardIcon from '../assets/NavIcons/ScorecardIcon.png'
 import HomeIcon from '../assets/NavIcons/HomeIcon.png'
 import PlayIcon from '../assets/NavIcons/PlayIcon.png'
 
 import HomePage from '../screens/HomePage';
-import Coach from '../screens/CoachScreens/Coach';
+
 import Play from '../screens/Play';
 import Book from '../screens/Book';
-import History from '../screens/History';
+
 
 import { useCustomFonts } from "../utils/CustomFonts";
 import CoachStack from "../screens/CoachScreens/CoachStack";
+import ScorecardStack from "../screens/Scorecard/Scorecardstack";
 
 
 const Tab = createBottomTabNavigator();
@@ -151,7 +152,7 @@ function NavBar () {
               tabBarIcon: ({ focused }) => (
                 <View style={styles.navContainer}>
                   <Image
-                    source={HistoryIcon}
+                    source={ScorecardIcon}
                     style={[
                       styles.navIcon,
                       { tintColor: focused ? "white" : "black" },
@@ -164,13 +165,13 @@ function NavBar () {
                       fontFamily: "Quicksand-SemiBold",
                     }}
                   >
-                    History
+                    Scorecard
                   </Text>
                 </View>
               ),
             }}
-            name="History"
-            component={History}
+            name="Scorecard"
+            component={ScorecardStack}
           />
         </Tab.Navigator>
         {/* <TouchableOpacity style={styles.fab}>
