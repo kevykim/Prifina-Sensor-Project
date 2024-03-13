@@ -11,12 +11,13 @@ import PlayIcon from '../assets/NavIcons/PlayIcon.png'
 import HomePage from '../screens/HomePage';
 
 import Play from '../screens/Play';
-import Book from '../screens/Book';
+
 
 
 import { useCustomFonts } from "../utils/CustomFonts";
 import CoachStack from "../screens/CoachScreens/CoachStack";
 import ScorecardStack from "../screens/Scorecard/Scorecardstack";
+import BookingStack from "../screens/BookingScreens/BookingStack";
 
 
 const Tab = createBottomTabNavigator();
@@ -139,13 +140,13 @@ function NavBar () {
                       fontFamily: "Quicksand-SemiBold",
                     }}
                   >
-                    Book
+                    Booking
                   </Text>
                 </View>
               ),
             }}
-            name="Book"
-            component={Book}
+            name="Booking"
+            component={BookingStack}
           />
           <Tab.Screen
             options={{
