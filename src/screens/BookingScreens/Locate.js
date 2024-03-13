@@ -110,11 +110,40 @@ function Locate({ navigation }) {
 
           <View style={styles.selectCrsTContainer}>
             <View style={styles.SCTBox}>
+              <Text style={styles.SCTBoxTop}>North Hill</Text>
+              <Text style={styles.SCTBoxBot}>3.6 miles</Text>
+            </View>
+
+            <TouchableOpacity
+              onPress={() => navigation.navigate("nhoverview")}
+              style={styles.seeDeetsButton}
+            >
+              <Text style={styles.seeDeetsText}>See Details</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        <View style={styles.selectCrsCard}>
+          <View style={styles.starContainer}>
+            <Image source={GreenStar} />
+            <Image source={GreenStar} />
+            <Image source={GreenStar} />
+            <Image source={GreenStar} />
+            <Image source={GrayStar} />
+          </View>
+
+          <Image style={styles.selectCrsImage} source={VA} />
+
+          <View style={styles.selectCrsTContainer}>
+            <View style={styles.SCTBox}>
               <Text style={styles.SCTBoxTop}>Ventura Acres</Text>
               <Text style={styles.SCTBoxBot}>3.6 miles</Text>
             </View>
 
-            <TouchableOpacity style={styles.seeDeetsButton}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("vaoverview")}
+              style={styles.seeDeetsButton}
+            >
               <Text style={styles.seeDeetsText}>See Details</Text>
             </TouchableOpacity>
           </View>
@@ -142,31 +171,6 @@ function Locate({ navigation }) {
             </TouchableOpacity>
           </View>
         </View>
-
-        <View style={styles.selectCrsCard}>
-          <View style={styles.starContainer}>
-            <Image source={GreenStar} />
-            <Image source={GreenStar} />
-            <Image source={GreenStar} />
-            <Image source={GreenStar} />
-            <Image source={GrayStar} />
-          </View>
-
-          <Image style={styles.selectCrsImage} source={VA} />
-
-          <View style={styles.selectCrsTContainer}>
-            <View style={styles.SCTBox}>
-              <Text style={styles.SCTBoxTop}>Ventura Acres</Text>
-              <Text style={styles.SCTBoxBot}>3.6 miles</Text>
-            </View>
-
-            <TouchableOpacity style={styles.seeDeetsButton}>
-              <Text style={styles.seeDeetsText}>See Details</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-
-
       </View>
     </ScrollView>
   );
