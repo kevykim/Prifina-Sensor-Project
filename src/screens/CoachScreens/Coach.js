@@ -269,9 +269,9 @@ const styles = StyleSheet.create({
   },
   progressCardsTHeader: {
     fontFamily: "Quicksand-Med",
-    height: 16,
+    height: 20,
     fontSize: 16,
-    lineHeight: 20,
+
   },
   progressCardsText: {
     fontFamily: "Quicksand-Reg",
@@ -279,7 +279,7 @@ const styles = StyleSheet.create({
     // padding: 4,
     width: 265,
     fontSize: 12,
-    lineHeight: 20,
+    lineHeight: 18,
   },
   progressCardsButton: {
     backgroundColor: "#2FDA74",
