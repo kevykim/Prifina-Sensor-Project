@@ -32,6 +32,7 @@ function Locate({ navigation }) {
 
   return (
     <ScrollView contentContainerStyle={styles.main}>
+      <View style={styles.container}>
       <View style={styles.header}>
         <View>
           <TouchableOpacity
@@ -172,6 +173,7 @@ function Locate({ navigation }) {
           </View>
         </View>
       </View>
+      </View>
     </ScrollView>
   );
 }
@@ -180,8 +182,11 @@ const styles = StyleSheet.create({
   main: {
     flexGrow: 1,
     flexDirection: "column",
-    marginTop: 55,
+    backgroundColor: 'white',
     padding: 15,
+  },
+  container: {
+    marginTop: 50,
   },
   header: {
     flexDirection: "row",

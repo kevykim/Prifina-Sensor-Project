@@ -40,6 +40,7 @@ function Statistics({ navigation }) {
 
   return (
     <ScrollView contentContainerStyle={styles.main}>
+      <View style={styles.container}>
       <View style={styles.header}>
         <View>
           <TouchableOpacity
@@ -104,7 +105,7 @@ function Statistics({ navigation }) {
         </TouchableOpacity>
       </View>
 
-      <Text style={styles.trendsHeader}>Trends</Text>
+      <Text style={styles.trendsHeader}>Statistics</Text>
 
       <View style={styles.scoreChart}>
         <Carousel
@@ -202,6 +203,7 @@ function Statistics({ navigation }) {
           </TouchableOpacity>
         </View>
       </View>
+      </View>
     </ScrollView>
   );
 }
@@ -210,8 +212,11 @@ const styles = StyleSheet.create({
   main: {
     flexGrow: 1,
     flexDirection: "column",
-    marginTop: 55,
     padding: 15,
+    backgroundColor: 'white'
+  },
+  container: {
+    marginTop: 50,
   },
   header: {
     flexDirection: "row",
