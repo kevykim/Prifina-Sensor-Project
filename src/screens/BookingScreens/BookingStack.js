@@ -7,6 +7,7 @@ import NHOverview from "./BookingLocationScreens/NorthHill/NHOverview";
 import VAOverview from "./BookingLocationScreens/VenturaAcres/VAOverview";
 import VARegulations from "./BookingLocationScreens/VenturaAcres/VARegulations";
 import VATeeTimes from "./BookingLocationScreens/VenturaAcres/VATeeTimes";
+import BookingSuccess from "./BookingSuccess";
 
 
 const Stack = createStackNavigator();
@@ -26,6 +27,7 @@ function BookingStack({ navigation }) {
       <Stack.Screen name='vaoverview' component={VAOverview} />
       <Stack.Screen name='varegulations' component={VARegulations} />
       <Stack.Screen name="vateetimes" component={VATeeTimes} />
+      <Stack.Screen name='success' component={BookingSuccess} />
     </Stack.Navigator>
   );
 }
