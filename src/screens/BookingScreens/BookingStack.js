@@ -8,11 +8,23 @@ import VAOverview from "./BookingLocationScreens/VenturaAcres/VAOverview";
 import VARegulations from "./BookingLocationScreens/VenturaAcres/VARegulations";
 import VATeeTimes from "./BookingLocationScreens/VenturaAcres/VATeeTimes";
 import BookingSuccess from "./BookingSuccess";
-
+import { useEffect } from "react";
 
 const Stack = createStackNavigator();
 
 function BookingStack({ navigation }) {
+ useEffect(() => {
+   const unsubscribe = navigation.addListener("tabPress", (e) => {
+
+     e.preventDefault();
+
+     // Reset the stack navigator
+      navigation.navigate("booking");
+   });
+
+   return unsubscribe;
+ }, [navigation]);
+
   return (
     <Stack.Navigator
       screenOptions={{
