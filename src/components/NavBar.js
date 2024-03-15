@@ -7,8 +7,9 @@ import CoachIcon from '../assets/NavIcons/CoachIcon.png'
 import ScorecardIcon from '../assets/NavIcons/ScorecardIcon.png'
 import HomeIcon from '../assets/NavIcons/HomeIcon.png'
 import PlayIcon from '../assets/NavIcons/PlayIcon.png'
+import Home from "../screens/Home";
 
-import HomePage from '../screens/HomePage';
+
 
 import Play from '../screens/Play';
 
@@ -64,7 +65,7 @@ function NavBar () {
               ),
             }}
             name="Home"
-            component={HomePage}
+            component={Home}
           />
           <Tab.Screen
             options={{
