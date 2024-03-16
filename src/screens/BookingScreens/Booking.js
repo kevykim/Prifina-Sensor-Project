@@ -34,6 +34,7 @@ function Booking({ navigation }) {
 
   return (
     <ScrollView contentContainerStyle={styles.main}>
+      <View style={styles.container}>
       <View style={styles.header}>
         <View>
           <TouchableOpacity
@@ -313,6 +314,7 @@ function Booking({ navigation }) {
           </View>
         </View>
       </View>
+      </View>
     </ScrollView>
   );
 }
@@ -321,8 +323,11 @@ const styles = StyleSheet.create({
   main: {
     flexGrow: 1,
     flexDirection: "column",
-    marginTop: 55,
     padding: 15,
+    backgroundColor: 'white'
+  },
+  container: {
+    marginTop: 50,
   },
   header: {
     flexDirection: "row",
@@ -452,7 +457,7 @@ const styles = StyleSheet.create({
     fontFamily: "Quicksand-Med",
     fontSize: 18,
     lineHeight: 24,
-    marginBottom: 10
+    marginBottom: 10,
   },
 
   CHContainer: {

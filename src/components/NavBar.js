@@ -7,10 +7,11 @@ import CoachIcon from '../assets/NavIcons/CoachIcon.png'
 import ScorecardIcon from '../assets/NavIcons/ScorecardIcon.png'
 import HomeIcon from '../assets/NavIcons/HomeIcon.png'
 import PlayIcon from '../assets/NavIcons/PlayIcon.png'
+import Home from "../screens/Home";
 
-import HomePage from '../screens/HomePage';
 
-import Play from '../screens/Play';
+
+
 
 
 
@@ -18,6 +19,7 @@ import { useCustomFonts } from "../utils/CustomFonts";
 import CoachStack from "../screens/CoachScreens/CoachStack";
 import ScorecardStack from "../screens/Scorecard/Scorecardstack";
 import BookingStack from "../screens/BookingScreens/BookingStack";
+import PlayStack from "../screens/PlayScreens/PlayStack";
 
 
 const Tab = createBottomTabNavigator();
@@ -64,7 +66,7 @@ function NavBar () {
               ),
             }}
             name="Home"
-            component={HomePage}
+            component={Home}
           />
           <Tab.Screen
             options={{
@@ -120,7 +122,7 @@ function NavBar () {
               ),
             }}
             name="Play"
-            component={Play}
+            component={PlayStack}
           />
           <Tab.Screen
             options={{

@@ -32,6 +32,7 @@ function BookingSuccess({ navigation }) {
 
   return (
     <ScrollView contentContainerStyle={styles.main}>
+      <View style={styles.container}>
       <View style={styles.header}>
         <View>
           <TouchableOpacity
@@ -120,6 +121,7 @@ function BookingSuccess({ navigation }) {
           <Text style={styles.cancelButtonText}>Cancel</Text>
         </TouchableOpacity>
       </View>
+      </View>
     </ScrollView>
   );
 }
@@ -128,8 +130,11 @@ const styles = StyleSheet.create({
   main: {
     flexGrow: 1,
     flexDirection: "column",
-    marginTop: 55,
     padding: 15,
+    backgroundColor: 'white'
+  },
+  container: {
+    marginTop: 50,
   },
   header: {
     flexDirection: "row",
@@ -217,8 +222,8 @@ const styles = StyleSheet.create({
   helpContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: 'center',
-    marginTop: 15
+    alignItems: "center",
+    marginTop: 15,
   },
   helpText: {
     fontFamily: "Quicksand-Med",

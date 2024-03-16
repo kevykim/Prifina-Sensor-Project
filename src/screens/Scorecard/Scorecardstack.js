@@ -4,11 +4,23 @@ import Trends from "./ScorecardScreens/Trends";
 import Statistics from "./ScorecardScreens/Statistics";
 import History from "./ScorecardScreens/History";
 
-
+import { useEffect } from "react";
 
 const Stack = createStackNavigator();
 
 function ScorecardStack({ navigation }) {
+
+useEffect(() => {
+  const unsubscribe = navigation.addListener("tabPress", (e) => {
+    e.preventDefault();
+
+    // Reset the stack navigator
+    navigation.navigate("scorecard");
+  });
+
+  return unsubscribe;
+}, [navigation]);
+
   return (
     <Stack.Navigator
       screenOptions={{

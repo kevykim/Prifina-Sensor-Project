@@ -52,6 +52,7 @@ function History({ navigation }) {
 
   return (
     <ScrollView contentContainerStyle={styles.main}>
+      <View style={styles.container}>
       <View style={styles.header}>
         <View>
           <TouchableOpacity
@@ -646,6 +647,7 @@ function History({ navigation }) {
           </View>
         )}
       </View>
+      </View>
     </ScrollView>
   );
 }
@@ -654,8 +656,11 @@ const styles = StyleSheet.create({
   main: {
     flexGrow: 1,
     flexDirection: "column",
-    marginTop: 55,
     padding: 15,
+    backgroundColor: "white",
+  },
+  container: {
+    marginTop: 50,
   },
   header: {
     flexDirection: "row",
@@ -784,7 +789,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   scoreChart: {
-    backgroundColor: "#e5e5e5",
+    backgroundColor: "#F1F1F1",
     width: 361,
     height: 236,
     borderRadius: 8,

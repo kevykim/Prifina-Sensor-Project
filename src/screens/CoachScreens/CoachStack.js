@@ -11,12 +11,24 @@ import PuttTrack from "./TrackScreens/PuttTrack";
 import ArcResult from "./ResultScreens/ArcResult";
 import PuttResult from "./ResultScreens/PuttResult";
 
-
+import { useEffect } from "react";
 
 
 const Stack = createStackNavigator();
 
 function CoachStack({ navigation }) {
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("tabPress", (e) => {
+      e.preventDefault();
+
+      // Reset the stack navigator
+      navigation.navigate("coach");
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
   return (
     <Stack.Navigator
       screenOptions={{
