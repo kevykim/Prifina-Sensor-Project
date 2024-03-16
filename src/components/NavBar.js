@@ -11,7 +11,7 @@ import Home from "../screens/Home";
 
 
 
-import Play from '../screens/Play';
+
 
 
 
@@ -19,6 +19,7 @@ import { useCustomFonts } from "../utils/CustomFonts";
 import CoachStack from "../screens/CoachScreens/CoachStack";
 import ScorecardStack from "../screens/Scorecard/Scorecardstack";
 import BookingStack from "../screens/BookingScreens/BookingStack";
+import PlayStack from "../screens/PlayScreens/PlayStack";
 
 
 const Tab = createBottomTabNavigator();
@@ -121,7 +122,7 @@ function NavBar () {
               ),
             }}
             name="Play"
-            component={Play}
+            component={PlayStack}
           />
           <Tab.Screen
             options={{

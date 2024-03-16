@@ -657,7 +657,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexDirection: "column",
     padding: 15,
-    backgroundColor: 'white'
+    backgroundColor: "white",
   },
   container: {
     marginTop: 50,
@@ -789,7 +789,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   scoreChart: {
-    backgroundColor: "#e5e5e5",
+    backgroundColor: "#F1F1F1",
     width: 361,
     height: 236,
     borderRadius: 8,
