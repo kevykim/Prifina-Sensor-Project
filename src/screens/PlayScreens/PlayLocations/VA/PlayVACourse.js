@@ -52,7 +52,7 @@ function PlayVACourse({ navigation }) {
               modalShown={showModal}
               closeModal={setShowModal}
               navigation={navigation}
-              navVar={"arctrack"}
+              navVar={"playvasummary"}
             />
           )}
         </View>
