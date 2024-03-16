@@ -6,6 +6,9 @@ import Play from "./Play";
 import Analyze from "./Analyze";
 import Track from "./Track";
 import Explore from "./Explore";
+import PlayVA from "./PlayLocations/VA/PlayVA";
+import PlayVASRound from "./PlayLocations/VA/PlayVASRound";
+import PlayVACourse from "./PlayLocations/VA/PlayVACourse";
 
 const Stack = createStackNavigator();
 
@@ -31,6 +34,9 @@ function PlayStack({ navigation }) {
       <Stack.Screen name='analyze' component={Analyze} />
       <Stack.Screen name='track' component={Track} />
       <Stack.Screen name='explore' component={Explore} />
+      <Stack.Screen name='playva' component={PlayVA} />
+      <Stack.Screen name='playvasround' component={PlayVASRound} />
+      <Stack.Screen name='playvacourse' component={PlayVACourse} />
     </Stack.Navigator>
   );
 }

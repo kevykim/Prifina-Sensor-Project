@@ -131,7 +131,7 @@ function Play({ navigation }) {
                   </View>
                 </View>
 
-                <TouchableOpacity style={styles.letsPlayButton}>
+                <TouchableOpacity onPress={() => navigation.navigate('playva')} style={styles.letsPlayButton}>
                   <Text style={styles.letsPlayText}>Play</Text>
                 </TouchableOpacity>
               </View>
