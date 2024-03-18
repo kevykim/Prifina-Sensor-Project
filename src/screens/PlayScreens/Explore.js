@@ -34,8 +34,8 @@ function Explore({ navigation }) {
         <View style={styles.header}>
           <View>
             <TouchableOpacity
-              style={styles.backHome}
-              onPress={() => navigation.navigate("Home")}
+              style={styles.backPlay}
+              onPress={() => navigation.navigate("play")}
             >
               <Image source={leftArrow} />
               <Text
@@ -45,7 +45,7 @@ function Explore({ navigation }) {
                   fontSize: 12,
                 }}
               >
-                Home
+                Play
               </Text>
             </TouchableOpacity>
           </View>
@@ -300,11 +300,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  backHome: {
+  backPlay: {
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    width: 60,
+    width: 48,
     justifyContent: "space-between",
   },
   nameHeader: {

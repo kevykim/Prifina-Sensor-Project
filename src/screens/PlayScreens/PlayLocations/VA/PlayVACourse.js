@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   backPlay: {
     flexDirection: "row",
     alignItems: "center",
-    width: 50,
+    width: 48,
     justifyContent: "space-between",
   },
   hamburgerContainer: {

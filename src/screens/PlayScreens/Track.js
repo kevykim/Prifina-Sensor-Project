@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    width: 55,
+    width: 48,
     justifyContent: "space-between",
   },
   nameHeader: {

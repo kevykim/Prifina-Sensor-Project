@@ -38,7 +38,7 @@ function PlayVASummary({ navigation }) {
           <View>
             <TouchableOpacity
               style={styles.backHome}
-              onPress={() => navigation.navigate("playvascourse")}
+              onPress={() => navigation.navigate("playvacourse")}
             >
               <Text
                 style={{
