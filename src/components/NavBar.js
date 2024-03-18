@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from "react";
 
 import BookingIcon from '../assets/NavIcons/BookingIcon.png'
-import CoachIcon from '../assets/NavIcons/CoachIcon.png'
+import TrainingIcon from '../assets/NavIcons/TrainingIcon.png'
 import ScorecardIcon from '../assets/NavIcons/ScorecardIcon.png'
 import HomeIcon from '../assets/NavIcons/HomeIcon.png'
 import PlayIcon from '../assets/NavIcons/PlayIcon.png'
@@ -16,7 +16,7 @@ import PlayIcon from '../assets/NavIcons/PlayIcon.png'
 
 
 import { useCustomFonts } from "../utils/CustomFonts";
-import CoachStack from "../screens/CoachScreens/CoachStack";
+import TrainingStack from "../screens/TrainingScreens/TrainingStack";
 import ScorecardStack from "../screens/Scorecard/Scorecardstack";
 import BookingStack from "../screens/BookingScreens/BookingStack";
 import PlayStack from "../screens/PlayScreens/PlayStack";
@@ -74,7 +74,7 @@ function NavBar () {
               tabBarIcon: ({ focused }) => (
                 <View style={styles.navContainer}>
                   <Image
-                    source={CoachIcon}
+                    source={TrainingIcon}
                     style={[
                       styles.navIcon,
                       { tintColor: focused ? "white" : "black" },
@@ -87,13 +87,13 @@ function NavBar () {
                       fontFamily: "Quicksand-SemiBold",
                     }}
                   >
-                    Coach
+                    Training
                   </Text>
                 </View>
               ),
             }}
-            name="Coach"
-            component={CoachStack}
+            name="Training"
+            component={TrainingStack}
           />
           <Tab.Screen
             options={{
