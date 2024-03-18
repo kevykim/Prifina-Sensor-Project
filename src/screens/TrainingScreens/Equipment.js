@@ -81,7 +81,6 @@ function Equipment({ navigation }) {
 
 
 
-  const equipmentArr = Object.values(equipmentObj);
 
   return (
     <ScrollView contentContainerStyle={styles.main}>
@@ -156,7 +155,7 @@ function Equipment({ navigation }) {
         <Text style={styles.myBagHeader}>My Bag</Text>
 
         <View style={styles.myBagContainer}>
-          {equipmentArr.map((club) => (
+          {equipmentObj.map((club) => (
             <View key={club.id} style={styles.myBagCards}>
               <Image style={styles.myBagImage} source={club.image} />
               <View style={styles.myBagTContainer}>
