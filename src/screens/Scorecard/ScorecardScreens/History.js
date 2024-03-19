@@ -23,7 +23,7 @@ function History({ navigation }) {
 
   const today = new Date();
   const newDate = new Date();
-  newDate.setDate(newDate.getDate() + 5);
+  newDate.setDate(newDate.getDate() - 25);
 
   const options = { month: "long", day: "numeric", year: "numeric" };
   const formattedDate = today.toLocaleDateString("en-US", options);
@@ -48,605 +48,542 @@ function History({ navigation }) {
   const [showNorth, setShowNorth] = useState(false);
   const [showSouth, setShowSouth] = useState(false);
   const [showVentura, setShowVentura] = useState(false);
-  const [showBlue, setShowBlue] = useState(false);
+  const [showPine, setShowPine] = useState(false);
+  const [showOak, setShowOak] = useState(false);
+
+   const nhData = [
+     { label: "Hole", values: ["1", "2", "3", "4", "5", "6", "7", "8", "9"] },
+     { label: "Handicap", values: ["18", "13", "14", "10", "11", "17", "15", "12", "16"] },
+     { label: "Par", values: ["4", "4", "3", "4", "4", "4", "3", "3", "4"] },
+     { label: "Score", values: ["+4", "+3", "+2", "+1", "+5", "+5", "+3", "+2", "+4"] },
+     { label: "Hole", values: ["10", "11", "12", "13", "14", "15", "16", "17", "18"] },
+     { label: "Handicap", values: ["9", "7", "3", "6", "5", "4", "2", "1", "8"] },
+     { label: "Par", values: ["4", "4", "3", "4", "4", "4", "3", "3", "4"] },
+     { label: "Score", values: ["+4", "+4", "+3", "+3", "+4", "+3", "+5", "+6", "+5"] },
+   ];
+
+   const swData = [
+  { label: "Hole", values: ["1", "2", "3", "4", "5", "6", "7", "8", "9"] },
+  { label: "Handicap", values: ["13", "8", "9", "14", "18", "17", "11", "16", "15"] },
+  { label: "Par", values: ["4", "4", "3", "4", "4", "4", "3", "3", "4"] },
+  { label: "Score", values: ["+2", "+3", "+2", "+1", "+5", "+4", "+2", "+3", "+4"] },
+  { label: "Hole", values: ["10", "11", "12", "13", "14", "15", "16", "17", "18"] },
+  { label: "Handicap", values: ["10", "6", "7", "12", "17", "16", "8", "15", "14"] },
+  { label: "Par", values: ["4", "4", "3", "4", "4", "4", "3", "3", "4"] },
+  { label: "Score", values: ["+3", "+4", "+2", "+2", "+3", "+5", "+3", "+2", "+4"] },
+];
+
+const vaData = [
+  { label: "Hole", values: ["1", "2", "3", "4", "5", "6", "7", "8", "9"] },
+  { label: "Handicap", values: ["15", "10", "11", "18", "17", "16", "12", "13", "14"] },
+  { label: "Par", values: ["4", "4", "3", "4", "4", "4", "3", "3", "4"] },
+  { label: "Score", values: ["+3", "+2", "+1", "+1", "+5", "+4", "+2", "+3", "+3"] },
+  { label: "Hole", values: ["10", "11", "12", "13", "14", "15", "16", "17", "18"] },
+  { label: "Handicap", values: ["8", "6", "5", "4", "13", "12", "7", "11", "9"] },
+  { label: "Par", values: ["4", "4", "3", "4", "4", "4", "3", "3", "4"] },
+  { label: "Score", values: ["+3", "+4", "+2", "+2", "+3", "+4", "+3", "+2", "+4"] },
+];
+
+const pineData = [
+  { label: "Hole", values: ["1", "2", "3", "4", "5", "6", "7", "8", "9"] },
+  { label: "Handicap", values: ["14", "11", "12", "17", "16", "15", "10", "13", "18"] },
+  { label: "Par", values: ["4", "4", "3", "4", "4", "4", "3", "3", "4"] },
+  { label: "Score", values: ["+1", "+3", "+2", "+2", "+4", "+3", "+1", "+2", "+3"] },
+  { label: "Hole", values: ["10", "11", "12", "13", "14", "15", "16", "17", "18"] },
+  { label: "Handicap", values: ["9", "7", "6", "12", "11", "10", "5", "8", "4"] },
+  { label: "Par", values: ["4", "4", "3", "4", "4", "4", "3", "3", "4"] },
+  { label: "Score", values: ["+2", "+4", "+3", "+3", "+2", "+4", "+2", "+3", "+4"] },
+];
+
+const oakData = [
+  { label: "Hole", values: ["1", "2", "3", "4", "5", "6", "7", "8", "9"] },
+  { label: "Handicap", values: ["14", "11", "12", "17", "16", "15", "10", "13", "18"] },
+  { label: "Par", values: ["4", "4", "3", "4", "4", "4", "3", "3", "4"] },
+  { label: "Score", values: ["+1", "+3", "+2", "+2", "+6", "+3", "+4", "+2", "+3"] },
+  { label: "Hole", values: ["10", "11", "12", "13", "14", "15", "16", "17", "18"] },
+  { label: "Handicap", values: ["9", "7", "6", "12", "11", "10", "5", "8", "4"] },
+  { label: "Par", values: ["4", "4", "3", "4", "4", "4", "3", "3", "4"] },
+  { label: "Score", values: ["+5", "+4", "+3", "+1", "+3", "+4", "+5", "+3", "+4"] },
+];
+
+  const renderScoreRow = (label, data, index) => (
+    <View
+      style={[
+        styles.ASCContainerRow,
+        label === "Hole" && {
+          borderTopLeftRadius: 4,
+          borderTopRightRadius: 4,
+          borderBottomWidth: 0,
+        },
+        label === "Par" && {
+          borderBottomWidth: 0,
+        },
+        label === "Handicap" && {
+          borderBottomWidth: 0,
+        },
+      ]}
+    >
+      <View
+        style={{
+          ...styles.ASCLabel,
+          borderTopRightRadius: 4,
+          borderTopLeftRadius: index === 0 ? 4 : 0,
+        }}
+      >
+        <Text style={styles.ASCTextBold}>{label}</Text>
+      </View>
+      {data.map((value, index) => (
+        <View
+          key={index}
+          style={
+            index === data.length - 1
+              ? { ...styles.ASCBorder, borderRightWidth: 0 }
+              : styles.ASCBorder
+          }
+        >
+          <Text style={label === "Hole" ? styles.ASCTextBold : styles.ASCText}>
+            {value}
+          </Text>
+        </View>
+      ))}
+    </View>
+  );
 
   return (
     <ScrollView contentContainerStyle={styles.main}>
       <View style={styles.container}>
-      <View style={styles.header}>
-        <View>
+        <View style={styles.header}>
+          <View>
+            <TouchableOpacity
+              style={styles.backScore}
+              onPress={() => navigation.navigate("scorecard")}
+            >
+              <Image source={leftArrow} />
+              <Text
+                style={{
+                  color: "#AFAFAF",
+                  fontFamily: "Quicksand-SemiBold",
+                  fontSize: 12,
+                }}
+              >
+                Scorecard
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.nameHeader}>
+            <Text style={{ fontSize: 16, fontFamily: "Quicksand-SemiBold" }}>
+              Andy Haynes
+            </Text>
+            <Image source={Avatar} />
+          </View>
+        </View>
+
+        <View style={styles.topButtonContainer}>
           <TouchableOpacity
-            style={styles.backScore}
-            onPress={() => navigation.navigate("scorecard")}
+            onPress={() => navigation.navigate("trends")}
+            style={styles.topButtons}
           >
-            <Image source={leftArrow} />
+            <Text style={styles.topButtonsText}>Trends</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("statistics")}
+            style={styles.topButtons}
+          >
+            <Text style={styles.topButtonsText}>Statistics</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("history")}
+            style={{
+              backgroundColor: route.name === "history" ? "#2FDA74" : "#D3D3D3",
+              ...styles.topButtons,
+            }}
+          >
             <Text
               style={{
-                color: "#AFAFAF",
-                fontFamily: "Quicksand-SemiBold",
-                fontSize: 12,
+                color: route.name === "history" ? "white" : "black",
+                ...styles.topButtonsText,
               }}
             >
-              Scorecard
+              History
             </Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.nameHeader}>
-          <Text style={{ fontSize: 16, fontFamily: "Quicksand-SemiBold" }}>
-            Andy Haynes
+
+        <Text style={styles.historyHeader}>History</Text>
+
+        <View>
+          <Text style={styles.historyInfo}>
+            Welcome to your personalized training hub. Here you can set and
+            customize your equipment, practice specific skills and drills, and
+            view tutorials catered towards your personal feedback needs.
+            Personalized coaching is available 24/7.
           </Text>
-          <Image source={Avatar} />
         </View>
-      </View>
 
-      <View style={styles.topButtonContainer}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("trends")}
-          style={styles.topButtons}
-        >
-          <Text style={styles.topButtonsText}>Trends</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("statistics")}
-          style={styles.topButtons}
-        >
-          <Text style={styles.topButtonsText}>Statistics</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("history")}
-          style={{
-            backgroundColor: route.name === "history" ? "#2FDA74" : "#D3D3D3",
-            ...styles.topButtons,
-          }}
-        >
-          <Text
-            style={{
-              color: route.name === "history" ? "white" : "black",
-              ...styles.topButtonsText,
-            }}
+        <Text style={styles.twelveMonths}>Last 12 months</Text>
+
+        <View style={styles.HTimeContainer}>
+          <TouchableOpacity
+            onPress={() => setShowNorth(!showNorth)}
+            style={styles.HTCards}
           >
-            History
-          </Text>
-        </TouchableOpacity>
-      </View>
+            <View style={styles.HTCLeft}>
+              <Text style={styles.HTCDate}>{formattedDate}</Text>
+              <Text style={styles.HTCName}>North Hill</Text>
+            </View>
 
-      <Text style={styles.historyHeader}>History</Text>
-
-      <View>
-        <Text style={styles.historyInfo}>
-          Welcome to your personalized training hub. Here you can set and
-          customize your equipment, practice specific skills and drills, and
-          view tutorials catered towards your personal feedback needs.
-          Personalized coaching is available 24/7.
-        </Text>
-      </View>
-
-      <Text style={styles.twelveMonths}>Last 12 months</Text>
-
-      <View style={styles.HTimeContainer}>
-        <TouchableOpacity
-          onPress={() => setShowNorth(!showNorth)}
-          style={styles.HTCards}
-        >
-          <View style={styles.HTCLeft}>
-            <Text style={styles.HTCDate}>{formattedDate}</Text>
-            <Text style={styles.HTCName}>North Hill</Text>
-          </View>
-
-          <Text style={styles.HTCBold}>104</Text>
-        </TouchableOpacity>
-        {showNorth && (
-          <View style={styles.scoreCardContainer}>
-            <View>
-              <View style={styles.SCHeader}>
-                <Text style={styles.SCHeaderText}>North Hill {shortToday}</Text>
-                <TouchableOpacity style={styles.downloadButton}>
-                  <Text style={styles.downloadButtonText}>Download</Text>
-                  <Image source={download} />
-                </TouchableOpacity>
-              </View>
-
-              <View style={styles.scoreChart}>
-                <View style={styles.scoreChartHeaderContainer}>
-                  <View style={styles.scoreChartHLeft}>
-                    <Text style={styles.scoreChartHLeftGray}>1 hr 16 min</Text>
-                    <Text style={styles.scoreChartHLeftBlack}>6 holes</Text>
-                  </View>
-                  <Text style={styles.scoreChartHRight}>104</Text>
+            <Text style={styles.HTCBold}>63</Text>
+          </TouchableOpacity>
+          {showNorth && (
+            <View style={styles.scoreCardContainer}>
+              <View>
+                <View style={styles.SCHeader}>
+                  <Text style={styles.SCHeaderText}>
+                    North Hill {shortToday}
+                  </Text>
+                  <TouchableOpacity style={styles.downloadButton}>
+                    <Text style={styles.downloadButtonText}>Download</Text>
+                    <Image source={download} />
+                  </TouchableOpacity>
                 </View>
 
-                <View style={styles.ASCContainer}>
-                  <View style={styles.ASCContainerRowFirst}>
-                    <View style={styles.ASCLabel}>
-                      <Text style={styles.ASCText}>Hole</Text>
+                <View style={styles.scoreChart}>
+                  <View style={styles.scoreChartHeaderContainer}>
+                    <View style={styles.scoreChartHLeft}>
+                      <Text style={styles.scoreChartHLeftGray}>
+                        5 hr 16 min
+                      </Text>
+                      <Text style={styles.scoreChartHLeftBlack}>18 Holes</Text>
                     </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>1</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>2</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>3</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>4</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>5</Text>
-                    </View>
-                    <View style={styles.ASCBorderLast}>
-                      <Text style={styles.ASCText}>6</Text>
-                    </View>
+                    <Text style={styles.scoreChartHRight}>63</Text>
                   </View>
+                  {nhData.map((row, index) => (
+                    <View
+                      key={index}
+                      style={
+                        index === nhData.length - 5
+                          ? styles.ASCContainer
+                          : styles.none
+                      }
+                    >
+                      {renderScoreRow(row.label, row.values, index)}
+                    </View>
+                  ))}
+                  <View style={styles.BPBDContainer}>
+                    <View style={styles.BPBDCard}>
+                      <View style={styles.boxGreen}></View>
+                      <Text style={styles.BPBDText}>Buddy</Text>
+                    </View>
 
-                  <View style={styles.ASCContainerRowSecond}>
-                    <View style={styles.ASCLabel}>
-                      <Text style={styles.ASCText}>Par</Text>
+                    <View style={styles.BPBDCardMid}>
+                      <View style={styles.boxDrkGreen}></View>
+                      <Text style={styles.BPBDText}>Par</Text>
                     </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>3</Text>
+
+                    <View style={styles.BPBDCard}>
+                      <View style={styles.boxGray}></View>
+                      <Text style={styles.BPBDText}>Bogey</Text>
                     </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>2</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>1</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>2</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>1</Text>
-                    </View>
-                    <View style={styles.ASCBorderLast}>
-                      <Text style={styles.ASCText}>1</Text>
-                    </View>
-                  </View>
-                  <View style={styles.ASCContainerRowThird}>
-                    <View style={styles.ASCLabel}>
-                      <Text style={styles.ASCText}>Score</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>7</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>5</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>4</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>8</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>6</Text>
-                    </View>
-                    <View style={styles.ASCBorderLast}>
-                      <Text style={styles.ASCText}>3</Text>
-                    </View>
-                  </View>
-                  <View style={styles.ASCContainerRowLast}>
-                    <View style={styles.ASCLabel}>
-                      <Text style={styles.ASCText}>Putt</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>3</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>2</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>1</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>2</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>4</Text>
-                    </View>
-                    <View style={styles.ASCBorderLast}>
-                      <Text style={styles.ASCText}>2</Text>
+
+                    <View style={styles.BPBDCardLast}>
+                      <View style={styles.boxDrkGray}></View>
+                      <Text style={styles.BPBDText}>Double Bogey</Text>
                     </View>
                   </View>
                 </View>
               </View>
             </View>
-          </View>
-        )}
+          )}
 
-        <TouchableOpacity
-          onPress={() => setShowSouth(!showSouth)}
-          style={styles.HTCards}
-        >
-          <View style={styles.HTCLeft}>
-            <Text style={styles.HTCDate}>{formattednewDate}</Text>
-            <Text style={styles.HTCName}>South West</Text>
-          </View>
+          <TouchableOpacity
+            onPress={() => setShowSouth(!showSouth)}
+            style={styles.HTCards}
+          >
+            <View style={styles.HTCLeft}>
+              <Text style={styles.HTCDate}>{formattednewDate}</Text>
+              <Text style={styles.HTCName}>South West</Text>
+            </View>
 
-          <Text style={styles.HTCBold}>110</Text>
-        </TouchableOpacity>
-        {showSouth && (
-          <View style={styles.scoreCardContainer}>
-            <View>
-              <View style={styles.SCHeader}>
-                <Text style={styles.SCHeaderText}>South West {shortnewDate}</Text>
-                <TouchableOpacity style={styles.downloadButton}>
-                  <Text style={styles.downloadButtonText}>Download</Text>
-                  <Image source={download} />
-                </TouchableOpacity>
-              </View>
-
-              <View style={styles.scoreChart}>
-                <View style={styles.scoreChartHeaderContainer}>
-                  <View style={styles.scoreChartHLeft}>
-                    <Text style={styles.scoreChartHLeftGray}>1 hr 16 min</Text>
-                    <Text style={styles.scoreChartHLeftBlack}>6 holes</Text>
-                  </View>
-                  <Text style={styles.scoreChartHRight}>110</Text>
+            <Text style={styles.HTCBold}>100</Text>
+          </TouchableOpacity>
+          {showSouth && (
+            <View style={styles.scoreCardContainer}>
+              <View>
+                <View style={styles.SCHeader}>
+                  <Text style={styles.SCHeaderText}>
+                    South West {shortnewDate}
+                  </Text>
+                  <TouchableOpacity style={styles.downloadButton}>
+                    <Text style={styles.downloadButtonText}>Download</Text>
+                    <Image source={download} />
+                  </TouchableOpacity>
                 </View>
 
-                <View style={styles.ASCContainer}>
-                  <View style={styles.ASCContainerRowFirst}>
-                    <View style={styles.ASCLabel}>
-                      <Text style={styles.ASCText}>Hole</Text>
+                <View style={styles.scoreChart}>
+                  <View style={styles.scoreChartHeaderContainer}>
+                    <View style={styles.scoreChartHLeft}>
+                      <Text style={styles.scoreChartHLeftGray}>
+                        8 hr 16 min
+                      </Text>
+                      <Text style={styles.scoreChartHLeftBlack}>18 holes</Text>
                     </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>1</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>2</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>3</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>4</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>5</Text>
-                    </View>
-                    <View style={styles.ASCBorderLast}>
-                      <Text style={styles.ASCText}>6</Text>
-                    </View>
+                    <Text style={styles.scoreChartHRight}>100</Text>
                   </View>
 
-                  <View style={styles.ASCContainerRowSecond}>
-                    <View style={styles.ASCLabel}>
-                      <Text style={styles.ASCText}>Par</Text>
+                  {swData.map((row, index) => (
+                    <View
+                      key={index}
+                      style={
+                        index === swData.length - 5
+                          ? styles.ASCContainer
+                          : styles.none
+                      }
+                    >
+                      {renderScoreRow(row.label, row.values, index)}
                     </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>3</Text>
+                  ))}
+                  <View style={styles.BPBDContainer}>
+                    <View style={styles.BPBDCard}>
+                      <View style={styles.boxGreen}></View>
+                      <Text style={styles.BPBDText}>Buddy</Text>
                     </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>2</Text>
+
+                    <View style={styles.BPBDCardMid}>
+                      <View style={styles.boxDrkGreen}></View>
+                      <Text style={styles.BPBDText}>Par</Text>
                     </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>1</Text>
+
+                    <View style={styles.BPBDCard}>
+                      <View style={styles.boxGray}></View>
+                      <Text style={styles.BPBDText}>Bogey</Text>
                     </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>2</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>1</Text>
-                    </View>
-                    <View style={styles.ASCBorderLast}>
-                      <Text style={styles.ASCText}>1</Text>
-                    </View>
-                  </View>
-                  <View style={styles.ASCContainerRowThird}>
-                    <View style={styles.ASCLabel}>
-                      <Text style={styles.ASCText}>Score</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>7</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>5</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>4</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>8</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>6</Text>
-                    </View>
-                    <View style={styles.ASCBorderLast}>
-                      <Text style={styles.ASCText}>3</Text>
-                    </View>
-                  </View>
-                  <View style={styles.ASCContainerRowLast}>
-                    <View style={styles.ASCLabel}>
-                      <Text style={styles.ASCText}>Putt</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>3</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>2</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>1</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>2</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>4</Text>
-                    </View>
-                    <View style={styles.ASCBorderLast}>
-                      <Text style={styles.ASCText}>2</Text>
+
+                    <View style={styles.BPBDCardLast}>
+                      <View style={styles.boxDrkGray}></View>
+                      <Text style={styles.BPBDText}>Double Bogey</Text>
                     </View>
                   </View>
                 </View>
               </View>
             </View>
-          </View>
-        )}
+          )}
 
-        <TouchableOpacity
-          onPress={() => setShowVentura(!showVentura)}
-          style={styles.HTCards}
-        >
-          <View style={styles.HTCLeft}>
-            <Text style={styles.HTCDate}>January 14, 2024</Text>
-            <Text style={styles.HTCName}>Ventura Acres</Text>
-          </View>
+          <TouchableOpacity
+            onPress={() => setShowVentura(!showVentura)}
+            style={styles.HTCards}
+          >
+            <View style={styles.HTCLeft}>
+              <Text style={styles.HTCDate}>January 14, 2024</Text>
+              <Text style={styles.HTCName}>Ventura Acres</Text>
+            </View>
 
-          <Text style={styles.HTCBold}>93</Text>
-        </TouchableOpacity>
-        {showVentura && (
-          <View style={styles.scoreCardContainer}>
-            <View>
-              <View style={styles.SCHeader}>
-                <Text style={styles.SCHeaderText}>Ventura Acres 1/14/2024</Text>
-                <TouchableOpacity style={styles.downloadButton}>
-                  <Text style={styles.downloadButtonText}>Download</Text>
-                  <Image source={download} />
-                </TouchableOpacity>
-              </View>
-
-              <View style={styles.scoreChart}>
-                <View style={styles.scoreChartHeaderContainer}>
-                  <View style={styles.scoreChartHLeft}>
-                    <Text style={styles.scoreChartHLeftGray}>1 hr 16 min</Text>
-                    <Text style={styles.scoreChartHLeftBlack}>6 holes</Text>
-                  </View>
-                  <Text style={styles.scoreChartHRight}>93</Text>
+            <Text style={styles.HTCBold}>93</Text>
+          </TouchableOpacity>
+          {showVentura && (
+            <View style={styles.scoreCardContainer}>
+              <View>
+                <View style={styles.SCHeader}>
+                  <Text style={styles.SCHeaderText}>
+                    Ventura Acres 1/14/2024
+                  </Text>
+                  <TouchableOpacity style={styles.downloadButton}>
+                    <Text style={styles.downloadButtonText}>Download</Text>
+                    <Image source={download} />
+                  </TouchableOpacity>
                 </View>
 
-                <View style={styles.ASCContainer}>
-                  <View style={styles.ASCContainerRowFirst}>
-                    <View style={styles.ASCLabel}>
-                      <Text style={styles.ASCText}>Hole</Text>
+                <View style={styles.scoreChart}>
+                  <View style={styles.scoreChartHeaderContainer}>
+                    <View style={styles.scoreChartHLeft}>
+                      <Text style={styles.scoreChartHLeftGray}>
+                        6 hr 16 min
+                      </Text>
+                      <Text style={styles.scoreChartHLeftBlack}>18 holes</Text>
                     </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>1</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>2</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>3</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>4</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>5</Text>
-                    </View>
-                    <View style={styles.ASCBorderLast}>
-                      <Text style={styles.ASCText}>6</Text>
-                    </View>
+                    <Text style={styles.scoreChartHRight}>93</Text>
                   </View>
+                  {vaData.map((row, index) => (
+                    <View
+                      key={index}
+                      style={
+                        index === vaData.length - 5
+                          ? styles.ASCContainer
+                          : styles.none
+                      }
+                    >
+                      {renderScoreRow(row.label, row.values, index)}
+                    </View>
+                  ))}
+                  <View style={styles.BPBDContainer}>
+                    <View style={styles.BPBDCard}>
+                      <View style={styles.boxGreen}></View>
+                      <Text style={styles.BPBDText}>Buddy</Text>
+                    </View>
 
-                  <View style={styles.ASCContainerRowSecond}>
-                    <View style={styles.ASCLabel}>
-                      <Text style={styles.ASCText}>Par</Text>
+                    <View style={styles.BPBDCardMid}>
+                      <View style={styles.boxDrkGreen}></View>
+                      <Text style={styles.BPBDText}>Par</Text>
                     </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>3</Text>
+
+                    <View style={styles.BPBDCard}>
+                      <View style={styles.boxGray}></View>
+                      <Text style={styles.BPBDText}>Bogey</Text>
                     </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>2</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>1</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>2</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>1</Text>
-                    </View>
-                    <View style={styles.ASCBorderLast}>
-                      <Text style={styles.ASCText}>1</Text>
-                    </View>
-                  </View>
-                  <View style={styles.ASCContainerRowThird}>
-                    <View style={styles.ASCLabel}>
-                      <Text style={styles.ASCText}>Score</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>7</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>5</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>4</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>8</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>6</Text>
-                    </View>
-                    <View style={styles.ASCBorderLast}>
-                      <Text style={styles.ASCText}>3</Text>
-                    </View>
-                  </View>
-                  <View style={styles.ASCContainerRowLast}>
-                    <View style={styles.ASCLabel}>
-                      <Text style={styles.ASCText}>Putt</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>3</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>2</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>1</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>2</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>4</Text>
-                    </View>
-                    <View style={styles.ASCBorderLast}>
-                      <Text style={styles.ASCText}>2</Text>
+
+                    <View style={styles.BPBDCardLast}>
+                      <View style={styles.boxDrkGray}></View>
+                      <Text style={styles.BPBDText}>Double Bogey</Text>
                     </View>
                   </View>
                 </View>
               </View>
             </View>
-          </View>
-        )}
+          )}
 
-        <TouchableOpacity
-          onPress={() => setShowBlue(!showBlue)}
-          style={styles.HTCards}
-        >
-          <View style={styles.HTCLeft}>
-            <Text style={styles.HTCDate}>February 29, 2024</Text>
-            <Text style={styles.HTCName}>Blue Monster</Text>
-          </View>
-          <Text style={styles.HTCBold}>102</Text>
-        </TouchableOpacity>
-        {showBlue && (
-          <View style={styles.scoreCardContainer}>
-            <View>
-              <View style={styles.SCHeader}>
-                <Text style={styles.SCHeaderText}>Blue Monster 2/29/2024</Text>
-                <TouchableOpacity style={styles.downloadButton}>
-                  <Text style={styles.downloadButtonText}>Download</Text>
-                  <Image source={download} />
-                </TouchableOpacity>
-              </View>
+          <TouchableOpacity
+            onPress={() => setShowPine(!showPine)}
+            style={styles.HTCards}
+          >
+            <View style={styles.HTCLeft}>
+              <Text style={styles.HTCDate}>December 15, 2023</Text>
+              <Text style={styles.HTCName}>Pine Ridge</Text>
+            </View>
 
-              <View style={styles.scoreChart}>
-                <View style={styles.scoreChartHeaderContainer}>
-                  <View style={styles.scoreChartHLeft}>
-                    <Text style={styles.scoreChartHLeftGray}>1 hr 16 min</Text>
-                    <Text style={styles.scoreChartHLeftBlack}>6 holes</Text>
-                  </View>
-                  <Text style={styles.scoreChartHRight}>104</Text>
+            <Text style={styles.HTCBold}>96</Text>
+          </TouchableOpacity>
+          {showPine && (
+            <View style={styles.scoreCardContainer}>
+              <View>
+                <View style={styles.SCHeader}>
+                  <Text style={styles.SCHeaderText}>
+                    Pine Ridge 12/15/2023
+                  </Text>
+                  <TouchableOpacity style={styles.downloadButton}>
+                    <Text style={styles.downloadButtonText}>Download</Text>
+                    <Image source={download} />
+                  </TouchableOpacity>
                 </View>
 
-                <View style={styles.ASCContainer}>
-                  <View style={styles.ASCContainerRowFirst}>
-                    <View style={styles.ASCLabel}>
-                      <Text style={styles.ASCText}>Hole</Text>
+                <View style={styles.scoreChart}>
+                  <View style={styles.scoreChartHeaderContainer}>
+                    <View style={styles.scoreChartHLeft}>
+                      <Text style={styles.scoreChartHLeftGray}>
+                        7 hr 16 min
+                      </Text>
+                      <Text style={styles.scoreChartHLeftBlack}>18 holes</Text>
                     </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>1</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>2</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>3</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>4</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>5</Text>
-                    </View>
-                    <View style={styles.ASCBorderLast}>
-                      <Text style={styles.ASCText}>6</Text>
-                    </View>
+                    <Text style={styles.scoreChartHRight}>96</Text>
                   </View>
+                  {pineData.map((row, index) => (
+                    <View
+                      key={index}
+                      style={
+                        index === vaData.length - 5
+                          ? styles.ASCContainer
+                          : styles.none
+                      }
+                    >
+                      {renderScoreRow(row.label, row.values, index)}
+                    </View>
+                  ))}
+                  <View style={styles.BPBDContainer}>
+                    <View style={styles.BPBDCard}>
+                      <View style={styles.boxGreen}></View>
+                      <Text style={styles.BPBDText}>Buddy</Text>
+                    </View>
 
-                  <View style={styles.ASCContainerRowSecond}>
-                    <View style={styles.ASCLabel}>
-                      <Text style={styles.ASCText}>Par</Text>
+                    <View style={styles.BPBDCardMid}>
+                      <View style={styles.boxDrkGreen}></View>
+                      <Text style={styles.BPBDText}>Par</Text>
                     </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>3</Text>
+
+                    <View style={styles.BPBDCard}>
+                      <View style={styles.boxGray}></View>
+                      <Text style={styles.BPBDText}>Bogey</Text>
                     </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>2</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>1</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>2</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>1</Text>
-                    </View>
-                    <View style={styles.ASCBorderLast}>
-                      <Text style={styles.ASCText}>1</Text>
-                    </View>
-                  </View>
-                  <View style={styles.ASCContainerRowThird}>
-                    <View style={styles.ASCLabel}>
-                      <Text style={styles.ASCText}>Score</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>7</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>5</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>4</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>8</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>6</Text>
-                    </View>
-                    <View style={styles.ASCBorderLast}>
-                      <Text style={styles.ASCText}>3</Text>
-                    </View>
-                  </View>
-                  <View style={styles.ASCContainerRowLast}>
-                    <View style={styles.ASCLabel}>
-                      <Text style={styles.ASCText}>Putt</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>3</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>2</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>1</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>2</Text>
-                    </View>
-                    <View style={styles.ASCBorderRight}>
-                      <Text style={styles.ASCText}>4</Text>
-                    </View>
-                    <View style={styles.ASCBorderLast}>
-                      <Text style={styles.ASCText}>2</Text>
+
+                    <View style={styles.BPBDCardLast}>
+                      <View style={styles.boxDrkGray}></View>
+                      <Text style={styles.BPBDText}>Double Bogey</Text>
                     </View>
                   </View>
                 </View>
               </View>
             </View>
-          </View>
-        )}
-      </View>
+          )}
+
+          <TouchableOpacity
+            onPress={() => setShowOak(!showOak)}
+            style={styles.HTCards}
+          >
+            <View style={styles.HTCLeft}>
+              <Text style={styles.HTCDate}>November 14, 2023</Text>
+              <Text style={styles.HTCName}>Oakwood Clubs</Text>
+            </View>
+
+            <Text style={styles.HTCBold}>83</Text>
+          </TouchableOpacity>
+          {showOak && (
+            <View style={styles.scoreCardContainer}>
+              <View>
+                <View style={styles.SCHeader}>
+                  <Text style={styles.SCHeaderText}>
+                    Oakwood Clubs 11/14/2023
+                  </Text>
+                  <TouchableOpacity style={styles.downloadButton}>
+                    <Text style={styles.downloadButtonText}>Download</Text>
+                    <Image source={download} />
+                  </TouchableOpacity>
+                </View>
+
+                <View style={styles.scoreChart}>
+                  <View style={styles.scoreChartHeaderContainer}>
+                    <View style={styles.scoreChartHLeft}>
+                      <Text style={styles.scoreChartHLeftGray}>
+                        6 hr 16 min
+                      </Text>
+                      <Text style={styles.scoreChartHLeftBlack}>18 holes</Text>
+                    </View>
+                    <Text style={styles.scoreChartHRight}>83</Text>
+                  </View>
+                  {oakData.map((row, index) => (
+                    <View
+                      key={index}
+                      style={
+                        index === vaData.length - 5
+                          ? styles.ASCContainer
+                          : styles.none
+                      }
+                    >
+                      {renderScoreRow(row.label, row.values, index)}
+                    </View>
+                  ))}
+                  <View style={styles.BPBDContainer}>
+                    <View style={styles.BPBDCard}>
+                      <View style={styles.boxGreen}></View>
+                      <Text style={styles.BPBDText}>Buddy</Text>
+                    </View>
+
+                    <View style={styles.BPBDCardMid}>
+                      <View style={styles.boxDrkGreen}></View>
+                      <Text style={styles.BPBDText}>Par</Text>
+                    </View>
+
+                    <View style={styles.BPBDCard}>
+                      <View style={styles.boxGray}></View>
+                      <Text style={styles.BPBDText}>Bogey</Text>
+                    </View>
+
+                    <View style={styles.BPBDCardLast}>
+                      <View style={styles.boxDrkGray}></View>
+                      <Text style={styles.BPBDText}>Double Bogey</Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+          )}
+        </View>
       </View>
     </ScrollView>
   );
@@ -724,21 +661,18 @@ const styles = StyleSheet.create({
   },
   HTimeContainer: {
     flexDirection: "column",
-    marginBottom: 200,
+    marginBottom: 125,
   },
   HTCards: {
     width: 363,
     height: 72,
     borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#D3D3D3",
-    borderStyle: "solid",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 16,
     marginBottom: 10,
-    backgroundColor: "#D3D3D3",
+    backgroundColor: "#F1F1F1",
   },
   HTCLeft: {
     flexDirection: "column",
@@ -791,7 +725,7 @@ const styles = StyleSheet.create({
   scoreChart: {
     backgroundColor: "#F1F1F1",
     width: 361,
-    height: 236,
+    height: 400,
     borderRadius: 8,
     paddingHorizontal: 24,
     paddingVertical: 12,
@@ -801,11 +735,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    marginBottom: 5,
   },
   scoreChartHLeft: {
     flexDirection: "column",
     justifyContent: "space-between",
-    height: 38,
+    height: 42,
   },
   scoreChartHLeftGray: {
     color: "#AFAFAF",
@@ -822,38 +757,14 @@ const styles = StyleSheet.create({
     fontSize: 48,
   },
 
+
   ASCContainer: {
-    height: 138,
+    height: 45,
   },
-  ASCContainerRowFirst: {
+  ASCContainerRow: {
     flexDirection: "row",
     alignItems: "center",
     borderWidth: 0.3,
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4,
-    borderColor: "#AFAFAF",
-  },
-  ASCContainerRowSecond: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderRightWidth: 0.3,
-    borderLeftWidth: 0.3,
-    borderBottomWidth: 0.3,
-    borderColor: "#AFAFAF",
-  },
-  ASCContainerRowThird: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderRightWidth: 0.3,
-    borderLeftWidth: 0.3,
-    borderColor: "#AFAFAF",
-  },
-  ASCContainerRowLast: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderWidth: 0.3,
-    borderBottomLeftRadius: 4,
-    borderBottomRightRadius: 4,
     borderColor: "#AFAFAF",
   },
   ASCLabel: {
@@ -865,22 +776,74 @@ const styles = StyleSheet.create({
     borderColor: "#AFAFAF",
   },
   ASCText: {
+    fontFamily: "Quicksand-Reg",
+    fontSize: 12,
+  },
+  ASCTextBold : {
     fontFamily: "Quicksand-SemiBold",
     fontSize: 12,
   },
-  ASCBorderRight: {
-    borderRightWidth: 0.3,
-    width: 40,
+  ASCBorder: {
+    width: 26.5,
     height: 32,
     justifyContent: "center",
     alignItems: "center",
+    borderRightWidth: 0.3,
     borderColor: "#AFAFAF",
   },
-  ASCBorderLast: {
-    width: 40,
-    height: 32,
-    justifyContent: "center",
+  BPBDContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 17
+  },
+  BPBDCard: {
+    width: 45,
+    height: 12,
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
+  },
+  BPBDCardMid: {
+    width: 31,
+    height: 12,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  BPBDCardLast: {
+    width: 80,
+    height: 12,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  BPBDText: {
+    fontFamily: "Quicksand-Reg",
+    fontSize: 10,
+  },
+  boxGreen: {
+    backgroundColor: "#2FDA74",
+    borderRadius: 2,
+    width: 8,
+    height: 8,
+  },
+  boxDrkGreen: {
+    borderRadius: 2,
+    width: 8,
+    height: 8,
+    backgroundColor: "#1B6E3C",
+  },
+  boxGray: {
+    borderRadius: 2,
+    width: 8,
+    height: 8,
+    backgroundColor: "#AFAFAF",
+  },
+  boxDrkGray: {
+    borderRadius: 2,
+    width: 8,
+    height: 8,
+    backgroundColor: "#202020",
   },
 });
 
