@@ -107,14 +107,14 @@ function Analyze({ navigation }) {
         </TouchableOpacity>
 
         <View style={styles.currInfoContainer}>
-            <View style={styles.currInfoLeft}>
-          <Text style={styles.currInfoLeftText}>Current Handicap: </Text>
-          <Text style={styles.currInfoLeftSpan}>10 over par</Text>
-            </View>
-            <TouchableOpacity style={styles.breakDownButton}>
-                <Text style={styles.breakDownButtonText}>Breakdown</Text>
-                <Image source={righty}/>
-            </TouchableOpacity>
+          <View style={styles.currInfoLeft}>
+            <Text style={styles.currInfoLeftText}>Current Handicap: </Text>
+            <Text style={styles.currInfoLeftSpan}>10 over par</Text>
+          </View>
+          <TouchableOpacity style={styles.breakDownButton}>
+            <Text style={styles.breakDownButtonText}>Breakdown</Text>
+            <Image source={righty} />
+          </TouchableOpacity>
         </View>
         <View style={styles.scoreChart}>
           <Carousel
@@ -171,7 +171,7 @@ function Analyze({ navigation }) {
                 hideRules
                 areaChart
                 curved
-                color="blue"
+                color="#358DD1"
                 startFillColor="#2FDA74"
                 data={barData}
                 frontColor={"#307D87"}
