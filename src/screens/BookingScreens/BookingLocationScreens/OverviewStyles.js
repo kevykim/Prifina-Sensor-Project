@@ -196,6 +196,19 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     width: 270,
   },
+  weatherBox: {
+    width: 80,
+    height: 88,
+    backgroundColor: "#F1F1F1",
+    borderRadius: 8,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  weatherImage: {
+    width: 56,
+    height: 56,
+    objectFit: "contain",
+  },
 });
 
 

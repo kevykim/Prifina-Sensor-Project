@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
+  Alert
 } from "react-native";
 import { useCustomFonts } from "../../utils/CustomFonts";
 
@@ -177,7 +178,7 @@ function Booking({ navigation }) {
               style={styles.favCoCards}
               // open modal then navigate to North hill passing down north hill variable to overview component
               onPress={() =>
-                navigation.navigate("locate", { propName: "North Hill" })
+                navigation.navigate("nhoverview", { propName: "North Hill" })
               }
             >
               <Image style={styles.favCoImage} source={NH} />
@@ -190,7 +191,7 @@ function Booking({ navigation }) {
             <TouchableOpacity
               style={styles.favCoCards}
               onPress={() =>
-                navigation.navigate("locate", { propName: "South West" })
+                navigation.navigate("swoverview", { propName: "South West" })
               }
             >
               <Image style={styles.favCoImage} source={SW} />
@@ -213,7 +214,7 @@ function Booking({ navigation }) {
             <TouchableOpacity
               style={styles.favCoCards}
               onPress={() =>
-                navigation.navigate("locate", { propName: "Ventura Acres" })
+                navigation.navigate("vaoverview", { propName: "Ventura Acres" })
               }
             >
               <Image style={styles.favCoImage} source={VA} />
@@ -225,7 +226,7 @@ function Booking({ navigation }) {
             <TouchableOpacity
               style={styles.favCoCards}
               onPress={() =>
-                navigation.navigate("locate", { propName: "Oakwood Clubs" })
+                navigation.navigate("ocoverview", { propName: "Oakwood Clubs" })
               }
             >
               <Image style={styles.favCoImage} source={OC} />
@@ -248,7 +249,7 @@ function Booking({ navigation }) {
             <TouchableOpacity
               style={styles.favCoCards}
               onPress={() =>
-                navigation.navigate("locate", { propName: "Pine Ridge" })
+                navigation.navigate("proverview", { propName: "Pine Ridge" })
               }
             >
               <Image style={styles.favCoImage} source={PR} />
@@ -276,13 +277,13 @@ function Booking({ navigation }) {
               </Text>
               <View style={styles.PFContainer}>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("")}
+                  onPress={() => navigation.navigate("nhoverview")}
                   style={styles.CHCardsButton}
                 >
                   <Text style={styles.CHCardsButtonText}>Play here</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("")}
+                  onPress={() => Alert.alert('Added North Hill to your Favorites')}
                   style={styles.addToFavoritesButton}
                 >
                   <Text style={styles.CHCardsButtonText}>Add to Favorites</Text>
@@ -303,13 +304,13 @@ function Booking({ navigation }) {
               </Text>
               <View style={styles.PFContainer}>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("")}
+                  onPress={() => navigation.navigate("swoverview")}
                   style={styles.CHCardsButton}
                 >
                   <Text style={styles.CHCardsButtonText}>Play here</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("")}
+                  onPress={() => Alert.alert('Added South West to your Favorites')}
                   style={styles.addToFavoritesButton}
                 >
                   <Text style={styles.CHCardsButtonText}>Add to Favorites</Text>
@@ -330,13 +331,13 @@ function Booking({ navigation }) {
               </Text>
               <View style={styles.PFContainer}>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("")}
+                  onPress={() => navigation.navigate("vaoverview")}
                   style={styles.CHCardsButton}
                 >
                   <Text style={styles.CHCardsButtonText}>Play here</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("")}
+                  onPress={() => Alert.alert('Added Ventura Acres to your Favorites')}
                   style={styles.addToFavoritesButton}
                 >
                   <Text style={styles.CHCardsButtonText}>Add to Favorites</Text>
@@ -357,13 +358,13 @@ function Booking({ navigation }) {
               </Text>
               <View style={styles.PFContainer}>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("")}
+                  onPress={() => navigation.navigate("proverview")}
                   style={styles.CHCardsButton}
                 >
                   <Text style={styles.CHCardsButtonText}>Play here</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("")}
+                  onPress={() => Alert.alert('Added Pine Ridge to your Favorites')}
                   style={styles.addToFavoritesButton}
                 >
                   <Text style={styles.CHCardsButtonText}>Add to Favorites</Text>
@@ -384,13 +385,13 @@ function Booking({ navigation }) {
               </Text>
               <View style={styles.PFContainer}>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("")}
+                  onPress={() => navigation.navigate("ocoverview")}
                   style={styles.CHCardsButton}
                 >
                   <Text style={styles.CHCardsButtonText}>Play here</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("")}
+                  onPress={() => Alert.alert("Added Oakwood Clubs to your Favorites")}
                   style={styles.addToFavoritesButton}
                 >
                   <Text style={styles.CHCardsButtonText}>Add to Favorites</Text>

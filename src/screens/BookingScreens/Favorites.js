@@ -185,7 +185,7 @@ function Favorites({ navigation }) {
                 style={styles.favCoCards}
                 // open modal then navigate to North hill passing down north hill variable to overview component
                 onPress={() =>
-                  navigation.navigate("locate", { propName: "North Hill" })
+                  navigation.navigate("nhoverview", { propName: "North Hill" })
                 }
               >
                 <Image style={styles.favCoImage} source={NH} />
@@ -198,7 +198,7 @@ function Favorites({ navigation }) {
               <TouchableOpacity
                 style={styles.favCoCards}
                 onPress={() =>
-                  navigation.navigate("locate", { propName: "South West" })
+                  navigation.navigate("swoverview", { propName: "South West" })
                 }
               >
                 <Image style={styles.favCoImage} source={SW} />
@@ -222,7 +222,7 @@ function Favorites({ navigation }) {
               <TouchableOpacity
                 style={styles.favCoCards}
                 onPress={() =>
-                  navigation.navigate("locate", { propName: "Ventura Acres" })
+                  navigation.navigate("vaoverview", { propName: "Ventura Acres" })
                 }
               >
                 <Image style={styles.favCoImage} source={VA} />
@@ -234,7 +234,7 @@ function Favorites({ navigation }) {
               <TouchableOpacity
                 style={styles.favCoCards}
                 onPress={() =>
-                  navigation.navigate("locate", { propName: "Oakwood Clubs" })
+                  navigation.navigate("ocoverview", { propName: "Oakwood Clubs" })
                 }
               >
                 <Image style={styles.favCoImage} source={OC} />
@@ -257,7 +257,7 @@ function Favorites({ navigation }) {
               <TouchableOpacity
                 style={styles.favCoCards}
                 onPress={() =>
-                  navigation.navigate("locate", { propName: "Pine Ridge" })
+                  navigation.navigate("proverview", { propName: "Pine Ridge" })
                 }
               >
                 <Image style={styles.favCoImage} source={PR} />
@@ -285,16 +285,11 @@ function Favorites({ navigation }) {
               </Text>
               <View style={styles.PFContainer}>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("")}
+                // Direct to play screen (component) or booking??
+                  onPress={() => navigation.navigate("nhoverview")}
                   style={styles.CHCardsButton}
                 >
-                  <Text style={styles.CHCardsButtonText}>Play here</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("")}
-                  style={styles.addToFavoritesButton}
-                >
-                  <Text style={styles.CHCardsButtonText}>Add to Favorites</Text>
+                  <Text style={styles.CHCardsButtonText}>Play here again</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -312,16 +307,10 @@ function Favorites({ navigation }) {
               </Text>
               <View style={styles.PFContainer}>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("")}
+                  onPress={() => navigation.navigate("swoverview")}
                   style={styles.CHCardsButton}
                 >
-                  <Text style={styles.CHCardsButtonText}>Play here</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("")}
-                  style={styles.addToFavoritesButton}
-                >
-                  <Text style={styles.CHCardsButtonText}>Add to Favorites</Text>
+                  <Text style={styles.CHCardsButtonText}>Play here again</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -339,16 +328,10 @@ function Favorites({ navigation }) {
               </Text>
               <View style={styles.PFContainer}>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("")}
+                  onPress={() => navigation.navigate("vaoverview")}
                   style={styles.CHCardsButton}
                 >
-                  <Text style={styles.CHCardsButtonText}>Play here</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("")}
-                  style={styles.addToFavoritesButton}
-                >
-                  <Text style={styles.CHCardsButtonText}>Add to Favorites</Text>
+                  <Text style={styles.CHCardsButtonText}>Play here again</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -366,16 +349,10 @@ function Favorites({ navigation }) {
               </Text>
               <View style={styles.PFContainer}>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("")}
+                  onPress={() => navigation.navigate("proverview")}
                   style={styles.CHCardsButton}
                 >
-                  <Text style={styles.CHCardsButtonText}>Play here</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("")}
-                  style={styles.addToFavoritesButton}
-                >
-                  <Text style={styles.CHCardsButtonText}>Add to Favorites</Text>
+                  <Text style={styles.CHCardsButtonText}>Play here again</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -393,16 +370,10 @@ function Favorites({ navigation }) {
               </Text>
               <View style={styles.PFContainer}>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("")}
+                  onPress={() => navigation.navigate("ocoverview")}
                   style={styles.CHCardsButton}
                 >
-                  <Text style={styles.CHCardsButtonText}>Play here</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("")}
-                  style={styles.addToFavoritesButton}
-                >
-                  <Text style={styles.CHCardsButtonText}>Add to Favorites</Text>
+                  <Text style={styles.CHCardsButtonText}>Play here again</Text>
                 </TouchableOpacity>
               </View>
             </View>
