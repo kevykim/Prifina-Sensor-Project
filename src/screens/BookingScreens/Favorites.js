@@ -15,12 +15,16 @@ import Avatar from "../../assets/Misc/Avatar.png";
 import Carousel from "pinar";
 
 import NH from "../../assets/Locations/NH.png";
-import PP from "../../assets/Locations/PP.png";
+import SW from "../../assets/Locations/SW.png";
 import VA from "../../assets/Locations/VA.png";
+import OC from "../../assets/Locations/OC.png";
+import PR from "../../assets/Locations/PR.jpg";
 
-import { useState } from "react";
 import ALPScreen from "../../utils/ALPScreen";
 import { useRoute } from "@react-navigation/native";
+
+import React, { useEffect, useState } from "react";
+
 
 
 function Favorites({ navigation }) {
@@ -29,6 +33,16 @@ function Favorites({ navigation }) {
 
   const [showLModal, setShowLModal] = useState(false);
 
+   const [carouselRender, setCarouselRendered] = useState(false);
+
+   useEffect(() => {
+     const timer = setTimeout(() => {
+       setCarouselRendered(true);
+     }, 100);
+
+     return () => clearTimeout(timer);
+   }, []);
+
   if (!fontsLoaded) {
     return null;
   }
@@ -36,275 +50,364 @@ function Favorites({ navigation }) {
   return (
     <ScrollView contentContainerStyle={styles.main}>
       <View style={styles.container}>
-      <View style={styles.header}>
-        <View>
-          <TouchableOpacity
-            style={styles.backBooking}
-            onPress={() => navigation.navigate("booking")}
-          >
-            <Image source={leftArrow} />
-            <Text
-              style={{
-                color: "#AFAFAF",
-                fontFamily: "Quicksand-SemiBold",
-                fontSize: 12,
-              }}
+        <View style={styles.header}>
+          <View>
+            <TouchableOpacity
+              style={styles.backBooking}
+              onPress={() => navigation.navigate("booking")}
             >
-              Booking
+              <Image source={leftArrow} />
+              <Text
+                style={{
+                  color: "#AFAFAF",
+                  fontFamily: "Quicksand-SemiBold",
+                  fontSize: 12,
+                }}
+              >
+                Booking
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.nameHeader}>
+            <Text style={{ fontSize: 16, fontFamily: "Quicksand-SemiBold" }}>
+              Andy Haynes
             </Text>
-          </TouchableOpacity>
+            <Image source={Avatar} />
+          </View>
         </View>
-        <View style={styles.nameHeader}>
-          <Text style={{ fontSize: 16, fontFamily: "Quicksand-SemiBold" }}>
-            Andy Haynes
-          </Text>
-          <Image source={Avatar} />
-        </View>
-      </View>
 
-      <View style={styles.topButtonContainer}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("locate")}
-          style={styles.topButtons}
-        >
-          <Text style={styles.topButtonsText}>Locate</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("favorites")}
-          style={{
-            backgroundColor: route.name === "favorites" ? "#2FDA74" : "#D3D3D3",
-            ...styles.topButtons,
-          }}
-        >
-          <Text
+        <View style={styles.topButtonContainer}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("locate")}
+            style={styles.topButtons}
+          >
+            <Text style={styles.topButtonsText}>Locate</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("favorites")}
             style={{
-              color: route.name === "favorites" ? "white" : "black",
-              ...styles.topButtonsText,
+              backgroundColor:
+                route.name === "favorites" ? "#2FDA74" : "#D3D3D3",
+              ...styles.topButtons,
             }}
           >
-            Favorites
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("locatehistory")}
-          style={styles.topButtons}
-        >
-          <Text style={styles.topButtonsText}>History</Text>
-        </TouchableOpacity>
-      </View>
-
-     
-
-
-      {showLModal && (
-        <ALPScreen
-          modalShown={showLModal}
-          closeModal={setShowLModal}
-          navigation={navigation}
-          navVar={"locate"}
-        />
-      )}
-
-      <View style={styles.favoriteCoursesContainer}>
-        <Text style={styles.favoritesCoursesText}>Favorite Courses</Text>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("favorites")}
-          style={styles.seeAllButton}
-        >
-          <Text style={styles.seeAllButtonText}>See all</Text>
-        </TouchableOpacity>
-      </View>
-
-      <Carousel
-        showsControls={false}
-        height={250}
-        dotsContainerStyle={{
-          position: "absolute",
-          right: 5,
-          top: 0,
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <View
-          style={{
-            flexDirection: "row",
-            marginTop: 25,
-            width: 361,
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <TouchableOpacity
-            style={styles.favCoCards}
-            // open modal then navigate to North hill passing down north hill variable to overview component
-            onPress={() =>
-              navigation.navigate("locate", { propName: "North Hill" })
-            }
-          >
-            <Image style={styles.favCoImage} source={NH} />
-            <View style={styles.favCoTextContainer}>
-              <Text style={styles.favCoTextTop}>North Hill</Text>
-              <Text style={styles.favCoTextBot}>3.6 miles</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.favCoCards}
-            // open modal then navigate to North hill passing down north hill variable to overview component
-            onPress={() =>
-              navigation.navigate("locate", { propName: "North Hill" })
-            }
-          >
-            <Image style={styles.favCoImage} source={NH} />
-            <View style={styles.favCoTextContainer}>
-              <Text style={styles.favCoTextTop}>North Hill</Text>
-              <Text style={styles.favCoTextBot}>3.6 miles</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-
-        <View
-          style={{
-            flexDirection: "row",
-            marginTop: 25,
-            width: 361,
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <TouchableOpacity
-            style={styles.favCoCards}
-            // open modal then navigate to North hill passing down north hill variable to overview component
-            onPress={() =>
-              navigation.navigate("locate", { propName: "North Hill" })
-            }
-          >
-            <Image style={styles.favCoImage} source={NH} />
-            <View style={styles.favCoTextContainer}>
-              <Text style={styles.favCoTextTop}>North Hill</Text>
-              <Text style={styles.favCoTextBot}>3.6 miles</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.favCoCards}
-            // open modal then navigate to North hill passing down north hill variable to overview component
-            onPress={() =>
-              navigation.navigate("locate", { propName: "North Hill" })
-            }
-          >
-            <Image style={styles.favCoImage} source={NH} />
-            <View style={styles.favCoTextContainer}>
-              <Text style={styles.favCoTextTop}>North Hill</Text>
-              <Text style={styles.favCoTextBot}>3.6 miles</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-
-        <View
-          style={{
-            flexDirection: "row",
-            marginTop: 25,
-            width: 361,
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <TouchableOpacity
-            style={styles.favCoCards}
-            // open modal then navigate to North hill passing down north hill variable to overview component
-            onPress={() =>
-              navigation.navigate("locate", { propName: "North Hill" })
-            }
-          >
-            <Image style={styles.favCoImage} source={NH} />
-            <View style={styles.favCoTextContainer}>
-              <Text style={styles.favCoTextTop}>North Hill</Text>
-              <Text style={styles.favCoTextBot}>3.6 miles</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.favCoCards}
-            // open modal then navigate to North hill passing down north hill variable to overview component
-            onPress={() =>
-              navigation.navigate("locate", { propName: "North Hill" })
-            }
-          >
-            <Image style={styles.favCoImage} source={NH} />
-            <View style={styles.favCoTextContainer}>
-              <Text style={styles.favCoTextTop}>North Hill</Text>
-              <Text style={styles.favCoTextBot}>3.6 miles</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-      </Carousel>
-
-      <Text style={styles.courseHistoryText}>Course History</Text>
-
-      <View style={styles.CHContainer}>
-        <View style={styles.CHCards}>
-          <Image source={PP} style={styles.CHImage} />
-          <View style={styles.CHCardsTContainer}>
-            <Text style={styles.CHCardsTHeader}>Papago Park</Text>
-            <Text style={styles.CHCardsText}>Played at 3:00 pm on 2/23/24</Text>
-            <Text style={styles.CHCardsText}>
-              Duration: 1 hr 4 min, 9 holes
+            <Text
+              style={{
+                color: route.name === "favorites" ? "white" : "black",
+                ...styles.topButtonsText,
+              }}
+            >
+              Favorites
             </Text>
-            <View style={styles.PFContainer}>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("locatehistory")}
+            style={styles.topButtons}
+          >
+            <Text style={styles.topButtonsText}>History</Text>
+          </TouchableOpacity>
+        </View>
+
+        {showLModal && (
+          <ALPScreen
+            modalShown={showLModal}
+            closeModal={setShowLModal}
+            navigation={navigation}
+            navVar={"locate"}
+          />
+        )}
+
+        <View style={styles.favoriteCoursesContainer}>
+          <Text style={styles.favoritesCoursesText}>Favorite Courses</Text>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("favorites")}
+            style={styles.seeAllButton}
+          >
+            <Text style={styles.seeAllButtonText}>See all</Text>
+          </TouchableOpacity>
+        </View>
+
+        {carouselRender && (
+          <Carousel
+            showsControls={false}
+            height={250}
+            containerStyle={{
+              overflow: "visible",
+            }}
+            contentContainerStyle={{
+              overflow: "visible",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+            dotsContainerStyle={{
+              position: "absolute",
+              right: 5,
+              top: 0,
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            activeDotStyle={{
+              backgroundColor: "#7C7C7C",
+              width: 5,
+              height: 5,
+              borderRadius: 100,
+              marginLeft: 2,
+              marginRight: 2,
+              marginTop: 2,
+              marginBottom: 2,
+            }}
+            dotStyle={{
+              backgroundColor: "#D3D3D3",
+              borderRadius: 100,
+              width: 5,
+              height: 5,
+              marginLeft: 2,
+              marginRight: 2,
+              marginTop: 2,
+              marginBottom: 2,
+            }}
+          >
+            <View
+              style={{
+                flexDirection: "row",
+                marginTop: 25,
+                marginLeft: 15,
+                width: 331,
+                overflow: "visible",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
               <TouchableOpacity
-                onPress={() => navigation.navigate("")}
-                style={styles.CHCardsButton}
+                style={styles.favCoCards}
+                // open modal then navigate to North hill passing down north hill variable to overview component
+                onPress={() =>
+                  navigation.navigate("locate", { propName: "North Hill" })
+                }
               >
-                <Text style={styles.CHCardsButtonText}>Play here again</Text>
+                <Image style={styles.favCoImage} source={NH} />
+                <View style={styles.favCoTextContainer}>
+                  <Text style={styles.favCoTextTop}>North Hill</Text>
+                  <Text style={styles.favCoTextBot}>3.6 miles</Text>
+                </View>
               </TouchableOpacity>
 
+              <TouchableOpacity
+                style={styles.favCoCards}
+                onPress={() =>
+                  navigation.navigate("locate", { propName: "South West" })
+                }
+              >
+                <Image style={styles.favCoImage} source={SW} />
+                <View style={styles.favCoTextContainer}>
+                  <Text style={styles.favCoTextTop}>South West</Text>
+                  <Text style={styles.favCoTextBot}>7.5 miles</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+
+            <View
+              style={{
+                flexDirection: "row",
+                marginTop: 25,
+                width: 331,
+                alignItems: "center",
+                justifyContent: "center",
+                overflow: "visible",
+              }}
+            >
+              <TouchableOpacity
+                style={styles.favCoCards}
+                onPress={() =>
+                  navigation.navigate("locate", { propName: "Ventura Acres" })
+                }
+              >
+                <Image style={styles.favCoImage} source={VA} />
+                <View style={styles.favCoTextContainer}>
+                  <Text style={styles.favCoTextTop}>Ventura Acres</Text>
+                  <Text style={styles.favCoTextBot}>5.5 miles</Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.favCoCards}
+                onPress={() =>
+                  navigation.navigate("locate", { propName: "Oakwood Clubs" })
+                }
+              >
+                <Image style={styles.favCoImage} source={OC} />
+                <View style={styles.favCoTextContainer}>
+                  <Text style={styles.favCoTextTop}>Oakwood Clubs</Text>
+                  <Text style={styles.favCoTextBot}>1.7 miles</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+
+            <View
+              style={{
+                flexDirection: "row",
+                marginTop: 25,
+                width: 145,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <TouchableOpacity
+                style={styles.favCoCards}
+                onPress={() =>
+                  navigation.navigate("locate", { propName: "Pine Ridge" })
+                }
+              >
+                <Image style={styles.favCoImage} source={PR} />
+                <View style={styles.favCoTextContainer}>
+                  <Text style={styles.favCoTextTop}>Pine Ridge</Text>
+                  <Text style={styles.favCoTextBot}>13.3 miles</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          </Carousel>
+        )}
+
+        <Text style={styles.courseHistoryText}>Course History</Text>
+
+        <View style={styles.CHContainer}>
+          <View style={styles.CHCards}>
+            <Image source={NH} style={styles.CHImage} />
+            <View style={styles.CHCardsTContainer}>
+              <Text style={styles.CHCardsTHeader}>North Hill</Text>
+              <Text style={styles.CHCardsText}>
+                Played at 1:00 pm on 3/19/24
+              </Text>
+              <Text style={styles.CHCardsText}>
+                Duration: 5 hr 16 min, 18 holes
+              </Text>
+              <View style={styles.PFContainer}>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("")}
+                  style={styles.CHCardsButton}
+                >
+                  <Text style={styles.CHCardsButtonText}>Play here</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("")}
+                  style={styles.addToFavoritesButton}
+                >
+                  <Text style={styles.CHCardsButtonText}>Add to Favorites</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+
+          <View style={styles.CHCards}>
+            <Image source={SW} style={styles.CHImage} />
+            <View style={styles.CHCardsTContainer}>
+              <Text style={styles.CHCardsTHeader}>South West</Text>
+              <Text style={styles.CHCardsText}>
+                Played at 3:00 pm on 2/23/24
+              </Text>
+              <Text style={styles.CHCardsText}>
+                Duration: 8 hr 16 min, 18 holes
+              </Text>
+              <View style={styles.PFContainer}>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("")}
+                  style={styles.CHCardsButton}
+                >
+                  <Text style={styles.CHCardsButtonText}>Play here</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("")}
+                  style={styles.addToFavoritesButton}
+                >
+                  <Text style={styles.CHCardsButtonText}>Add to Favorites</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+
+          <View style={styles.CHCards}>
+            <Image source={VA} style={styles.CHImage} />
+            <View style={styles.CHCardsTContainer}>
+              <Text style={styles.CHCardsTHeader}>Ventura Acres</Text>
+              <Text style={styles.CHCardsText}>
+                Played at 10:00 am on 1/24/24
+              </Text>
+              <Text style={styles.CHCardsText}>
+                Duration: 6 hr 16 min, 18 holes
+              </Text>
+              <View style={styles.PFContainer}>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("")}
+                  style={styles.CHCardsButton}
+                >
+                  <Text style={styles.CHCardsButtonText}>Play here</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("")}
+                  style={styles.addToFavoritesButton}
+                >
+                  <Text style={styles.CHCardsButtonText}>Add to Favorites</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+
+          <View style={styles.CHCards}>
+            <Image source={PR} style={styles.CHImage} />
+            <View style={styles.CHCardsTContainer}>
+              <Text style={styles.CHCardsTHeader}>Pine Ridge</Text>
+              <Text style={styles.CHCardsText}>
+                Played at 9:00 am on 12/15/23
+              </Text>
+              <Text style={styles.CHCardsText}>
+                Duration: 7 hr 16 min, 18 holes
+              </Text>
+              <View style={styles.PFContainer}>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("")}
+                  style={styles.CHCardsButton}
+                >
+                  <Text style={styles.CHCardsButtonText}>Play here</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("")}
+                  style={styles.addToFavoritesButton}
+                >
+                  <Text style={styles.CHCardsButtonText}>Add to Favorites</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+
+          <View style={styles.CHCards}>
+            <Image source={OC} style={styles.CHImage} />
+            <View style={styles.CHCardsTContainer}>
+              <Text style={styles.CHCardsTHeader}>Oakwood Clubs</Text>
+              <Text style={styles.CHCardsText}>
+                Played at 10:00 am on 11/14/23
+              </Text>
+              <Text style={styles.CHCardsText}>
+                Duration: 6 hr 16 min, 18 holes
+              </Text>
+              <View style={styles.PFContainer}>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("")}
+                  style={styles.CHCardsButton}
+                >
+                  <Text style={styles.CHCardsButtonText}>Play here</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("")}
+                  style={styles.addToFavoritesButton}
+                >
+                  <Text style={styles.CHCardsButtonText}>Add to Favorites</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
         </View>
-
-        <View style={styles.CHCards}>
-          <Image source={NH} style={styles.CHImage} />
-          <View style={styles.CHCardsTContainer}>
-            <Text style={styles.CHCardsTHeader}>North Hill</Text>
-            <Text style={styles.CHCardsText}>Played at 1:00 pm on 2/05/24</Text>
-            <Text style={styles.CHCardsText}>
-              Duration: 1 hr 45 min, 9 holes
-            </Text>
-            <View style={styles.PFContainer}>
-              <TouchableOpacity
-                onPress={() => navigation.navigate("")}
-                style={styles.CHCardsButton}
-              >
-                <Text style={styles.CHCardsButtonText}>Play here again</Text>
-              </TouchableOpacity>
-             
-            </View>
-          </View>
-        </View>
-
-        <View style={styles.CHCards}>
-          <Image source={VA} style={styles.CHImage} />
-          <View style={styles.CHCardsTContainer}>
-            <Text style={styles.CHCardsTHeader}>Ventura Acres</Text>
-            <Text style={styles.CHCardsText}>
-              Played at 10:00 am on 1/23/24
-            </Text>
-            <Text style={styles.CHCardsText}>
-              Duration: 1 hr 14 min, 9 holes
-            </Text>
-            <View style={styles.PFContainer}>
-              <TouchableOpacity
-                onPress={() => navigation.navigate("")}
-                style={styles.CHCardsButton}
-              >
-                <Text style={styles.CHCardsButtonText}>Play here again</Text>
-              </TouchableOpacity>
-            
-            </View>
-          </View>
-        </View>
-      </View>
       </View>
     </ScrollView>
   );
@@ -314,7 +417,7 @@ const styles = StyleSheet.create({
   main: {
     flexGrow: 1,
     flexDirection: "column",
-    backgroundColor: 'white',
+    backgroundColor: "white",
     padding: 15,
   },
   container: {
@@ -328,7 +431,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    width: 70,
+    width: 69,
     justifyContent: "space-between",
   },
   nameHeader: {
@@ -395,7 +498,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 10,
-    marginTop: 25
+    marginTop: 25,
   },
   favoritesCoursesText: {
     fontFamily: "Quicksand-Med",
@@ -427,6 +530,8 @@ const styles = StyleSheet.create({
   favCoImage: {
     borderTopRightRadius: 6,
     borderTopLeftRadius: 6,
+    width: 160,
+    height: 136,
   },
   favCoTextContainer: {
     flexDirection: "column",
@@ -453,7 +558,7 @@ const styles = StyleSheet.create({
   },
 
   CHContainer: {
-    marginBottom: 200,
+    marginBottom: 125,
   },
   CHCards: {
     height: 106,

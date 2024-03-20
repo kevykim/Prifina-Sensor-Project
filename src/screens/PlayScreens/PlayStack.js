@@ -9,6 +9,7 @@ import Explore from "./Explore";
 import PlayVA from "./PlayLocations/VA/PlayVA";
 import PlayVASRound from "./PlayLocations/VA/PlayVASRound";
 import PlayVACourse from "./PlayLocations/VA/PlayVACourse";
+import PlayVASummary from "./PlayLocations/VA/PlayVASummary";
 
 const Stack = createStackNavigator();
 
@@ -37,6 +38,7 @@ function PlayStack({ navigation }) {
       <Stack.Screen name='playva' component={PlayVA} />
       <Stack.Screen name='playvasround' component={PlayVASRound} />
       <Stack.Screen name='playvacourse' component={PlayVACourse} />
+      <Stack.Screen name='playvasummary' component={PlayVASummary} />
     </Stack.Navigator>
   );
 }

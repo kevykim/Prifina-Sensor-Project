@@ -16,8 +16,8 @@ import Avatar from "../../assets/Misc/Avatar.png";
 import GreenStar from "../../assets/Misc/GreenStar.png";
 import GrayStar from "../../assets/Misc/GrayStar.png";
 
-import NHG from "../../assets/Locations/NHG.png";
-import SB from "../../assets/Locations/SB.png";
+import SW from "../../assets/Locations/SW.png";
+import NH from '../../assets/Locations/NH.png'
 
 function Play({ navigation }) {
   const fontsLoaded = useCustomFonts();
@@ -94,7 +94,7 @@ function Play({ navigation }) {
                 <Image source={GrayStar} />
               </View>
 
-              <Image style={styles.eventCrsImage} source={NHG} />
+              <Image style={styles.eventCrsImage} source={NH} />
 
               <View style={styles.eventCrsTContainer}>
                 <View style={styles.ECrsBox}>
@@ -120,7 +120,7 @@ function Play({ navigation }) {
                 <Image source={GrayStar} />
               </View>
 
-              <Image style={styles.eventCrsImage} source={SB} />
+              <Image style={styles.eventCrsImage} source={SW} />
 
               <View style={styles.eventCrsTContainer}>
                 <View style={styles.ECrsBox}>
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    width: 60,
+    width: 57,
     justifyContent: "space-between",
   },
   nameHeader: {

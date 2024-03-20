@@ -12,11 +12,11 @@ import leftArrow from "../../assets/Misc/leftArrow.png";
 
 import Avatar from "../../assets/Misc/Avatar.png";
 
-import Carousel from "pinar";
-
 import NH from "../../assets/Locations/NH.png";
-import PP from "../../assets/Locations/PP.png";
+import SW from "../../assets/Locations/SW.png";
 import VA from "../../assets/Locations/VA.png";
+import OC from "../../assets/Locations/OC.png";
+import PR from "../../assets/Locations/PR.jpg";
 
 import { useState } from "react";
 import ALPScreen from "../../utils/ALPScreen";
@@ -35,139 +35,181 @@ function LocateHistory({ navigation }) {
   return (
     <ScrollView contentContainerStyle={styles.main}>
       <View style={styles.container}>
-      <View style={styles.header}>
-        <View>
+        <View style={styles.header}>
+          <View>
+            <TouchableOpacity
+              style={styles.backBooking}
+              onPress={() => navigation.navigate("booking")}
+            >
+              <Image source={leftArrow} />
+              <Text
+                style={{
+                  color: "#AFAFAF",
+                  fontFamily: "Quicksand-SemiBold",
+                  fontSize: 12,
+                }}
+              >
+                Booking
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.nameHeader}>
+            <Text style={{ fontSize: 16, fontFamily: "Quicksand-SemiBold" }}>
+              Andy Haynes
+            </Text>
+            <Image source={Avatar} />
+          </View>
+        </View>
+
+        <View style={styles.topButtonContainer}>
           <TouchableOpacity
-            style={styles.backBooking}
-            onPress={() => navigation.navigate("booking")}
+            onPress={() => navigation.navigate("locate")}
+            style={styles.topButtons}
           >
-            <Image source={leftArrow} />
+            <Text style={styles.topButtonsText}>Locate</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("favorites")}
+            style={styles.topButtons}
+          >
+            <Text style={styles.topButtonsText}>Favorites</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("locatehistory")}
+            style={{
+              backgroundColor:
+                route.name === "locatehistory" ? "#2FDA74" : "#D3D3D3",
+              ...styles.topButtons,
+            }}
+          >
             <Text
               style={{
-                color: "#AFAFAF",
-                fontFamily: "Quicksand-SemiBold",
-                fontSize: 12,
+                color: route.name === "locatehistory" ? "white" : "black",
+                ...styles.topButtonsText,
               }}
             >
-              Booking
+              History
             </Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.nameHeader}>
-          <Text style={{ fontSize: 16, fontFamily: "Quicksand-SemiBold" }}>
-            Andy Haynes
-          </Text>
-          <Image source={Avatar} />
-        </View>
-      </View>
 
-      <View style={styles.topButtonContainer}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("locate")}
-          style={styles.topButtons}
-        >
-          <Text style={styles.topButtonsText}>Locate</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("favorites")}
-          style={ styles.topButtons }
-        >
-          <Text
-            style={styles.topButtonsText}
-          >
-            Favorites
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("locatehistory")}
-          style={{
-            backgroundColor:
-              route.name === "locatehistory" ? "#2FDA74" : "#D3D3D3",
-            ...styles.topButtons,
-          }}
-        >
-          <Text
-            style={{
-              color: route.name === "locatehistory" ? "white" : "black",
-              ...styles.topButtonsText,
-            }}
-          >
-            History
-          </Text>
-        </TouchableOpacity>
-      </View>
+        {showLModal && (
+          <ALPScreen
+            modalShown={showLModal}
+            closeModal={setShowLModal}
+            navigation={navigation}
+            navVar={"locate"}
+          />
+        )}
 
-      {showLModal && (
-        <ALPScreen
-          modalShown={showLModal}
-          closeModal={setShowLModal}
-          navigation={navigation}
-          navVar={"locate"}
-        />
-      )}
+        <Text style={styles.courseHistoryText}>Course History</Text>
 
-      <Text style={styles.courseHistoryText}>Course History</Text>
+        <View style={styles.CHContainer}>
+          <View style={styles.CHCards}>
+            <Image source={NH} style={styles.CHImage} />
+            <View style={styles.CHCardsTContainer}>
+              <Text style={styles.CHCardsTHeader}>North Hill</Text>
+              <Text style={styles.CHCardsText}>
+                Played at 1:00 pm on 3/19/24
+              </Text>
+              <Text style={styles.CHCardsText}>
+                Duration: 5 hr 16 min, 18 holes
+              </Text>
+              <View style={styles.PFContainer}>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("nhoverview")}
+                  style={styles.CHCardsButton}
+                >
+                  <Text style={styles.CHCardsButtonText}>Play here again</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
 
-      <View style={styles.CHContainer}>
-        <View style={styles.CHCards}>
-          <Image source={PP} style={styles.CHImage} />
-          <View style={styles.CHCardsTContainer}>
-            <Text style={styles.CHCardsTHeader}>Papago Park</Text>
-            <Text style={styles.CHCardsText}>Played at 3:00 pm on 2/23/24</Text>
-            <Text style={styles.CHCardsText}>
-              Duration: 1 hr 4 min, 9 holes
-            </Text>
-            <View style={styles.PFContainer}>
-              <TouchableOpacity
-                onPress={() => navigation.navigate("")}
-                style={styles.CHCardsButton}
-              >
-                <Text style={styles.CHCardsButtonText}>Play here again</Text>
-              </TouchableOpacity>
+          <View style={styles.CHCards}>
+            <Image source={SW} style={styles.CHImage} />
+            <View style={styles.CHCardsTContainer}>
+              <Text style={styles.CHCardsTHeader}>South West</Text>
+              <Text style={styles.CHCardsText}>
+                Played at 3:00 pm on 2/23/24
+              </Text>
+              <Text style={styles.CHCardsText}>
+                Duration: 8 hr 16 min, 18 holes
+              </Text>
+              <View style={styles.PFContainer}>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("swoverview")}
+                  style={styles.CHCardsButton}
+                >
+                  <Text style={styles.CHCardsButtonText}>Play here again</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+
+          <View style={styles.CHCards}>
+            <Image source={VA} style={styles.CHImage} />
+            <View style={styles.CHCardsTContainer}>
+              <Text style={styles.CHCardsTHeader}>Ventura Acres</Text>
+              <Text style={styles.CHCardsText}>
+                Played at 10:00 am on 1/24/24
+              </Text>
+              <Text style={styles.CHCardsText}>
+                Duration: 6 hr 16 min, 18 holes
+              </Text>
+              <View style={styles.PFContainer}>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("vaoverview")}
+                  style={styles.CHCardsButton}
+                >
+                  <Text style={styles.CHCardsButtonText}>Play here again</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+
+          <View style={styles.CHCards}>
+            <Image source={PR} style={styles.CHImage} />
+            <View style={styles.CHCardsTContainer}>
+              <Text style={styles.CHCardsTHeader}>Pine Ridge</Text>
+              <Text style={styles.CHCardsText}>
+                Played at 9:00 am on 12/15/23
+              </Text>
+              <Text style={styles.CHCardsText}>
+                Duration: 7 hr 16 min, 18 holes
+              </Text>
+              <View style={styles.PFContainer}>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("proverview")}
+                  style={styles.CHCardsButton}
+                >
+                  <Text style={styles.CHCardsButtonText}>Play here again</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+
+          <View style={styles.CHCards}>
+            <Image source={OC} style={styles.CHImage} />
+            <View style={styles.CHCardsTContainer}>
+              <Text style={styles.CHCardsTHeader}>Oakwood Clubs</Text>
+              <Text style={styles.CHCardsText}>
+                Played at 10:00 am on 11/14/23
+              </Text>
+              <Text style={styles.CHCardsText}>
+                Duration: 6 hr 16 min, 18 holes
+              </Text>
+              <View style={styles.PFContainer}>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("ocoverview")}
+                  style={styles.CHCardsButton}
+                >
+                  <Text style={styles.CHCardsButtonText}>Play here again</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
         </View>
-
-        <View style={styles.CHCards}>
-          <Image source={NH} style={styles.CHImage} />
-          <View style={styles.CHCardsTContainer}>
-            <Text style={styles.CHCardsTHeader}>North Hill</Text>
-            <Text style={styles.CHCardsText}>Played at 1:00 pm on 2/05/24</Text>
-            <Text style={styles.CHCardsText}>
-              Duration: 1 hr 45 min, 9 holes
-            </Text>
-            <View style={styles.PFContainer}>
-              <TouchableOpacity
-                onPress={() => navigation.navigate("")}
-                style={styles.CHCardsButton}
-              >
-                <Text style={styles.CHCardsButtonText}>Play here again</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-
-        <View style={styles.CHCards}>
-          <Image source={VA} style={styles.CHImage} />
-          <View style={styles.CHCardsTContainer}>
-            <Text style={styles.CHCardsTHeader}>Ventura Acres</Text>
-            <Text style={styles.CHCardsText}>
-              Played at 10:00 am on 1/23/24
-            </Text>
-            <Text style={styles.CHCardsText}>
-              Duration: 1 hr 14 min, 9 holes
-            </Text>
-            <View style={styles.PFContainer}>
-              <TouchableOpacity
-                onPress={() => navigation.navigate("")}
-                style={styles.CHCardsButton}
-              >
-                <Text style={styles.CHCardsButtonText}>Play here again</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </View>
       </View>
     </ScrollView>
   );
@@ -191,7 +233,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    width: 70,
+    width: 69,
     justifyContent: "space-between",
   },
   nameHeader: {

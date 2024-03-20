@@ -57,7 +57,7 @@ function VATeeTimes({ navigation }) {
       <View style={styles.header}>
         <View>
           <TouchableOpacity
-            style={styles.backBooking}
+            style={styles.backLocate}
             onPress={() => navigation.navigate("locate")}
           >
             <Image source={leftArrow} />
@@ -246,11 +246,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  backBooking: {
+  backLocate: {
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    width: 65,
+    width: 62,
     justifyContent: "space-between",
   },
   nameHeader: {

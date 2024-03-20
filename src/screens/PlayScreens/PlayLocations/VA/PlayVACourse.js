@@ -52,7 +52,7 @@ function PlayVACourse({ navigation }) {
               modalShown={showModal}
               closeModal={setShowModal}
               navigation={navigation}
-              navVar={"arctrack"}
+              navVar={"playvasummary"}
             />
           )}
         </View>
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   backPlay: {
     flexDirection: "row",
     alignItems: "center",
-    width: 50,
+    width: 48,
     justifyContent: "space-between",
   },
   hamburgerContainer: {

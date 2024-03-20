@@ -35,100 +35,129 @@ function Scorecard({ navigation }) {
   return (
     <ScrollView contentContainerStyle={styles.main}>
       <View style={styles.container}>
-      <View style={styles.header}>
-        <View>
-          <TouchableOpacity
-            style={styles.backHome}
-            onPress={() => navigation.navigate("Home")}
-          >
-            <Image source={leftArrow} />
-            <Text
-              style={{
-                color: "#AFAFAF",
-                fontFamily: "Quicksand-SemiBold",
-                fontSize: 12,
-              }}
+        <View style={styles.header}>
+          <View>
+            <TouchableOpacity
+              style={styles.backHome}
+              onPress={() => navigation.navigate("Home")}
             >
-              Home
+              <Image source={leftArrow} />
+              <Text
+                style={{
+                  color: "#AFAFAF",
+                  fontFamily: "Quicksand-SemiBold",
+                  fontSize: 12,
+                }}
+              >
+                Home
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.nameHeader}>
+            <Text style={{ fontSize: 16, fontFamily: "Quicksand-SemiBold" }}>
+              Andy Haynes
             </Text>
+            <Image source={Avatar} />
+          </View>
+        </View>
+
+        <View style={styles.topButtonContainer}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("trends")}
+            style={styles.topButtons}
+          >
+            <Text style={styles.topButtonsText}>Trends</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("statistics")}
+            style={styles.topButtons}
+          >
+            <Text style={styles.topButtonsText}>Statistics</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("history")}
+            style={styles.topButtons}
+          >
+            <Text style={styles.topButtonsText}>History</Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.nameHeader}>
-          <Text style={{ fontSize: 16, fontFamily: "Quicksand-SemiBold" }}>
-            Andy Haynes
+
+        <Text style={styles.scorecardHeader}>Scorecard</Text>
+
+        <View>
+          <Text style={styles.scorecardInfo}>
+            Welcome to your personalized training hub. Here you can set and
+            customize your equipment, practice specific skills and drills, and
+            view tutorials catered towards your personal feedback needs.
+            Personalized coaching is available 24/7.
           </Text>
-          <Image source={Avatar} />
         </View>
-      </View>
 
-      <View style={styles.topButtonContainer}>
+        <View style={styles.handicapContainer}>
+          <Text style={styles.handicapText}>Your Current Handicap: </Text>
+          <Text style={styles.handicapTextGreen}>10 over par</Text>
+        </View>
+
         <TouchableOpacity
+          style={styles.breakdownButton}
           onPress={() => navigation.navigate("trends")}
-          style={styles.topButtons}
         >
-          <Text style={styles.topButtonsText}>Trends</Text>
+          <Text style={styles.breakdownButtonText}>View Breakdown</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("statistics")}
-          style={styles.topButtons}
-        >
-          <Text style={styles.topButtonsText}>Statistics</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("history")}
-          style={styles.topButtons}
-        >
-          <Text style={styles.topButtonsText}>History</Text>
-        </TouchableOpacity>
-      </View>
 
-      <Text style={styles.scorecardHeader}>Scorecard</Text>
-
-      <View>
-        <Text style={styles.scorecardInfo}>
-          Welcome to your personalized training hub. Here you can set and
-          customize your equipment, practice specific skills and drills, and
-          view tutorials catered towards your personal feedback needs.
-          Personalized coaching is available 24/7.
-        </Text>
-      </View>
-
-      <View style={styles.handicapContainer}>
-        <Text style={styles.handicapText}>Your Current Handicap: </Text>
-        <Text style={styles.handicapTextGreen}>10 over par</Text>
-      </View>
-
-      <TouchableOpacity
-        style={styles.breakdownButton}
-        onPress={() => navigation.navigate("trends")}
-      >
-        <Text style={styles.breakdownButtonText}>View Breakdown</Text>
-      </TouchableOpacity>
-
-      <Text style={styles.progressText}>In progress</Text>
-      <View style={styles.scoreChart}>
-        <View style={styles.chartHeaderContainer}>
-          <Text style={styles.CHCTopText}>Performance Tracking</Text>
-          <Text style={styles.CHCBotText}>Score</Text>
+        <Text style={styles.progressText}>In progress</Text>
+        <View style={styles.scoreChart}>
+          <View style={styles.chartHeaderContainer}>
+            <Text style={styles.CHCTopText}>Performance Tracking</Text>
+            <Text style={styles.CHCBotText}>Score</Text>
+          </View>
+          <BarChart
+            width={290}
+            noOfSections={5}
+            data={barData}
+            maxValue={15}
+            frontColor={"#307D87"}
+            barBorderTopLeftRadius={4}
+            barBorderTopRightRadius={4}
+            yAxisThickness={0}
+            xAxisThickness={1}
+            hideYAxisText
+            xAxisColor="#D3D3D3"
+            xAxisLabelTextStyle={{
+              color: "#AFAFAF",
+              fontFamily: "Quicksand-SemiBold",
+            }}
+            hideRules
+            showReferenceLine1
+            referenceLine1Position={3}
+            referenceLine1Config={{
+              color: "#AFAFAF",
+              dashWidth: 1,
+              dashGap: 10,
+            }}
+            showReferenceLine2
+            referenceLine2Position={6}
+            referenceLine2Config={{
+              color: "#AFAFAF",
+              dashWidth: 1,
+              dashGap: 10,
+            }}
+            showReferenceLine3
+            referenceLine3Position={9}
+            referenceLine3Config={{
+              color: "#AFAFAF",
+              dashWidth: 1,
+              dashGap: 10,
+            }}
+            showReferenceLine4
+            referenceLine4Position={12}
+            referenceLine4Config={{
+              color: "#AFAFAF",
+              dashWidth: 1,
+              dashGap: 10,
+            }}
+          />
         </View>
-        <BarChart
-          width={290}
-          hideRules
-          noOfSections={5}
-          data={barData}
-          frontColor={"#307D87"}
-          yAxisColor="lightgray"
-          xAxisColor="lightgray"
-          yAxisTextStyle={{
-            color: "#AFAFAF",
-            fontFamily: "Quicksand-SemiBold",
-          }}
-          xAxisLabelTextStyle={{
-            color: "#AFAFAF",
-            fontFamily: "Quicksand-SemiBold",
-          }}
-        />
-      </View>
       </View>
     </ScrollView>
   );
@@ -152,7 +181,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    width: 60,
+    width: 57,
     justifyContent: "space-between",
   },
   nameHeader: {
@@ -247,7 +276,7 @@ const styles = StyleSheet.create({
   chartHeaderContainer: {
     position: "absolute",
     top: 15,
-    left: 70,
+    left: 15,
   },
   CHCTopText: {
     fontFamily: "Quicksand-Med",
