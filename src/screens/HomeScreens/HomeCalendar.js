@@ -19,8 +19,8 @@ import { useRoute } from "@react-navigation/native";
 import GreenStar from "../../assets/Misc/GreenStar.png";
 import GrayStar from "../../assets/Misc/GrayStar.png";
 
-import NHG from "../../assets/Locations/NHG.png";
-import SB from "../../assets/Locations/SB.png";
+import NH from "../../assets/Locations/NH.png";
+import SW from "../../assets/Locations/SW.png";
 
 function HomeCalendar({ navigation }) {
   const route = useRoute();
@@ -147,7 +147,7 @@ function HomeCalendar({ navigation }) {
                 <Image source={GrayStar} />
               </View>
 
-              <Image style={styles.eventCrsImage} source={NHG} />
+              <Image style={styles.eventCrsImage} source={NH} />
 
               <View style={styles.eventCrsTContainer}>
                 <View style={styles.ECrsBox}>
@@ -173,7 +173,7 @@ function HomeCalendar({ navigation }) {
                 <Image source={GrayStar} />
               </View>
 
-              <Image style={styles.eventCrsImage} source={SB} />
+              <Image style={styles.eventCrsImage} source={SW} />
 
               <View style={styles.eventCrsTContainer}>
                 <View style={styles.ECrsBox}>
