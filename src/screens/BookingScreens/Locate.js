@@ -194,7 +194,7 @@ function Locate({ navigation }) {
             <View style={styles.selectCrsTContainer}>
               <View style={styles.SCTBox}>
                 <Text style={styles.SCTBoxTop}>South West</Text>
-                <Text style={styles.SCTBoxBot}>7.5</Text>
+                <Text style={styles.SCTBoxBot}>7.5 miles</Text>
               </View>
 
               <TouchableOpacity

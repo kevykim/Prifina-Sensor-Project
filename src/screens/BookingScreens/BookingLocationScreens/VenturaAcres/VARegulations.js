@@ -126,7 +126,7 @@ function VARegulations({ navigation }) {
           <View style={{ flexDirection: "row" }}>
             <Text style={styles.dotText}>• </Text>
             <Text style={styles.VARegulationsText}>
-              Ventura Acres is a par 72, 9-hole golf course featuring mature
+              Ventura Acres is a par 72, 18-hole golf course featuring mature
               trees and large greens
             </Text>
           </View>
