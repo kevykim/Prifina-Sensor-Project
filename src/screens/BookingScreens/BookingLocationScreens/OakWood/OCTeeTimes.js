@@ -16,7 +16,7 @@ import { useState } from "react";
 import styles from "../TeeTimesStyles.js";
 import fakeTime from "../FakeTime.js";
 
-function VATeeTimes({ navigation }) {
+function OCTeeTimes({ navigation }) {
   const fontsLoaded = useCustomFonts();
   const route = useRoute();
 
@@ -70,28 +70,28 @@ function VATeeTimes({ navigation }) {
 
         <View style={styles.topButtonContainer}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("vaoverview")}
+            onPress={() => navigation.navigate("ocoverview")}
             style={styles.topButtons}
           >
             <Text style={styles.topButtonsText}>Overview</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate("varegulations")}
+            onPress={() => navigation.navigate("ocregulations")}
             style={styles.topButtons}
           >
             <Text style={styles.topButtonsText}>Regulations</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate("vateetimes")}
+            onPress={() => navigation.navigate("octeetimes")}
             style={{
               backgroundColor:
-                route.name === "vateetimes" ? "#2FDA74" : "#D3D3D3",
+                route.name === "octeetimes" ? "#2FDA74" : "#D3D3D3",
               ...styles.topButtons,
             }}
           >
             <Text
               style={{
-                color: route.name === "vateetimes" ? "white" : "black",
+                color: route.name === "octeetimes" ? "white" : "black",
                 ...styles.topButtonsText,
               }}
             >
@@ -101,12 +101,12 @@ function VATeeTimes({ navigation }) {
         </View>
 
         <View style={styles.VAContainer}>
-          <Text style={styles.VAHeader}>Ventura Acres</Text>
+          <Text style={styles.VAHeader}>Oakwood Clubs</Text>
           <View style={styles.starContainer}>
             <Image style={styles.starSize} source={GreenStar} />
             <Image style={styles.starSize} source={GreenStar} />
             <Image style={styles.starSize} source={GreenStar} />
-            <Image style={styles.starSize} source={GreenStar} />
+            <Image style={styles.starSize} source={GrayStar} />
             <Image style={styles.starSize} source={GrayStar} />
           </View>
         </View>
@@ -234,7 +234,7 @@ function VATeeTimes({ navigation }) {
                     navigation.navigate("success", {
                       propDate: selected,
                       propTime: fake.time,
-                      currScreen: "va",
+                      currScreen: "oc",
                     })
                   }
                   style={styles.confirmTeeTime}
@@ -252,4 +252,4 @@ function VATeeTimes({ navigation }) {
   );
 }
 
-export default VATeeTimes;
+export default OCTeeTimes;

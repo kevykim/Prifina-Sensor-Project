@@ -99,7 +99,8 @@ const styles = StyleSheet.create({
   },
   AVTContainer: {
     flexDirection: "column",
-    marginBottom: 200,
+    marginBottom: 125,
+    height: 150
   },
   AVTCards: {
     flexDirection: "column",

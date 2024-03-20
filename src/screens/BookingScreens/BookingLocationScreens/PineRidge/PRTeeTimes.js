@@ -1,4 +1,10 @@
-import { View, ScrollView, Text, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  ScrollView,
+  Text,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import { useCustomFonts } from "../../../../utils/CustomFonts";
 
 import leftArrow from "../../../../assets/Misc/leftArrow.png";
@@ -13,18 +19,18 @@ import { Calendar, LocaleConfig } from "react-native-calendars";
 import { useRoute } from "@react-navigation/native";
 import { useState } from "react";
 
-import styles from "../TeeTimesStyles.js";
-import fakeTime from "../FakeTime.js";
+import styles from '../TeeTimesStyles.js';
+import fakeTime from '../FakeTime.js';
 
-function VATeeTimes({ navigation }) {
+function PRTeeTimes({ navigation }) {
   const fontsLoaded = useCustomFonts();
   const route = useRoute();
 
   const today = new Date();
 
   const year = today.getFullYear();
-  const month = today.getMonth() + 1;
-  const day = today.getDate();
+  const month = today.getMonth() + 1
+  const day = today.getDate() 
 
   const formattedDate = `${year}-${month}-${day}`;
 
@@ -35,9 +41,11 @@ function VATeeTimes({ navigation }) {
     setSelectedTimeId(id === selectedTimeId ? null : id);
   };
 
+
   if (!fontsLoaded) {
     return null;
   }
+
 
   return (
     <ScrollView contentContainerStyle={styles.main}>
@@ -70,28 +78,28 @@ function VATeeTimes({ navigation }) {
 
         <View style={styles.topButtonContainer}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("vaoverview")}
+            onPress={() => navigation.navigate("proverview")}
             style={styles.topButtons}
           >
             <Text style={styles.topButtonsText}>Overview</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate("varegulations")}
+            onPress={() => navigation.navigate("prregulations")}
             style={styles.topButtons}
           >
             <Text style={styles.topButtonsText}>Regulations</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate("vateetimes")}
+            onPress={() => navigation.navigate("prteetimes")}
             style={{
               backgroundColor:
-                route.name === "vateetimes" ? "#2FDA74" : "#D3D3D3",
+                route.name === "prteetimes" ? "#2FDA74" : "#D3D3D3",
               ...styles.topButtons,
             }}
           >
             <Text
               style={{
-                color: route.name === "vateetimes" ? "white" : "black",
+                color: route.name === "prteetimes" ? "white" : "black",
                 ...styles.topButtonsText,
               }}
             >
@@ -101,7 +109,7 @@ function VATeeTimes({ navigation }) {
         </View>
 
         <View style={styles.VAContainer}>
-          <Text style={styles.VAHeader}>Ventura Acres</Text>
+          <Text style={styles.VAHeader}>Pine Ridge</Text>
           <View style={styles.starContainer}>
             <Image style={styles.starSize} source={GreenStar} />
             <Image style={styles.starSize} source={GreenStar} />
@@ -234,7 +242,7 @@ function VATeeTimes({ navigation }) {
                     navigation.navigate("success", {
                       propDate: selected,
                       propTime: fake.time,
-                      currScreen: "va",
+                      currScreen: "pr",
                     })
                   }
                   style={styles.confirmTeeTime}
@@ -252,4 +260,4 @@ function VATeeTimes({ navigation }) {
   );
 }
 
-export default VATeeTimes;
+export default PRTeeTimes;
