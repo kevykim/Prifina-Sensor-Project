@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   Pressable,
 } from "react-native";
+
+
 import { useCustomFonts } from "../../utils/CustomFonts";
 
 import Avatar from "../../assets/Misc/Avatar.png";
@@ -20,7 +22,8 @@ import GreenStar from "../../assets/Misc/GreenStar.png";
 import GrayStar from "../../assets/Misc/GrayStar.png";
 
 import NH from "../../assets/Locations/NH.png";
-import SW from "../../assets/Locations/SW.png";
+import VA from "../../assets/Locations/VA.png";
+import SW from '../../assets/Locations/SW.png'
 
 function HomeCalendar({ navigation }) {
   const route = useRoute();
@@ -30,7 +33,20 @@ function HomeCalendar({ navigation }) {
   const newDay = new Date();
   const month = newDay.getMonth() + 1;
   const day = newDay.getDate();
+  const year = newDay.getFullYear();
   const shortDate = `${month}.${day}`;
+
+  const newthreeDate = new Date();
+  const threeDay = newthreeDate.getDate() + 3;
+
+  const futureDay = new Date();
+  const futureMonth = futureDay.getMonth() + 6
+
+  const longDate = `0${month}.${day}.${year}`
+
+  const threeDate = `0${month}.${threeDay}.${year}`;
+
+  const futureDate = `0${futureMonth}.${day}.${year}`;
 
   if (!fontsLoaded) {
     return null;
@@ -71,14 +87,8 @@ function HomeCalendar({ navigation }) {
             }}
             style={styles.HBCards}
           >
-            <Image
-              source={sunnyIcon}
-            />
-            <Text
-              style={styles.HBCBot}
-            >
-              Today
-            </Text>
+            <Image source={sunnyIcon} />
+            <Text style={styles.HBCBot}>Today</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -133,7 +143,7 @@ function HomeCalendar({ navigation }) {
           <View style={styles.upComingEventContainer}>
             <Text style={styles.upComingEventText}>Upcoming Event</Text>
             <View style={styles.upComingEventNum}>
-              <Text style={styles.upComingEventNumText}>2</Text>
+              <Text style={styles.upComingEventNumText}>3</Text>
             </View>
           </View>
 
@@ -154,11 +164,43 @@ function HomeCalendar({ navigation }) {
                   <Text style={styles.ECrsBoxTop}>North Hill</Text>
                   <View style={styles.ECrsBoxBot}>
                     <Text style={styles.ECrsBBText}>Tee Time</Text>
-                    <Text style={styles.ECrsBBDate}> 03.01.2024 10:00AM</Text>
+                    <Text style={styles.ECrsBBDate}> {longDate} 10:00AM</Text>
                   </View>
                 </View>
 
-                <TouchableOpacity style={styles.contactButton}>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("Booking", {screen:'nhoverview'})}
+                  style={styles.contactButton}
+                >
+                  <Text style={styles.contactText}>Contact</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+
+            <View style={styles.eventCrsCard}>
+              <View style={styles.starContainer}>
+                <Image source={GreenStar} />
+                <Image source={GreenStar} />
+                <Image source={GreenStar} />
+                <Image source={GreenStar} />
+                <Image source={GrayStar} />
+              </View>
+
+              <Image style={styles.eventCrsImage} source={VA} />
+
+              <View style={styles.eventCrsTContainer}>
+                <View style={styles.ECrsBox}>
+                  <Text style={styles.ECrsBoxTop}>Ventura Acres</Text>
+                  <View style={styles.ECrsBoxBot}>
+                    <Text style={styles.ECrsBBText}>Tee Time</Text>
+                    <Text style={styles.ECrsBBDate}> {threeDate} 10:00AM</Text>
+                  </View>
+                </View>
+
+                <TouchableOpacity
+                   onPress={() => navigation.navigate("Booking", {screen:'vaoverview'})}
+                  style={styles.contactButton}
+                >
                   <Text style={styles.contactText}>Contact</Text>
                 </TouchableOpacity>
               </View>
@@ -177,14 +219,17 @@ function HomeCalendar({ navigation }) {
 
               <View style={styles.eventCrsTContainer}>
                 <View style={styles.ECrsBox}>
-                  <Text style={styles.ECrsBoxTop}>Ventura Acres</Text>
+                  <Text style={styles.ECrsBoxTop}>South West</Text>
                   <View style={styles.ECrsBoxBot}>
                     <Text style={styles.ECrsBBText}>Tee Time</Text>
-                    <Text style={styles.ECrsBBDate}> 03.24.2024 10:00AM</Text>
+                    <Text style={styles.ECrsBBDate}> {futureDate} 10:00AM</Text>
                   </View>
                 </View>
 
-                <TouchableOpacity style={styles.contactButton}>
+                <TouchableOpacity
+                   onPress={() => navigation.navigate("Booking", {screen:'swoverview'})}
+                  style={styles.contactButton}
+                >
                   <Text style={styles.contactText}>Contact</Text>
                 </TouchableOpacity>
               </View>

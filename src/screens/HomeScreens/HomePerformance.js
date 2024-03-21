@@ -30,13 +30,13 @@ function HomePerformance({ navigation }) {
   const shortDate = `${month}.${day}`;
 
      const barData = [
-       { value: 1 },
-       { value: 4 },
-       { value: 3 },
-       { value: 10 },
-       { value: 3 },
-       { value: 2, frontColor: "#2FDA74" },
-       { value: 6, frontColor: "#2FDA74" },
+       { value: 1, label: 'Mo' },
+       { value: 4, label: 'Tu' },
+       { value: 3, label: 'We' },
+       { value: 10, label: 'Th' },
+       { value: 3, label: 'Fr' },
+       { value: 2, frontColor: "#2FDA74", label: 'Sa' },
+       { value: 6, frontColor: "#2FDA74", label: 'Su' },
      ];
 
   if (!fontsLoaded) {
@@ -78,14 +78,8 @@ function HomePerformance({ navigation }) {
             }}
             style={styles.HBCards}
           >
-            <Image
-              source={sunnyIcon}
-            />
-            <Text
-              style={styles.HBCBot}
-            >
-              Today
-            </Text>
+            <Image source={sunnyIcon} />
+            <Text style={styles.HBCBot}>Today</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -94,16 +88,8 @@ function HomePerformance({ navigation }) {
             }}
             style={styles.HBCards}
           >
-            <Text
-              style={styles.HBCTop}
-            >
-              {shortDate}
-            </Text>
-            <Text
-              style={styles.HBCBot}
-            >
-              Calendar
-            </Text>
+            <Text style={styles.HBCTop}>{shortDate}</Text>
+            <Text style={styles.HBCBot}>Calendar</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -112,16 +98,8 @@ function HomePerformance({ navigation }) {
             }}
             style={styles.HBCards}
           >
-            <Text
-              style={styles.HBCTop}
-            >
-              102
-            </Text>
-            <Text
-              style={styles.HBCBot}
-            >
-              My Score
-            </Text>
+            <Text style={styles.HBCTop}>102</Text>
+            <Text style={styles.HBCBot}>My Score</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -170,13 +148,17 @@ function HomePerformance({ navigation }) {
             <BarChart
               data={barData}
               frontColor={"#358DD1"}
-              width={300}
+              width={290}
               yAxisThickness={0}
               xAxisThickness={1}
               barWidth={30}
               maxValue={12}
               hideYAxisText
-              xAxisColor={"#D3D3D3"}
+              xAxisColor="#D3D3D3"
+              xAxisLabelTextStyle={{
+                color: "#AFAFAF",
+                fontFamily: "Quicksand-SemiBold",
+              }}
               hideRules
               showReferenceLine1
               referenceLine1Position={3}

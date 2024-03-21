@@ -68,14 +68,8 @@ function HomeMyScore({ navigation }) {
             }}
             style={styles.HBCards}
           >
-            <Image
-              source={sunnyIcon}
-            />
-            <Text
-              style={styles.HBCBot}
-            >
-              Today
-            </Text>
+            <Image source={sunnyIcon} />
+            <Text style={styles.HBCBot}>Today</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -84,16 +78,8 @@ function HomeMyScore({ navigation }) {
             }}
             style={styles.HBCards}
           >
-            <Text
-              style={styles.HBCTop}
-            >
-              {shortDate}
-            </Text>
-            <Text
-              style={styles.HBCBot}
-            >
-              Calendar
-            </Text>
+            <Text style={styles.HBCTop}>{shortDate}</Text>
+            <Text style={styles.HBCBot}>Calendar</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -111,7 +97,10 @@ function HomeMyScore({ navigation }) {
               102
             </Text>
             <Text
-              style={{color: route.name === 'homemyscore' ? "#2FDA74" : "black", ...styles.HBCBot }}
+              style={{
+                color: route.name === "homemyscore" ? "#2FDA74" : "black",
+                ...styles.HBCBot,
+              }}
             >
               My Score
             </Text>
@@ -133,7 +122,7 @@ function HomeMyScore({ navigation }) {
         <View>
           <View>
             <View style={styles.SCHeader}>
-              <Text style={styles.SCHeaderText}>South West 3/23/24</Text>
+              <Text style={styles.SCHeaderText}>North Hill 3/23/24</Text>
               <TouchableOpacity style={styles.downloadButton}>
                 <Text style={styles.downloadButtonText}>Download</Text>
                 <Image source={download} />
@@ -144,7 +133,7 @@ function HomeMyScore({ navigation }) {
               <View style={styles.scoreChartHeaderContainer}>
                 <View style={styles.scoreChartHLeft}>
                   <Text style={styles.scoreChartHLeftGray}>5 hr 16 min</Text>
-                  <Text style={styles.scoreChartHLeftBlack}>Front 9</Text>
+                  <Text style={styles.scoreChartHLeftBlack}>18 holes</Text>
                 </View>
                 <Text style={styles.scoreChartHRight}>108</Text>
               </View>
@@ -155,13 +144,52 @@ function HomeMyScore({ navigation }) {
                     <Text style={styles.ASCTextBold}>Hole</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>1</Text>
+                    <Text style={styles.ASCTextBold}>1</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>2</Text>
+                    <Text style={styles.ASCTextBold}>2</Text>
+                  </View>
+                  <View style={styles.ASCBorderRight}>
+                    <Text style={styles.ASCTextBold}>3</Text>
+                  </View>
+                  <View style={styles.ASCBorderRight}>
+                    <Text style={styles.ASCTextBold}>4</Text>
+                  </View>
+                  <View style={styles.ASCBorderRight}>
+                    <Text style={styles.ASCTextBold}>5</Text>
+                  </View>
+                  <View style={styles.ASCBorderRight}>
+                    <Text style={styles.ASCTextBold}>6</Text>
+                  </View>
+                  <View style={styles.ASCBorderRight}>
+                    <Text style={styles.ASCTextBold}>7</Text>
+                  </View>
+                  <View style={styles.ASCBorderRight}>
+                    <Text style={styles.ASCTextBold}>8</Text>
+                  </View>
+                  <View style={styles.ASCBorderLast}>
+                    <Text style={styles.ASCTextBold}>9</Text>
+                  </View>
+                </View>
+
+                <View style={styles.ASCContainerRowSecond}>
+                  <View style={styles.ASCLabel}>
+                    <Text style={styles.ASCTextBold}>Par</Text>
+                  </View>
+                  <View style={styles.ASCBorderRight}>
+                    <Text style={styles.ASCText}>4</Text>
+                  </View>
+                  <View style={styles.ASCBorderRight}>
+                    <Text style={styles.ASCText}>4</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
                     <Text style={styles.ASCText}>3</Text>
+                  </View>
+                  <View style={styles.ASCBorderRight}>
+                    <Text style={styles.ASCText}>5</Text>
+                  </View>
+                  <View style={styles.ASCBorderRight}>
+                    <Text style={styles.ASCText}>4</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
                     <Text style={styles.ASCText}>4</Text>
@@ -170,19 +198,12 @@ function HomeMyScore({ navigation }) {
                     <Text style={styles.ASCText}>5</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>6</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>7</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>8</Text>
+                    <Text style={styles.ASCText}>5</Text>
                   </View>
                   <View style={styles.ASCBorderLast}>
-                    <Text style={styles.ASCText}>9</Text>
+                    <Text style={styles.ASCText}>4</Text>
                   </View>
                 </View>
-
                 <View style={styles.ASCContainerRowSecond}>
                   <View style={styles.ASCLabel}>
                     <Text style={styles.ASCTextBold}>Par</Text>
@@ -249,40 +270,72 @@ function HomeMyScore({ navigation }) {
                 </View>
               </View>
 
-              <View style={{ ...styles.ASCContainer, marginBottom: 3 }}>
+              <View style={{ ...styles.ASCContainer, marginBottom: 5 }}>
                 <View style={styles.ASCContainerRowFirst}>
                   <View style={styles.ASCLabel}>
                     <Text style={styles.ASCTextBold}>Hole</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>10</Text>
+                    <Text style={styles.ASCTextBold}>10</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>11</Text>
+                    <Text style={styles.ASCTextBold}>11</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>12</Text>
+                    <Text style={styles.ASCTextBold}>12</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>13</Text>
+                    <Text style={styles.ASCTextBold}>13</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>14</Text>
+                    <Text style={styles.ASCTextBold}>14</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>15</Text>
+                    <Text style={styles.ASCTextBold}>15</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>16</Text>
+                    <Text style={styles.ASCTextBold}>16</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>17</Text>
+                    <Text style={styles.ASCTextBold}>17</Text>
                   </View>
                   <View style={styles.ASCBorderLast}>
-                    <Text style={styles.ASCText}>18</Text>
+                    <Text style={styles.ASCTextBold}>18</Text>
                   </View>
                 </View>
 
+                <View style={styles.ASCContainerRowSecond}>
+                  <View style={styles.ASCLabel}>
+                    <Text style={styles.ASCTextBold}>Par</Text>
+                  </View>
+                  <View style={styles.ASCBorderRight}>
+                    <Text style={styles.ASCText}>4</Text>
+                  </View>
+                  <View style={styles.ASCBorderRight}>
+                    <Text style={styles.ASCText}>4</Text>
+                  </View>
+                  <View style={styles.ASCBorderRight}>
+                    <Text style={styles.ASCText}>3</Text>
+                  </View>
+                  <View style={styles.ASCBorderRight}>
+                    <Text style={styles.ASCText}>5</Text>
+                  </View>
+                  <View style={styles.ASCBorderRight}>
+                    <Text style={styles.ASCText}>4</Text>
+                  </View>
+                  <View style={styles.ASCBorderRight}>
+                    <Text style={styles.ASCText}>4</Text>
+                  </View>
+                  <View style={styles.ASCBorderRight}>
+                    <Text style={styles.ASCText}>5</Text>
+                  </View>
+                  <View style={styles.ASCBorderRight}>
+                    <Text style={styles.ASCText}>5</Text>
+                  </View>
+                  <View style={styles.ASCBorderLast}>
+                    <Text style={styles.ASCText}>4</Text>
+                  </View>
+                </View>
                 <View style={styles.ASCContainerRowSecond}>
                   <View style={styles.ASCLabel}>
                     <Text style={styles.ASCTextBold}>Par</Text>
@@ -501,7 +554,7 @@ const styles = StyleSheet.create({
   scoreChart: {
     backgroundColor: "#F1F1F1",
     width: 361,
-    height: 323,
+    height: 400,
     borderRadius: 8,
     paddingHorizontal: 24,
     paddingVertical: 12,
@@ -534,7 +587,7 @@ const styles = StyleSheet.create({
   },
 
   ASCContainer: {
-    height: 108,
+    height: 145,
   },
   ASCContainerRowFirst: {
     flexDirection: "row",
