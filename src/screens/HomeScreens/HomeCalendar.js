@@ -164,15 +164,16 @@ function HomeCalendar({ navigation }) {
                   <Text style={styles.ECrsBoxTop}>North Hill</Text>
                   <View style={styles.ECrsBoxBot}>
                     <Text style={styles.ECrsBBText}>Tee Time</Text>
-                    <Text style={styles.ECrsBBDate}> {longDate} 10:00AM</Text>
+                    <Text style={styles.ECrsBBDate}> {longDate} 9:00AM</Text>
                   </View>
                 </View>
 
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("Booking", {screen:'nhoverview'})}
+                //navigate to play screen!!!!!
+                  onPress={() => navigation.navigate("Play", {screen:'playnh'})}
                   style={styles.contactButton}
                 >
-                  <Text style={styles.contactText}>Contact</Text>
+                  <Text style={styles.contactText}>Play</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -198,10 +199,10 @@ function HomeCalendar({ navigation }) {
                 </View>
 
                 <TouchableOpacity
-                   onPress={() => navigation.navigate("Booking", {screen:'vaoverview'})}
+                   onPress={() => navigation.navigate("Play", {screen:'playva'})}
                   style={styles.contactButton}
                 >
-                  <Text style={styles.contactText}>Contact</Text>
+                  <Text style={styles.contactText}>Play</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -222,15 +223,15 @@ function HomeCalendar({ navigation }) {
                   <Text style={styles.ECrsBoxTop}>South West</Text>
                   <View style={styles.ECrsBoxBot}>
                     <Text style={styles.ECrsBBText}>Tee Time</Text>
-                    <Text style={styles.ECrsBBDate}> {futureDate} 10:00AM</Text>
+                    <Text style={styles.ECrsBBDate}> {futureDate} 1:00PM</Text>
                   </View>
                 </View>
 
                 <TouchableOpacity
-                   onPress={() => navigation.navigate("Booking", {screen:'swoverview'})}
+                   onPress={() => navigation.navigate("Play", {screen:'playsw'})}
                   style={styles.contactButton}
                 >
-                  <Text style={styles.contactText}>Contact</Text>
+                  <Text style={styles.contactText}>Play</Text>
                 </TouchableOpacity>
               </View>
             </View>

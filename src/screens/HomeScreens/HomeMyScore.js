@@ -174,7 +174,7 @@ function HomeMyScore({ navigation }) {
 
                 <View style={styles.ASCContainerRowSecond}>
                   <View style={styles.ASCLabel}>
-                    <Text style={styles.ASCTextBold}>Par</Text>
+                    <Text style={styles.ASCTextBold}>Handicap</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
                     <Text style={styles.ASCText}>4</Text>
@@ -306,7 +306,7 @@ function HomeMyScore({ navigation }) {
 
                 <View style={styles.ASCContainerRowSecond}>
                   <View style={styles.ASCLabel}>
-                    <Text style={styles.ASCTextBold}>Par</Text>
+                    <Text style={styles.ASCTextBold}>Handicap</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
                     <Text style={styles.ASCText}>4</Text>

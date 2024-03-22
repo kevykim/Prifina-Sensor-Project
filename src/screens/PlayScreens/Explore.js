@@ -16,18 +16,68 @@ import mapnearby from "../../assets/Locations/mapnearby.png";
 import { SearchBar } from "@rneui/themed";
 import Carousel from "pinar";
 import NH from "../../assets/Locations/NH.png";
+import SW from '../../assets/Locations/SW.png'
+import VA from '../../assets/Locations/VA.png'
 
 import { useRoute } from "@react-navigation/native";
+import MapView from "react-native-maps";
+import { Marker } from "react-native-maps";
 
+import { useState, useRef, useEffect } from "react";
 
 function Explore({ navigation }) {
   const fontsLoaded = useCustomFonts();
   const route = useRoute();
 
+  const [carouselRender, setCarouselRendered] = useState(false);
+
+   useEffect(() => {
+     const timer = setTimeout(() => {
+       setCarouselRendered(true);
+     }, 100);
+     return () => clearTimeout(timer);
+   }, []);
+
+
   if (!fontsLoaded) {
     return null;
   }
 
+   const mapRef = useRef();
+
+  const markers = [
+    {
+      location: {
+        latitude: 37.78825,
+        longitude: -122.4324,
+        latitudeDelta: 0.3022,
+        longitudeDelta: 0.3421,
+      },
+      title: "San Francisco",
+    },
+    {
+      location: {
+        latitude: 37.8716,
+        longitude: -122.2727,
+        latitudeDelta: 0.3022,
+        longitudeDelta: 0.3421,
+      },
+      title: "Berkeley",
+    },
+    {
+      location: {
+        latitude: 37.8044,
+        longitude: -122.2712,
+        latitudeDelta: 0.3022,
+        longitudeDelta: 0.3421,
+      },
+      title: "Oakland",
+    },
+  ];
+
+   const onRegionChange = (region) => {
+    // console.log(region);
+  };
   return (
     <ScrollView contentContainerStyle={styles.main}>
       <View style={styles.container}>
@@ -116,9 +166,30 @@ function Explore({ navigation }) {
         </View>
 
         <View style={{ marginTop: 80 }}>
-          <Image source={mapnearby} />
+          {/* <Image source={mapnearby} />
+           */}
 
-          <TouchableOpacity style={styles.bookATeeButton}>
+          <MapView
+            ref={mapRef}
+            style={{ width: "100%", height: 225, borderRadius: 8 }}
+            provider={undefined}
+            // onRegionChange={onRegionChange}
+            initialRegion={{
+              latitude: 37.78825,
+              longitude: -122.4324,
+              latitudeDelta: 0.3022,
+              longitudeDelta: 0.3421,
+            }}
+          >
+            {markers.map((marker, index) => (
+              <Marker key={index} coordinate={marker.location} />
+            ))}
+          </MapView>
+
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Booking")}
+            style={styles.bookATeeButton}
+          >
             <Text style={styles.bookATeeButtonText}>Book a Tee-Time</Text>
           </TouchableOpacity>
 
@@ -133,12 +204,21 @@ function Explore({ navigation }) {
               <Text style={styles.seeAllButtonText}>See all</Text>
             </TouchableOpacity>
           </View>
-
+              {carouselRender && (
           <Carousel
             style={{ marginBottom: 150 }}
             showsControls={false}
             height={250}
             width={361}
+            containerStyle={{
+              overflow: "visible",
+            }}
+            contentContainerStyle={{
+              overflow: "visible",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
             dotsContainerStyle={{
               position: "absolute",
               right: 5,
@@ -173,7 +253,9 @@ function Explore({ navigation }) {
               style={{
                 flexDirection: "row",
                 marginTop: 25,
-                width: 361,
+                marginLeft: 15,
+                width: 331,
+                overflow: "visible",
                 alignItems: "center",
                 justifyContent: "center",
               }}
@@ -182,7 +264,7 @@ function Explore({ navigation }) {
                 style={styles.favCoCards}
                 // open modal then navigate to North hill passing down north hill variable to overview component
                 onPress={() =>
-                  navigation.navigate("locate", { propName: "North Hill" })
+                  navigation.navigate('playnh')
                 }
               >
                 <Image style={styles.favCoImage} source={NH} />
@@ -191,17 +273,17 @@ function Explore({ navigation }) {
                   <Text style={styles.favCoTextBot}>3.6 miles</Text>
                 </View>
               </TouchableOpacity>
+
               <TouchableOpacity
                 style={styles.favCoCards}
-                // open modal then navigate to North hill passing down north hill variable to overview component
                 onPress={() =>
-                  navigation.navigate("locate", { propName: "North Hill" })
+                  navigation.navigate('playsw')
                 }
               >
-                <Image style={styles.favCoImage} source={NH} />
+                <Image style={styles.favCoImage} source={SW} />
                 <View style={styles.favCoTextContainer}>
-                  <Text style={styles.favCoTextTop}>North Hill</Text>
-                  <Text style={styles.favCoTextBot}>3.6 miles</Text>
+                  <Text style={styles.favCoTextTop}>South West</Text>
+                  <Text style={styles.favCoTextBot}>7.5 miles</Text>
                 </View>
               </TouchableOpacity>
             </View>
@@ -210,76 +292,28 @@ function Explore({ navigation }) {
               style={{
                 flexDirection: "row",
                 marginTop: 25,
-                width: 361,
+                width: 171,
                 alignItems: "center",
                 justifyContent: "center",
+                overflow: "visible",
               }}
             >
               <TouchableOpacity
                 style={styles.favCoCards}
-                // open modal then navigate to North hill passing down north hill variable to overview component
                 onPress={() =>
-                  navigation.navigate("locate", { propName: "North Hill" })
+                  navigation.navigate('playva')
                 }
               >
-                <Image style={styles.favCoImage} source={NH} />
+                <Image style={styles.favCoImage} source={VA} />
                 <View style={styles.favCoTextContainer}>
-                  <Text style={styles.favCoTextTop}>North Hill</Text>
-                  <Text style={styles.favCoTextBot}>3.6 miles</Text>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.favCoCards}
-                // open modal then navigate to North hill passing down north hill variable to overview component
-                onPress={() =>
-                  navigation.navigate("locate", { propName: "North Hill" })
-                }
-              >
-                <Image style={styles.favCoImage} source={NH} />
-                <View style={styles.favCoTextContainer}>
-                  <Text style={styles.favCoTextTop}>North Hill</Text>
-                  <Text style={styles.favCoTextBot}>3.6 miles</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-
-            <View
-              style={{
-                flexDirection: "row",
-                marginTop: 25,
-                width: 361,
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <TouchableOpacity
-                style={styles.favCoCards}
-                // open modal then navigate to North hill passing down north hill variable to overview component
-                onPress={() =>
-                  navigation.navigate("locate", { propName: "North Hill" })
-                }
-              >
-                <Image style={styles.favCoImage} source={NH} />
-                <View style={styles.favCoTextContainer}>
-                  <Text style={styles.favCoTextTop}>North Hill</Text>
-                  <Text style={styles.favCoTextBot}>3.6 miles</Text>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.favCoCards}
-                // open modal then navigate to North hill passing down north hill variable to overview component
-                onPress={() =>
-                  navigation.navigate("locate", { propName: "North Hill" })
-                }
-              >
-                <Image style={styles.favCoImage} source={NH} />
-                <View style={styles.favCoTextContainer}>
-                  <Text style={styles.favCoTextTop}>North Hill</Text>
-                  <Text style={styles.favCoTextBot}>3.6 miles</Text>
+                  <Text style={styles.favCoTextTop}>Ventura Acres</Text>
+                  <Text style={styles.favCoTextBot}>5.5 miles</Text>
                 </View>
               </TouchableOpacity>
             </View>
           </Carousel>
+
+              )}
         </View>
       </View>
     </ScrollView>
@@ -396,6 +430,8 @@ const styles = StyleSheet.create({
   favCoImage: {
     borderTopRightRadius: 6,
     borderTopLeftRadius: 6,
+    width: 160,
+    height: 136,
   },
   favCoTextContainer: {
     flexDirection: "column",

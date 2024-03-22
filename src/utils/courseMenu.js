@@ -123,7 +123,7 @@ function CourseMenu({ modalShown, closeModal, navigation, navVar }) {
               modalShown={showCalcModal}
               closeCalcModal={setshowCalcModal}
               navigation={navigation}
-              navVar={"playvasummary"}
+              navVar={navVar}
               closeMenu={closeModal}
             />
           )}

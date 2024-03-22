@@ -144,7 +144,7 @@ function Track({ navigation }) {
           />
         </View>
 
-        <TouchableOpacity style={styles.viewScoreCard}>
+        <TouchableOpacity onPress={() => navigation.navigate('Scorecard')} style={styles.viewScoreCard}>
           <Text style={styles.viewScoreCardText}>View Scorecard</Text>
         </TouchableOpacity>
 
