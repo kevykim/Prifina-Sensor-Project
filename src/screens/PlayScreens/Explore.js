@@ -5,6 +5,10 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { useCustomFonts } from "../../utils/CustomFonts";
 
@@ -78,6 +82,29 @@ function Explore({ navigation }) {
    const onRegionChange = (region) => {
     // console.log(region);
   };
+
+
+const [searchQuery, setSearchQuery] = useState("");
+
+const searchData = [
+  "North Hill",
+  "Ventura Acres",
+  "South West",
+  "Pine Ridge",
+  "Oakwood Clubs",
+  "California",
+  "Texas"
+];
+
+const filteredData = searchData.filter((item) =>
+  item[0].toLowerCase().includes(searchQuery.toLowerCase())
+);
+
+const updateSearch = (query) => {
+  setSearchQuery(query);
+};
+
+
   return (
     <ScrollView contentContainerStyle={styles.main}>
       <View style={styles.container}>
@@ -138,32 +165,73 @@ function Explore({ navigation }) {
           </TouchableOpacity>
         </View>
 
-        <View style={styles.searchBarContainer}>
-          <SearchBar
-            lightTheme
-            autoCorrect={false}
-            round
-            inputStyle={{
-              backgroundColor: "#F1F1F1",
-              color: "black",
-              fontFamily: "Quicksand-Reg",
-              fontSize: 12,
-            }}
-            containerStyle={{
-              backgroundColor: "transparent",
-              borderBottomColor: "transparent",
-              borderTopColor: "transparent",
-            }}
-            inputContainerStyle={{
-              height: 32,
-              width: 361,
-              backgroundColor: "#F1F1F1",
-              paddingHorizontal: 8,
-              paddingVertical: 6,
-            }}
-            clearButtonMode="never"
-          />
-        </View>
+        <TouchableWithoutFeedback
+          onPress={Keyboard.dismiss}
+          accessible={false}
+          style={{ zIndex: 25 }}
+        >
+          <View style={styles.searchBarContainer}>
+            <SearchBar
+              lightTheme
+              autoCorrect={false}
+              onChangeText={updateSearch}
+              value={searchQuery}
+              round
+              inputStyle={{
+                backgroundColor: "#F1F1F1",
+                color: "black",
+                fontFamily: "Quicksand-Reg",
+                fontSize: 12,
+                zIndex: 25,
+              }}
+              containerStyle={{
+                backgroundColor: "transparent",
+                borderBottomColor: "transparent",
+                borderTopColor: "transparent",
+                zIndex: 25,
+              }}
+              inputContainerStyle={{
+                height: 32,
+                width: 361,
+                backgroundColor: "#F1F1F1",
+                paddingHorizontal: 8,
+                paddingVertical: 6,
+                zIndex: 25,
+              }}
+              clearButtonMode="never"
+            />
+            {searchQuery.length > 0 &&
+              filteredData.length > 0 &&
+              filteredData.map((item, index) => (
+                <View
+                  style={{
+                    position: "absolute",
+                    right: 8,
+                    height: 35,
+                    top: 30,
+                    backgroundColor: "#F1F1F1",
+                    width: 360,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    zIndex: 24,
+                    borderBottomLeftRadius: 20,
+                    borderBottomRightRadius: 20,
+                  }}
+                  key={index}
+                >
+                  <Text
+                    style={{
+                      textAlign: "left",
+                      fontFamily: "Quicksand-Reg",
+                      fontSize: 12,
+                    }}
+                  >
+                    {item}
+                  </Text>
+                </View>
+              ))}
+          </View>
+        </TouchableWithoutFeedback>
 
         <View style={{ marginTop: 80 }}>
           {/* <Image source={mapnearby} />
@@ -204,116 +272,109 @@ function Explore({ navigation }) {
               <Text style={styles.seeAllButtonText}>See all</Text>
             </TouchableOpacity>
           </View>
-              {carouselRender && (
-          <Carousel
-            style={{ marginBottom: 150 }}
-            showsControls={false}
-            height={250}
-            width={361}
-            containerStyle={{
-              overflow: "visible",
-            }}
-            contentContainerStyle={{
-              overflow: "visible",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-            dotsContainerStyle={{
-              position: "absolute",
-              right: 5,
-              top: 0,
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-            activeDotStyle={{
-              backgroundColor: "#2FDA74",
-              width: 5,
-              height: 5,
-              borderRadius: 100,
-              marginLeft: 2,
-              marginRight: 2,
-              marginTop: 2,
-              marginBottom: 2,
-            }}
-            dotStyle={{
-              backgroundColor: "#D3D3D3",
-              borderRadius: 100,
-              width: 5,
-              height: 5,
-              marginLeft: 2,
-              marginRight: 2,
-              marginTop: 2,
-              marginBottom: 2,
-            }}
-          >
-            <View
-              style={{
-                flexDirection: "row",
-                marginTop: 25,
-                marginLeft: 15,
-                width: 331,
-                overflow: "visible",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <TouchableOpacity
-                style={styles.favCoCards}
-                // open modal then navigate to North hill passing down north hill variable to overview component
-                onPress={() =>
-                  navigation.navigate('playnh')
-                }
-              >
-                <Image style={styles.favCoImage} source={NH} />
-                <View style={styles.favCoTextContainer}>
-                  <Text style={styles.favCoTextTop}>North Hill</Text>
-                  <Text style={styles.favCoTextBot}>3.6 miles</Text>
-                </View>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                style={styles.favCoCards}
-                onPress={() =>
-                  navigation.navigate('playsw')
-                }
-              >
-                <Image style={styles.favCoImage} source={SW} />
-                <View style={styles.favCoTextContainer}>
-                  <Text style={styles.favCoTextTop}>South West</Text>
-                  <Text style={styles.favCoTextBot}>7.5 miles</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-
-            <View
-              style={{
-                flexDirection: "row",
-                marginTop: 25,
-                width: 171,
-                alignItems: "center",
-                justifyContent: "center",
+          {carouselRender && (
+            <Carousel
+              style={{ marginBottom: 150 }}
+              showsControls={false}
+              height={250}
+              width={361}
+              containerStyle={{
                 overflow: "visible",
               }}
+              contentContainerStyle={{
+                overflow: "visible",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+              dotsContainerStyle={{
+                position: "absolute",
+                right: 5,
+                top: 0,
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+              activeDotStyle={{
+                backgroundColor: "#2FDA74",
+                width: 5,
+                height: 5,
+                borderRadius: 100,
+                marginLeft: 2,
+                marginRight: 2,
+                marginTop: 2,
+                marginBottom: 2,
+              }}
+              dotStyle={{
+                backgroundColor: "#D3D3D3",
+                borderRadius: 100,
+                width: 5,
+                height: 5,
+                marginLeft: 2,
+                marginRight: 2,
+                marginTop: 2,
+                marginBottom: 2,
+              }}
             >
-              <TouchableOpacity
-                style={styles.favCoCards}
-                onPress={() =>
-                  navigation.navigate('playva')
-                }
+              <View
+                style={{
+                  flexDirection: "row",
+                  marginTop: 25,
+                  marginLeft: 15,
+                  width: 331,
+                  overflow: "visible",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
               >
-                <Image style={styles.favCoImage} source={VA} />
-                <View style={styles.favCoTextContainer}>
-                  <Text style={styles.favCoTextTop}>Ventura Acres</Text>
-                  <Text style={styles.favCoTextBot}>5.5 miles</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-          </Carousel>
+                <TouchableOpacity
+                  style={styles.favCoCards}
+                  // open modal then navigate to North hill passing down north hill variable to overview component
+                  onPress={() => navigation.navigate("playnh")}
+                >
+                  <Image style={styles.favCoImage} source={NH} />
+                  <View style={styles.favCoTextContainer}>
+                    <Text style={styles.favCoTextTop}>North Hill</Text>
+                    <Text style={styles.favCoTextBot}>3.6 miles</Text>
+                  </View>
+                </TouchableOpacity>
 
-              )}
+                <TouchableOpacity
+                  style={styles.favCoCards}
+                  onPress={() => navigation.navigate("playsw")}
+                >
+                  <Image style={styles.favCoImage} source={SW} />
+                  <View style={styles.favCoTextContainer}>
+                    <Text style={styles.favCoTextTop}>South West</Text>
+                    <Text style={styles.favCoTextBot}>7.5 miles</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+
+              <View
+                style={{
+                  flexDirection: "row",
+                  marginTop: 25,
+                  width: 171,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  overflow: "visible",
+                }}
+              >
+                <TouchableOpacity
+                  style={styles.favCoCards}
+                  onPress={() => navigation.navigate("playva")}
+                >
+                  <Image style={styles.favCoImage} source={VA} />
+                  <View style={styles.favCoTextContainer}>
+                    <Text style={styles.favCoTextTop}>Ventura Acres</Text>
+                    <Text style={styles.favCoTextBot}>5.5 miles</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+            </Carousel>
+          )}
         </View>
       </View>
     </ScrollView>
