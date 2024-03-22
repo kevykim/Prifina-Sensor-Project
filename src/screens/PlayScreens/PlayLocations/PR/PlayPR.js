@@ -14,20 +14,17 @@ import Avatar from "../../../../assets/Misc/Avatar.png";
 
 import GreenStar from "../../../../assets/Misc/GreenStar.png";
 import GrayStar from "../../../../assets/Misc/GrayStar.png";
-import VA from "../../../../assets/Locations/VA.png";
-
+import PR from "../../../../assets/Locations/PR.jpg";
 
 import CalibScreen from "../../../../utils/calibScreen";
-
-import { useState } from "react";
 import styles from "../PlayStyles.js";
 
+import { useState } from "react";
 
-function PlayVA({ navigation }) {
+function PlayPR({ navigation }) {
   const fontsLoaded = useCustomFonts();
 
- const [showModal, setShowModal] = useState(false);
-
+  const [showModal, setShowModal] = useState(false);
 
   if (!fontsLoaded) {
     return null;
@@ -63,7 +60,7 @@ function PlayVA({ navigation }) {
         </View>
 
         <View style={styles.VAContainer}>
-          <Text style={styles.VAHeader}>Ventura Acres</Text>
+          <Text style={styles.VAHeader}>Pine Ridge</Text>
           <View style={styles.starContainer}>
             <Image style={styles.starSize} source={GreenStar} />
             <Image style={styles.starSize} source={GreenStar} />
@@ -75,9 +72,9 @@ function PlayVA({ navigation }) {
 
         <View style={styles.VAImageContainer}>
           <View style={styles.VAPlayedContainer}>
-            <Text style={styles.VAPlayedText}>Played 8 times</Text>
+            <Text style={styles.VAPlayedText}>Played 5 times</Text>
           </View>
-          <Image style={styles.VABigImage} source={VA} />
+          <Image style={styles.VABigImage} source={PR} />
         </View>
 
         <View style={styles.VAplayTips}>
@@ -85,29 +82,30 @@ function PlayVA({ navigation }) {
           <View style={{ flexDirection: "row" }}>
             <Text style={styles.dotText}>• </Text>
             <Text style={styles.VAplayTipsText}>
-              <Text style={styles.VAplayTipsTextBold}>Hole 12</Text>: A
-              challenging lake near the green demands accuracy. Be aware of the
-              water hazard.
+              <Text style={styles.VAplayTipsTextBold}>Hole 3</Text>: Aim
+              slightly left to avoid the fairway bunker on the right side.
             </Text>
           </View>
           <View style={{ flexDirection: "row" }}>
             <Text style={styles.dotText}>• </Text>
             <Text style={styles.VAplayTipsText}>
-              <Text style={styles.VAplayTipsTextBold}>Hole 5</Text>: Consider
-              laying up before the water hazard for a safer and simpler approach
-              to the green.
+              <Text style={styles.VAplayTipsTextBold}>Hole 7</Text>: The green
+              slopes from back to front, so leave your approach below the hole.
             </Text>
           </View>
           <View style={{ flexDirection: "row" }}>
             <Text style={styles.dotText}>• </Text>
             <Text style={styles.VAplayTipsText}>
               <Text style={styles.VAplayTipsTextBold}>Overall Difficulty</Text>:
-              Moderate. Expect a mix of challenges and strategic opportunities.
+              High. Navigate tight fairways and well-protected greens.
             </Text>
           </View>
         </View>
 
-        <TouchableOpacity onPress={() => setShowModal(true)} style={styles.startRoundButton}>
+        <TouchableOpacity
+          onPress={() => setShowModal(true)}
+          style={styles.startRoundButton}
+        >
           <Text style={styles.startRoundButtonText}>Start Round</Text>
         </TouchableOpacity>
 
@@ -116,7 +114,7 @@ function PlayVA({ navigation }) {
             modalShown={showModal}
             closeModal={setShowModal}
             navigation={navigation}
-            navVar={"playvasround"}
+            navVar={"playprsround"}
           />
         )}
       </View>
@@ -124,5 +122,4 @@ function PlayVA({ navigation }) {
   );
 }
 
-
-export default PlayVA;
+export default PlayPR;

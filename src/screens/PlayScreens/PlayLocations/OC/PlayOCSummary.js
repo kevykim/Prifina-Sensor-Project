@@ -14,8 +14,7 @@ import ScoreSave from "../../../../utils/ScoreSave";
 
 import styles from "../PlaySummaryStyles";
 
-
-function PlayVASummary({ navigation }) {
+function PlayOCSummary({ navigation }) {
   const fontsLoaded = useCustomFonts();
 
   if (!fontsLoaded) {
@@ -29,7 +28,7 @@ function PlayVASummary({ navigation }) {
 
   const formattedDate = `${year}.${month}.${day}`;
 
-  const [showSave, setShowSave] = useState(false)
+  const [showSave, setShowSave] = useState(false);
 
   return (
     <ScrollView contentContainerStyle={styles.main}>
@@ -38,7 +37,7 @@ function PlayVASummary({ navigation }) {
           <View>
             <TouchableOpacity
               style={styles.backHome}
-              onPress={() => navigation.navigate("playvacourse")}
+              onPress={() => navigation.navigate("playoccourse")}
             >
               <Text
                 style={{
@@ -194,7 +193,7 @@ function PlayVASummary({ navigation }) {
           <View>
             <View style={styles.SCHeader}>
               <Text style={styles.SCHeaderText}>
-                Ventura Acres {month}/{day}/{year}
+                Oakwood Clubs {month}/{day}/{year}
               </Text>
               <TouchableOpacity style={styles.downloadButton}>
                 <Text style={styles.downloadButtonText}>Download</Text>
@@ -205,10 +204,10 @@ function PlayVASummary({ navigation }) {
             <View style={styles.scoreChart}>
               <View style={styles.scoreChartHeaderContainer}>
                 <View style={styles.scoreChartHLeft}>
-                  <Text style={styles.scoreChartHLeftGray}>5 hr 16 min</Text>
+                  <Text style={styles.scoreChartHLeftGray}>6 hr 16 min</Text>
                   <Text style={styles.scoreChartHLeftBlack}>18 holes</Text>
                 </View>
-                <Text style={styles.scoreChartHRight}>93</Text>
+                <Text style={styles.scoreChartHRight}>83</Text>
               </View>
 
               <View style={styles.ASCContainer}>
@@ -250,16 +249,13 @@ function PlayVASummary({ navigation }) {
                     <Text style={styles.ASCTextBold}>Handicap</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>15</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>10</Text>
+                    <Text style={styles.ASCText}>14</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
                     <Text style={styles.ASCText}>11</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>18</Text>
+                    <Text style={styles.ASCText}>12</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
                     <Text style={styles.ASCText}>17</Text>
@@ -268,13 +264,16 @@ function PlayVASummary({ navigation }) {
                     <Text style={styles.ASCText}>16</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>12</Text>
+                    <Text style={styles.ASCText}>15</Text>
+                  </View>
+                  <View style={styles.ASCBorderRight}>
+                    <Text style={styles.ASCText}>10</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
                     <Text style={styles.ASCText}>13</Text>
                   </View>
                   <View style={styles.ASCBorderLast}>
-                    <Text style={styles.ASCText}>14</Text>
+                    <Text style={styles.ASCText}>18</Text>
                   </View>
                 </View>
                 <View style={styles.ASCContainerRowSecond}>
@@ -314,28 +313,28 @@ function PlayVASummary({ navigation }) {
                     <Text style={styles.ASCTextBold}>Score</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
+                    <Text style={styles.ASCText}>+1</Text>
+                  </View>
+                  <View style={styles.ASCBorderRight}>
                     <Text style={styles.ASCText}>+3</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
                     <Text style={styles.ASCText}>+2</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>+1</Text>
+                    <Text style={styles.ASCText}>+2</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>+1</Text>
+                    <Text style={styles.ASCText}>+6</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>+5</Text>
+                    <Text style={styles.ASCText}>+3</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
                     <Text style={styles.ASCText}>+4</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
                     <Text style={styles.ASCText}>+2</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>+3</Text>
                   </View>
                   <View style={styles.ASCBorderLast}>
                     <Text style={styles.ASCText}>+3</Text>
@@ -382,31 +381,31 @@ function PlayVASummary({ navigation }) {
                     <Text style={styles.ASCTextBold}>Handicap</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>8</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>6</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>5</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>4</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>13</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>12</Text>
+                    <Text style={styles.ASCText}>9</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
                     <Text style={styles.ASCText}>7</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
+                    <Text style={styles.ASCText}>6</Text>
+                  </View>
+                  <View style={styles.ASCBorderRight}>
+                    <Text style={styles.ASCText}>12</Text>
+                  </View>
+                  <View style={styles.ASCBorderRight}>
                     <Text style={styles.ASCText}>11</Text>
                   </View>
+                  <View style={styles.ASCBorderRight}>
+                    <Text style={styles.ASCText}>10</Text>
+                  </View>
+                  <View style={styles.ASCBorderRight}>
+                    <Text style={styles.ASCText}>5</Text>
+                  </View>
+                  <View style={styles.ASCBorderRight}>
+                    <Text style={styles.ASCText}>8</Text>
+                  </View>
                   <View style={styles.ASCBorderLast}>
-                    <Text style={styles.ASCText}>9</Text>
+                    <Text style={styles.ASCText}>4</Text>
                   </View>
                 </View>
                 <View style={styles.ASCContainerRowSecond}>
@@ -446,19 +445,7 @@ function PlayVASummary({ navigation }) {
                     <Text style={styles.ASCTextBold}>Score</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>+3</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>+4</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>+2</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>+2</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>+3</Text>
+                    <Text style={styles.ASCText}>+5</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
                     <Text style={styles.ASCText}>+4</Text>
@@ -467,7 +454,19 @@ function PlayVASummary({ navigation }) {
                     <Text style={styles.ASCText}>+3</Text>
                   </View>
                   <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>+2</Text>
+                    <Text style={styles.ASCText}>+1</Text>
+                  </View>
+                  <View style={styles.ASCBorderRight}>
+                    <Text style={styles.ASCText}>+3</Text>
+                  </View>
+                  <View style={styles.ASCBorderRight}>
+                    <Text style={styles.ASCText}>+4</Text>
+                  </View>
+                  <View style={styles.ASCBorderRight}>
+                    <Text style={styles.ASCText}>+5</Text>
+                  </View>
+                  <View style={styles.ASCBorderRight}>
+                    <Text style={styles.ASCText}>+3</Text>
                   </View>
                   <View style={styles.ASCBorderLast}>
                     <Text style={styles.ASCText}>+4</Text>
@@ -504,4 +503,4 @@ function PlayVASummary({ navigation }) {
   );
 }
 
-export default PlayVASummary;
+export default PlayOCSummary;
