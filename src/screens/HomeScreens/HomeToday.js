@@ -73,10 +73,13 @@ function HomeToday({navigation}) {
         time.time === currentTimeIndex && time.hour === currentTimePeriod
     );
 
-    const nextWeatherTimes = [
-      ...weatherTimes.slice(currentIndex),
-      ...weatherTimes.slice(0, 5 - (weatherTimes.length - currentIndex)),
-    ];
+    let nextWeatherTimes = [];
+
+    if (currentIndex === -1) {
+      nextWeatherTimes = weatherTimes.slice(0, 5);
+    } else {
+      nextWeatherTimes = weatherTimes.slice(currentIndex, currentIndex + 5);
+    }
 
     return nextWeatherTimes;
   }
@@ -199,7 +202,9 @@ function HomeToday({navigation}) {
             <Image
               style={{ height: 420, borderRadius: 8, width: 361 }}
               source={
-                currentHour.time > 7 && currentHour.hour === "PM"
+                currentHour.time === 12 && currentHour.hour === "PM"
+                  ? daytime
+                  : currentHour.time > 7 && currentHour.hour === "PM"
                   ? night
                   : currentHour.time === 12 && currentHour.hour === "AM"
                   ? night
@@ -213,7 +218,9 @@ function HomeToday({navigation}) {
               <View style={styles.degreeBox}>
                 <Text style={styles.degree}>{currentDegreeMap[0]}°</Text>
                 <Text style={styles.currentInfo}>
-                  {currentHour.time > 7 && currentHour.hour === "PM"
+                  {currentHour.time === 12 && currentHour.hour === "PM"
+                    ? "Sunny"
+                    : currentHour.time > 7 && currentHour.hour === "PM"
                     ? "Mostly Clear"
                     : currentHour.time === 12 && currentHour.hour === "AM"
                     ? "Mostly Clear"
@@ -226,7 +233,9 @@ function HomeToday({navigation}) {
                 style={{
                   ...styles.weatherRow,
                   backgroundColor:
-                    currentHour.time > 7 && currentHour.hour === "PM"
+                    currentHour.time === 12 && currentHour.hour === "PM"
+                      ? "#358DD1"
+                      : currentHour.time > 7 && currentHour.hour === "PM"
                       ? "#24283c"
                       : currentHour.time === 12 && currentHour.hour === "AM"
                       ? "#24283c"
@@ -239,7 +248,9 @@ function HomeToday({navigation}) {
                   <Text style={styles.weatherText}>Now</Text>
                   <Image
                     source={
-                      currentHour.time > 7 && currentHour.hour === "PM"
+                      currentHour.time === 12 && currentHour.hour === "PM"
+                        ? sun
+                        : currentHour.time > 7 && currentHour.hour === "PM"
                         ? moon
                         : currentHour.time === 12 && currentHour.hour === "AM"
                         ? moon
@@ -257,7 +268,9 @@ function HomeToday({navigation}) {
                     <Text style={styles.weatherText}>{el.time}</Text>
                     <Image
                       source={
-                        currentHour.time > 7 && currentHour.hour === "PM"
+                        currentHour.time === 12 && currentHour.hour === "PM"
+                          ? sun
+                          : currentHour.time > 7 && currentHour.hour === "PM"
                           ? moon
                           : currentHour.time === 12 && currentHour.hour === "AM"
                           ? moon
@@ -279,7 +292,9 @@ function HomeToday({navigation}) {
             <Image
               style={{ height: 420, borderRadius: 8, width: 361 }}
               source={
-                currentHour.time > 7 && currentHour.hour === "PM"
+                currentHour.time === 12 && currentHour.hour === "PM"
+                  ? daytime
+                  : currentHour.time > 7 && currentHour.hour === "PM"
                   ? night
                   : currentHour.time === 12 && currentHour.hour === "AM"
                   ? night
@@ -293,7 +308,9 @@ function HomeToday({navigation}) {
               <View style={styles.degreeBox}>
                 <Text style={styles.degree}>{currentDegreeMap[0]}°</Text>
                 <Text style={styles.currentInfo}>
-                  {currentHour.time > 7 && currentHour.hour === "PM"
+                  {currentHour.time === 12 && currentHour.hour === "PM"
+                    ? "Sunny"
+                    : currentHour.time > 7 && currentHour.hour === "PM"
                     ? "Mostly Clear"
                     : currentHour.time === 12 && currentHour.hour === "AM"
                     ? "Mostly Clear"
@@ -306,7 +323,9 @@ function HomeToday({navigation}) {
                 style={{
                   ...styles.weatherRow,
                   backgroundColor:
-                    currentHour.time > 7 && currentHour.hour === "PM"
+                    currentHour.time === 12 && currentHour.hour === "PM"
+                      ? "#358DD1"
+                      : currentHour.time > 7 && currentHour.hour === "PM"
                       ? "#24283c"
                       : currentHour.time === 12 && currentHour.hour === "AM"
                       ? "#24283c"
@@ -319,7 +338,9 @@ function HomeToday({navigation}) {
                   <Text style={styles.weatherText}>Now</Text>
                   <Image
                     source={
-                      currentHour.time > 7 && currentHour.hour === "PM"
+                      currentHour.time === 12 && currentHour.hour === "PM"
+                        ? sun
+                        : currentHour.time > 7 && currentHour.hour === "PM"
                         ? moon
                         : currentHour.time === 12 && currentHour.hour === "AM"
                         ? moon
@@ -337,7 +358,9 @@ function HomeToday({navigation}) {
                     <Text style={styles.weatherText}>{el.time}</Text>
                     <Image
                       source={
-                        currentHour.time > 7 && currentHour.hour === "PM"
+                        currentHour.time === 12 && currentHour.hour === "PM"
+                          ? sun
+                          : currentHour.time > 7 && currentHour.hour === "PM"
                           ? moon
                           : currentHour.time === 12 && currentHour.hour === "AM"
                           ? moon
@@ -359,7 +382,9 @@ function HomeToday({navigation}) {
             <Image
               style={{ height: 420, borderRadius: 8, width: 361 }}
               source={
-                currentHour.time > 7 && currentHour.hour === "PM"
+                currentHour.time === 12 && currentHour.hour === "PM"
+                  ? daytime
+                  : currentHour.time > 7 && currentHour.hour === "PM"
                   ? night
                   : currentHour.time === 12 && currentHour.hour === "AM"
                   ? night
@@ -373,7 +398,9 @@ function HomeToday({navigation}) {
               <View style={styles.degreeBox}>
                 <Text style={styles.degree}>{currentDegreeMap[0]}°</Text>
                 <Text style={styles.currentInfo}>
-                  {currentHour.time > 7 && currentHour.hour === "PM"
+                  {currentHour.time === 12 && currentHour.hour === "PM"
+                    ? "Sunny"
+                    : currentHour.time > 7 && currentHour.hour === "PM"
                     ? "Mostly Clear"
                     : currentHour.time === 12 && currentHour.hour === "AM"
                     ? "Mostly Clear"
@@ -386,7 +413,9 @@ function HomeToday({navigation}) {
                 style={{
                   ...styles.weatherRow,
                   backgroundColor:
-                    currentHour.time > 7 && currentHour.hour === "PM"
+                    currentHour.time === 12 && currentHour.hour === "PM"
+                      ? "#358DD1"
+                      : currentHour.time > 7 && currentHour.hour === "PM"
                       ? "#24283c"
                       : currentHour.time === 12 && currentHour.hour === "AM"
                       ? "#24283c"
@@ -399,7 +428,9 @@ function HomeToday({navigation}) {
                   <Text style={styles.weatherText}>Now</Text>
                   <Image
                     source={
-                      currentHour.time > 7 && currentHour.hour === "PM"
+                      currentHour.time === 12 && currentHour.hour === "PM"
+                        ? sun
+                        : currentHour.time > 7 && currentHour.hour === "PM"
                         ? moon
                         : currentHour.time === 12 && currentHour.hour === "AM"
                         ? moon
@@ -417,7 +448,9 @@ function HomeToday({navigation}) {
                     <Text style={styles.weatherText}>{el.time}</Text>
                     <Image
                       source={
-                        currentHour.time > 7 && currentHour.hour === "PM"
+                        currentHour.time === 12 && currentHour.hour === "PM"
+                          ? sun
+                          : currentHour.time > 7 && currentHour.hour === "PM"
                           ? moon
                           : currentHour.time === 12 && currentHour.hour === "AM"
                           ? moon
@@ -434,7 +467,6 @@ function HomeToday({navigation}) {
               </View>
             </View>
           </View>
-
         </Carousel>
       </View>
     </ScrollView>
@@ -590,7 +622,7 @@ const styles = StyleSheet.create({
   },
   dotsContainer: {
     position: "absolute",
-    bottom: 10,
+    bottom: 15,
     left: 0,
     right: 0,
     display: "flex",

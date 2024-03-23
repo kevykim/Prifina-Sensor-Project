@@ -5,15 +5,15 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
-  ImageBackground
+  ImageBackground,
 } from "react-native";
 import { useCustomFonts } from "../../../../utils/CustomFonts";
 
 import leftArrow from "../../../../assets/Misc/leftArrow.png";
 
-import CRS from '../../../../assets/Golf/CRS.png'
+import CRS from "../../../../assets/Golf/CRS.png";
 
-import hamburger from '../../../../assets/Misc/hamburger.png'
+import hamburger from "../../../../assets/Misc/hamburger.png";
 
 import CourseMenu from "../../../../utils/courseMenu";
 
@@ -23,7 +23,7 @@ import startingRoundObj from "../StartingRoundObject";
 
 import styles from "../PlayCourseStyles";
 
-function PlayVACourse({ navigation, route }) {
+function PlayPRCourse({ navigation, route }) {
   const { propHole } = route?.params;
   const fontsLoaded = useCustomFonts();
 
@@ -31,13 +31,13 @@ function PlayVACourse({ navigation, route }) {
     return null;
   }
 
- const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
- const [handicap, setHandicap] = useState(10);
+   const [handicap, setHandicap] = useState(10);
 
- const updateHandicap = (newHandicap) => {
-   setHandicap(newHandicap);
- };
+   const updateHandicap = (newHandicap) => {
+     setHandicap(newHandicap);
+   };
 
   return (
     <ImageBackground style={styles.main} source={CRS}>
@@ -46,7 +46,7 @@ function PlayVACourse({ navigation, route }) {
           <View>
             <TouchableOpacity
               style={styles.backPlay}
-              onPress={() => navigation.navigate("playvasround")}
+              onPress={() => navigation.navigate("playprsround")}
             >
               <Image style={{ tintColor: "white" }} source={leftArrow} />
             </TouchableOpacity>
@@ -66,7 +66,7 @@ function PlayVACourse({ navigation, route }) {
               modalShown={showModal}
               closeModal={setShowModal}
               navigation={navigation}
-              navVar={"playvasummary"}
+              navVar={"playprsummary"}
             />
           )}
         </View>
@@ -102,4 +102,4 @@ function PlayVACourse({ navigation, route }) {
 }
 
 
-export default PlayVACourse;
+export default PlayPRCourse;
