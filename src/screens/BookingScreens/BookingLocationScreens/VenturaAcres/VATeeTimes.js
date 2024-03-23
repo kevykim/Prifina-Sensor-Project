@@ -234,6 +234,8 @@ function VATeeTimes({ navigation }) {
                     navigation.navigate("success", {
                       propDate: selected,
                       propTime: fake.time,
+                      propName: 'Ventura Acres',
+                      propImage: 'VA',
                       currScreen: "va",
                     })
                   }

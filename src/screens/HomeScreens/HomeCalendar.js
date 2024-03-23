@@ -8,7 +8,6 @@ import {
   Pressable,
 } from "react-native";
 
-
 import { useCustomFonts } from "../../utils/CustomFonts";
 
 import Avatar from "../../assets/Misc/Avatar.png";
@@ -23,10 +22,16 @@ import GrayStar from "../../assets/Misc/GrayStar.png";
 
 import NH from "../../assets/Locations/NH.png";
 import VA from "../../assets/Locations/VA.png";
-import SW from '../../assets/Locations/SW.png'
+import SW from "../../assets/Locations/SW.png";
+import PR from "../../assets/Locations/PR.jpg";
+import OC from "../../assets/Locations/OC.png";
+
+import { useFakeDates } from "../../context/FakeDates";
 
 function HomeCalendar({ navigation }) {
   const route = useRoute();
+
+  const { fakeDates } = useFakeDates();
 
   const fontsLoaded = useCustomFonts();
 
@@ -36,17 +41,6 @@ function HomeCalendar({ navigation }) {
   const year = newDay.getFullYear();
   const shortDate = `${month}.${day}`;
 
-  const newthreeDate = new Date();
-  const threeDay = newthreeDate.getDate() + 3;
-
-  const futureDay = new Date();
-  const futureMonth = futureDay.getMonth() + 6
-
-  const longDate = `0${month}.${day}.${year}`
-
-  const threeDate = `0${month}.${threeDay}.${year}`;
-
-  const futureDate = `0${futureMonth}.${day}.${year}`;
 
   if (!fontsLoaded) {
     return null;
@@ -143,98 +137,62 @@ function HomeCalendar({ navigation }) {
           <View style={styles.upComingEventContainer}>
             <Text style={styles.upComingEventText}>Upcoming Event</Text>
             <View style={styles.upComingEventNum}>
-              <Text style={styles.upComingEventNumText}>3</Text>
+              <Text style={styles.upComingEventNumText}>
+                {fakeDates.length}
+              </Text>
             </View>
           </View>
 
           <View style={styles.eventsContainer}>
-            <View style={styles.eventCrsCard}>
-              <View style={styles.starContainer}>
-                <Image source={GreenStar} />
-                <Image source={GreenStar} />
-                <Image source={GreenStar} />
-                <Image source={GreenStar} />
-                <Image source={GrayStar} />
-              </View>
-
-              <Image style={styles.eventCrsImage} source={NH} />
-
-              <View style={styles.eventCrsTContainer}>
-                <View style={styles.ECrsBox}>
-                  <Text style={styles.ECrsBoxTop}>North Hill</Text>
-                  <View style={styles.ECrsBoxBot}>
-                    <Text style={styles.ECrsBBText}>Tee Time</Text>
-                    <Text style={styles.ECrsBBDate}> {longDate} 9:00AM</Text>
-                  </View>
+            {fakeDates.map((date) => (
+              <View key={date.id} style={styles.eventCrsCard}>
+                <View style={styles.starContainer}>
+                  <Image source={GreenStar} />
+                  <Image source={GreenStar} />
+                  <Image source={GreenStar} />
+                  <Image source={GreenStar} />
+                  <Image source={GrayStar} />
                 </View>
 
-                <TouchableOpacity
-                //navigate to play screen!!!!!
-                  onPress={() => navigation.navigate("Play", {screen:'playnh'})}
-                  style={styles.contactButton}
-                >
-                  <Text style={styles.contactText}>Play</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
+                <Image
+                  style={styles.eventCrsImage}
+                  source={
+                    date.image === "NH"
+                      ? NH
+                      : date.image === "SW"
+                      ? SW
+                      : date.image === "VA"
+                      ? VA
+                      : date.image === "PR"
+                      ? PR
+                      : OC
+                  }
+                />
 
-            <View style={styles.eventCrsCard}>
-              <View style={styles.starContainer}>
-                <Image source={GreenStar} />
-                <Image source={GreenStar} />
-                <Image source={GreenStar} />
-                <Image source={GreenStar} />
-                <Image source={GrayStar} />
-              </View>
-
-              <Image style={styles.eventCrsImage} source={VA} />
-
-              <View style={styles.eventCrsTContainer}>
-                <View style={styles.ECrsBox}>
-                  <Text style={styles.ECrsBoxTop}>Ventura Acres</Text>
-                  <View style={styles.ECrsBoxBot}>
-                    <Text style={styles.ECrsBBText}>Tee Time</Text>
-                    <Text style={styles.ECrsBBDate}> {threeDate} 10:00AM</Text>
+                <View style={styles.eventCrsTContainer}>
+                  <View style={styles.ECrsBox}>
+                    <Text style={styles.ECrsBoxTop}>{date.name}</Text>
+                    <View style={styles.ECrsBoxBot}>
+                      <Text style={styles.ECrsBBText}>Tee Time</Text>
+                      <Text style={styles.ECrsBBDate}>
+                        {" "}
+                        {date.date} {date.time}
+                      </Text>
+                    </View>
                   </View>
+
+                  <TouchableOpacity
+                    //navigate to play screen!!!!!
+                    onPress={() =>
+                      navigation.navigate("Play", { screen: `play${date.tag}` })
+                    }
+                    style={styles.contactButton}
+                  >
+                    <Text style={styles.contactText}>Play</Text>
+                  </TouchableOpacity>
                 </View>
-
-                <TouchableOpacity
-                   onPress={() => navigation.navigate("Play", {screen:'playva'})}
-                  style={styles.contactButton}
-                >
-                  <Text style={styles.contactText}>Play</Text>
-                </TouchableOpacity>
               </View>
-            </View>
-
-            <View style={styles.eventCrsCard}>
-              <View style={styles.starContainer}>
-                <Image source={GreenStar} />
-                <Image source={GreenStar} />
-                <Image source={GreenStar} />
-                <Image source={GreenStar} />
-                <Image source={GrayStar} />
-              </View>
-
-              <Image style={styles.eventCrsImage} source={SW} />
-
-              <View style={styles.eventCrsTContainer}>
-                <View style={styles.ECrsBox}>
-                  <Text style={styles.ECrsBoxTop}>South West</Text>
-                  <View style={styles.ECrsBoxBot}>
-                    <Text style={styles.ECrsBBText}>Tee Time</Text>
-                    <Text style={styles.ECrsBBDate}> {futureDate} 1:00PM</Text>
-                  </View>
-                </View>
-
-                <TouchableOpacity
-                   onPress={() => navigation.navigate("Play", {screen:'playsw'})}
-                  style={styles.contactButton}
-                >
-                  <Text style={styles.contactText}>Play</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
+            ))}
           </View>
         </View>
       </View>
@@ -394,6 +352,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 6,
     borderTopRightRadius: 6,
     height: 136,
+    width: 361,
   },
   eventCrsTContainer: {
     flexDirection: "row",

@@ -234,6 +234,8 @@ function SWTeeTimes({ navigation }) {
                     navigation.navigate("success", {
                       propDate: selected,
                       propTime: fake.time,
+                      propName: 'South West',
+                      propImage: 'SW',
                       currScreen: "sw",
                     })
                   }

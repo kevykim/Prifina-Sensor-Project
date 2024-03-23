@@ -14,14 +14,14 @@ import leftArrow from "../../assets/Misc/leftArrow.png";
 import Avatar from "../../assets/Misc/Avatar.png";
 
 
-
+import { useFakeDates } from "../../context/FakeDates";
 
 
 import { useRoute } from "@react-navigation/native";
 
 
 function BookingSuccess({ navigation, route }) {
-    const { propDate, propTime, currScreen } = route?.params
+    const { propDate, propTime, currScreen, propName, propImage } = route?.params
 
   const fontsLoaded = useCustomFonts();
   const current = useRoute();
@@ -48,99 +48,121 @@ const formattedDate = `${monthName} ${formattedDay}, ${formattedYear}`;
     return null;
   }
 
+  const { addFakeDate, fakeDates } = useFakeDates()
+
+  const month = dateParts[1]
+  const shortDate = `${month}.${day}.${year}`
+
+  const addToCalendar = () => {
+    Alert.alert("Added to your calendar")
+    addFakeDate(propName, shortDate, propTime, currScreen, propImage)
+  }
+
 
   return (
     <ScrollView contentContainerStyle={styles.main}>
       <View style={styles.container}>
-      <View style={styles.header}>
-        <View>
+        <View style={styles.header}>
+          <View>
+            <TouchableOpacity
+              style={styles.backBooking}
+              onPress={() => navigation.navigate("booking")}
+            >
+              <Image source={leftArrow} />
+              <Text
+                style={{
+                  color: "#AFAFAF",
+                  fontFamily: "Quicksand-SemiBold",
+                  fontSize: 12,
+                }}
+              >
+                Booking
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.nameHeader}>
+            <Text style={{ fontSize: 16, fontFamily: "Quicksand-SemiBold" }}>
+              Andy Haynes
+            </Text>
+            <Image source={Avatar} />
+          </View>
+        </View>
+
+        <View style={styles.topButtonContainer}>
           <TouchableOpacity
-            style={styles.backBooking}
-            onPress={() => navigation.navigate("booking")}
+            onPress={() => navigation.navigate(`${currScreen}overview`)}
+            style={styles.topButtons}
           >
-            <Image source={leftArrow} />
+            <Text style={styles.topButtonsText}>Overview</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate(`${currScreen}regulations`)}
+            style={styles.topButtons}
+          >
+            <Text style={styles.topButtonsText}>Regulations</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("success")}
+            style={{
+              backgroundColor:
+                current.name === "success" ? "#2FDA74" : "#D3D3D3",
+              ...styles.topButtons,
+            }}
+          >
             <Text
               style={{
-                color: "#AFAFAF",
-                fontFamily: "Quicksand-SemiBold",
-                fontSize: 12,
+                color: current.name === "success" ? "white" : "black",
+                ...styles.topButtonsText,
               }}
             >
-              Booking
+              Tee Times
             </Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.nameHeader}>
-          <Text style={{ fontSize: 16, fontFamily: "Quicksand-SemiBold" }}>
-            Andy Haynes
+
+        <Text style={styles.successHeader}>Success</Text>
+
+        <View style={styles.successInfo}>
+          <Text style={styles.successInfoTop}>
+            You have successfully reserved a tee time at {propTime} on{" "}
+            {formattedDate}. Your tee time is now available under the Play tab.
           </Text>
-          <Image source={Avatar} />
+          <Text style={styles.successInfoBot}>
+            If you would like make accommodations please use the fields below.
+          </Text>
         </View>
-      </View>
 
-      <View style={styles.topButtonContainer}>
         <TouchableOpacity
-          onPress={() => navigation.navigate(`${currScreen}overview`)}
-          style={styles.topButtons}
+          onPress={addToCalendar}
+          style={styles.addToCalendarButton}
         >
-          <Text style={styles.topButtonsText}>Overview</Text>
+          <Text style={styles.addToCalendarButtonText}>Add to Calendar</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate(`${currScreen}regulations`)}
-          style={styles.topButtons}
-        >
-          <Text style={styles.topButtonsText}>Regulations</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("success")}
-          style={{
-            backgroundColor: current.name === "success" ? "#2FDA74" : "#D3D3D3",
-            ...styles.topButtons,
-          }}
-        >
-          <Text
-            style={{
-              color: current.name === "success" ? "white" : "black",
-              ...styles.topButtonsText,
-            }}
+
+        <View style={styles.helpContainer}>
+          <Text style={styles.helpText}>Help</Text>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Home")}
+            style={styles.returnHomeButton}
           >
-            Tee Times
-          </Text>
-        </TouchableOpacity>
-      </View>
+            <Text style={styles.returnHomeText}>Return Home</Text>
+          </TouchableOpacity>
+        </View>
 
-      <Text style={styles.successHeader}>Success</Text>
-
-
-      <View style={styles.successInfo}>
-        <Text style={styles.successInfoTop}>
-          You have successfully reserved a tee time at {propTime} on {formattedDate}.
-          Your tee time is now available under the Play tab.
-        </Text>
-        <Text style={styles.successInfoBot}>
-          If you would like make accommodations please use the fields below.
-        </Text>
-      </View>
-
-      <TouchableOpacity onPress={() => Alert.alert('Added to your calendar')} style={styles.addToCalendarButton}>
-        <Text style={styles.addToCalendarButtonText}>Add to Calendar</Text>
-      </TouchableOpacity>
-
-      <View style={styles.helpContainer}>
-            <Text style={styles.helpText}>Help</Text>
-            <TouchableOpacity onPress={() => navigation.navigate('Home')} style={styles.returnHomeButton}>
-              <Text style={styles.returnHomeText}>Return Home</Text>
-            </TouchableOpacity>
-      </View>
-
-      <View style={styles.rescheduleContainer}>
-        <TouchableOpacity onPress={() => navigation.navigate(`${currScreen}teetimes`)} style={styles.rescheduleButton}>
-          <Text style={styles.rescheduleButtonText}>Reschedule</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('locate')} style={styles.cancelButton}>
-          <Text style={styles.cancelButtonText}>Cancel</Text>
-        </TouchableOpacity>
-      </View>
+        <View style={styles.rescheduleContainer}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate(`${currScreen}teetimes`)}
+            style={styles.rescheduleButton}
+          >
+            <Text style={styles.rescheduleButtonText}>Reschedule</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("locate")}
+            style={styles.cancelButton}
+          >
+            <Text style={styles.cancelButtonText}>Cancel</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </ScrollView>
   );

@@ -234,6 +234,8 @@ function OCTeeTimes({ navigation }) {
                     navigation.navigate("success", {
                       propDate: selected,
                       propTime: fake.time,
+                      propName: 'Oakwood Clubs',
+                      propImage: 'OC',
                       currScreen: "oc",
                     })
                   }

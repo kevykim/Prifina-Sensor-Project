@@ -242,6 +242,8 @@ function PRTeeTimes({ navigation }) {
                     navigation.navigate("success", {
                       propDate: selected,
                       propTime: fake.time,
+                      propName: 'Pine Ridge',
+                      propImage: 'PR',
                       currScreen: "pr",
                     })
                   }

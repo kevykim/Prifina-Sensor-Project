@@ -234,6 +234,8 @@ function NHTeeTimes({ navigation }) {
                     navigation.navigate("success", {
                       propDate: selected,
                       propTime: fake.time,
+                      propName: 'North Hill',
+                      propImage: 'NH',
                       currScreen: "nh",
                     })
                   }
