@@ -14,17 +14,17 @@ import Avatar from "../../../../assets/Misc/Avatar.png";
 
 import Carousel from "pinar";
 
-import distance from '../../../../assets/Misc/distance.png'
-import windspeed from '../../../../assets/Misc/windspeed.png'
+import distance from "../../../../assets/Misc/distance.png";
+import windspeed from "../../../../assets/Misc/windspeed.png";
 
-import styles from "../PlayStartRoundStyles";
+import styles from '../PlayStartRoundStyles'
 
 import React, { useEffect, useState } from "react";
 
 import startingRoundObj from "../StartingRoundObject";
 
 
-function PlayVASRound({ navigation }) {
+function PlayNHSRound({ navigation }) {
   const fontsLoaded = useCustomFonts();
 
   if (!fontsLoaded) {
@@ -94,8 +94,8 @@ function PlayVASRound({ navigation }) {
             width={361}
             showsDots={false}
             showsControls={true}
-            onIndexChanged={({ index, total }) => {
-              setCurrentCourseId(index + 1);
+            onIndexChanged={({index, total}) => {
+              setCurrentCourseId(index + 1)
             }}
           >
             {startingRoundObj.map((course) => (
@@ -141,7 +141,7 @@ function PlayVASRound({ navigation }) {
         )}
         <TouchableOpacity
           onPress={() =>
-            navigation.navigate("playvacourse", { propHole: currentCourseId })
+            navigation.navigate("playnhcourse", { propHole: currentCourseId })
           }
           style={styles.beginButton}
         >
@@ -154,4 +154,4 @@ function PlayVASRound({ navigation }) {
 
 
 
-export default PlayVASRound;
+export default PlayNHSRound;
