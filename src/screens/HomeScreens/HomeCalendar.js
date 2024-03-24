@@ -11,9 +11,8 @@ import {
 import { useCustomFonts } from "../../utils/CustomFonts";
 
 import Avatar from "../../assets/Misc/Avatar.png";
-import updateIcon from "../../assets/Misc/updateIcon.png";
+import calendarIcon from '../../assets/Misc/calendarIcon.png'
 import sunnyIcon from "../../assets/Weather/sunnyIcon.png";
-import greenSunny from "../../assets/Weather/greenSunny.png";
 
 import { LinearGradient } from "expo-linear-gradient";
 import { useRoute } from "@react-navigation/native";
@@ -61,13 +60,11 @@ function HomeCalendar({ navigation }) {
             </View>
 
             <View style={styles.updateContainer}>
-              <Image source={updateIcon} />
+              <Image source={calendarIcon} />
               <View>
-                <Text style={styles.updateContainerTextTop}>
-                  You achieved 2 strokes less than the last game.
-                </Text>
-                <Text style={styles.updateContainerTextBot}>
-                  Good job on improving your skill every day!
+                <Text style={styles.updateContainerText}>
+                  You have a scheduled game today! Press Play on the course card
+                  to begin and monitor your progress.
                 </Text>
               </View>
             </View>
@@ -241,17 +238,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginTop: 15,
-    width: 305,
+    // width: 305,
   },
-  updateContainerTextTop: {
-    fontFamily: "Quicksand-Med",
-    fontSize: 12,
-    lineHeight: 20,
-    color: "white",
-  },
-  updateContainerTextBot: {
-    fontFamily: "Quicksand-Reg",
-    fontSize: 12,
+  updateContainerText: {
+    fontFamily: "Quicksand-SemiBold",
+    width: 290,
+    fontSize: 11,
     lineHeight: 20,
     color: "white",
   },

@@ -11,7 +11,7 @@ import { useCustomFonts } from "../../utils/CustomFonts";
 
 
 import Avatar from "../../assets/Misc/Avatar.png";
-import updateIcon from "../../assets/Misc/updateIcon.png";
+import homeCheck from '../../assets/Misc/homeCheck.png';
 import sunnyIcon from "../../assets/Weather/sunnyIcon.png";
 import greenSunny from "../../assets/Weather/greenSunny.png";
 import daytime from '../../assets/Weather/daytime.png';
@@ -24,6 +24,8 @@ import Carousel from "pinar";
 
 import { LinearGradient } from "expo-linear-gradient";
 import { useRoute } from "@react-navigation/native";
+
+import { useFakeDates } from "../../context/FakeDates";
 
 function HomeToday({navigation}) {
   const route = useRoute();
@@ -62,6 +64,32 @@ function HomeToday({navigation}) {
     { id: 24, time: 12, degree: 63, hour: "AM" },
   ];
 
+  const { fakeDates } = useFakeDates();
+
+  const formattedTime = () => {
+      const str = fakeDates[fakeDates.length - 1].time
+      const lastTwo = str.slice(-2)
+      const newStr = str.slice(0 , -2)
+
+      if (lastTwo === 'PM') {
+        return `${newStr} p.m`
+      } else {
+        return `${newStr} a.m`
+      }
+  }
+
+  const longDate = () => {
+
+    const lastDate = fakeDates[fakeDates.length - 1].date
+
+    const [month, day, year] = lastDate.split('.')
+    const options = {month : 'long', day: 'numeric', year: 'numeric'}
+    const newDate = new Date(year, month - 1, day).toLocaleDateString('en-US', options)
+    return newDate
+
+
+  }
+
   function getCurrentWeatherTimes() {
     const currentDate = new Date();
     const currentHour = currentDate.getHours();
@@ -94,6 +122,8 @@ function HomeToday({navigation}) {
     return null;
   }
 
+  
+
   return (
     <ScrollView style={styles.main}>
       <View style={styles.container}>
@@ -109,13 +139,12 @@ function HomeToday({navigation}) {
             </View>
 
             <View style={styles.updateContainer}>
-              <Image source={updateIcon} />
+              <Image source={homeCheck} />
               <View>
-                <Text style={styles.updateContainerTextTop}>
-                  You achieved 2 strokes less than the last game.
-                </Text>
-                <Text style={styles.updateContainerTextBot}>
-                  Good job on improving your skill every day!
+                <Text style={styles.updateContainerText}>
+                  Tee-time at {formattedTime()} at{" "}
+                  {fakeDates[fakeDates.length - 1].name} on {longDate()} has
+                  been added to your Calendar!
                 </Text>
               </View>
             </View>
@@ -514,13 +543,14 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginTop: 15,
-    width: 305,
+    // width: 305,
   },
-  updateContainerTextTop: {
+  updateContainerText: {
     fontFamily: "Quicksand-Med",
-    fontSize: 12,
+    fontSize: 11,
     lineHeight: 20,
     color: "white",
+    width: 290
   },
   updateContainerTextBot: {
     fontFamily: "Quicksand-Reg",
