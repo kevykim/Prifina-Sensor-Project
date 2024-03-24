@@ -17,10 +17,24 @@ import { LineChart } from "react-native-gifted-charts";
 import { useRoute } from "@react-navigation/native";
 
 import Carousel from "pinar";
+import chartGreen from '../../assets/Charts/ChartGreen.png'
+
+import React, { useEffect, useState } from "react";
+
 
 function Analyze({ navigation }) {
   const fontsLoaded = useCustomFonts();
   const route = useRoute();
+
+  const [carouselRender, setCarouselRendered] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setCarouselRendered(true);
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const today = new Date();
   const options = { month: "long", day: "numeric", year: "numeric" };
@@ -30,15 +44,40 @@ function Analyze({ navigation }) {
     return null;
   }
 
+  const customDataPoint = () => {
+    return (
+      <View
+        style={{
+          width: 8,
+          height: 8,
+          backgroundColor: "white",
+          borderWidth: 1,
+          borderRadius: 25,
+          borderColor: "#358DD1",
+          marginBottom: 5,
+        }}
+      />
+    );
+  };
+
   const barData = [
-    { value: 10, label: "M" },
-    { value: 5, label: "T" },
-    { value: 6, label: "W" },
-    { value: 5, label: "T" },
-    { value: 7, label: "F" },
-    { value: 8, label: "S", frontColor: "#2FDA74" },
-    { value: 9, label: "S", frontColor: "#2FDA74" },
+    { value: 10, label: "1", customDataPoint: customDataPoint },
+    { value: 5, label: "2" },
+    { value: 6, label: "3", customDataPoint: customDataPoint },
+    { value: 5, label: "4" },
+    { value: 7, label: "5", customDataPoint: customDataPoint },
+    { value: 8, label: "6" },
+    { value: 9, label: "7", customDataPoint: customDataPoint },
+    { value: 3, label: "8" },
+    { value: 2, label: "9", customDataPoint: customDataPoint },
+    { value: 7, label: "10" },
   ];
+
+   const firstChartData = [
+     { label: "Fairway Hit Rate", levelAvg: "50%", myAvg: "60%" },
+     { label: "Driving Distance", levelAvg: "40%", myAvg: "50%" },
+     { label: "Putting Accuracy", levelAvg: "50%", myAvg: "70%" },
+   ];
 
   return (
     <ScrollView contentContainerStyle={styles.main}>
@@ -102,7 +141,7 @@ function Analyze({ navigation }) {
 
         <Text style={styles.analyzeHeader}>Analyze</Text>
 
-        <TouchableOpacity style={styles.swingAButton}>
+        <TouchableOpacity onPress={() => navigation.navigate('Training')} style={styles.swingAButton}>
           <Text style={styles.swingAButtonText}>Start Swing Analysis</Text>
         </TouchableOpacity>
 
@@ -117,9 +156,10 @@ function Analyze({ navigation }) {
           </TouchableOpacity>
         </View>
         <View style={styles.scoreChart}>
+          {carouselRender && (
           <Carousel
             showsControls={false}
-            height={240}
+            height={270}
             dotsContainerStyle={{
               position: "absolute",
               bottom: -10,
@@ -152,105 +192,81 @@ function Analyze({ navigation }) {
             }}
           >
             <View>
-              <View style={styles.chartHeaderContainer}>
-                <Text style={styles.CHCTopText}>Fairway Hit Rate</Text>
+              <View style={styles.CIContainer}>
+                <Text style={styles.CHCTopText}>On Green Rate</Text>
                 <Text style={styles.CHCBotText}>As of {formattedDate}</Text>
               </View>
-              <View style={styles.averageContainer}>
-                <View style={styles.levelAvg}>
-                  <Text style={styles.levelAvgText}>Level Average</Text>
-                  <Text style={styles.levelAvgPerc}>50%</Text>
-                </View>
-                <View style={styles.myAvg}>
-                  <Text style={styles.myAvgText}>My Average</Text>
-                  <Text style={styles.myAvgPerc}>60%</Text>
-                </View>
-              </View>
-              <LineChart
-                width={290}
-                hideRules
-                areaChart
-                curved
-                color="#358DD1"
-                startFillColor="#2FDA74"
-                data={barData}
-                frontColor={"#307D87"}
-                hideYAxisText
-                yAxisThickness={0}
-                xAxisThickness={0}
-                xAxisLabelTextStyle={{
-                  color: "#AFAFAF",
-                  fontFamily: "Quicksand-SemiBold",
-                }}
-              />
+              <Image style={styles.chartImage} source={chartGreen} />
             </View>
-            <View>
-              <View style={styles.chartHeaderContainer}>
-                <Text style={styles.CHCTopText}>Fairway Hit Rate</Text>
-                <Text style={styles.CHCBotText}>As of {formattedDate}</Text>
-              </View>
-              <View style={styles.averageContainer}>
-                <View style={styles.levelAvg}>
-                  <Text style={styles.levelAvgText}>Level Average</Text>
-                  <Text style={styles.levelAvgPerc}>50%</Text>
+
+            {firstChartData.map((item, index) => (
+              <View key={index}>
+                <View style={styles.chartHeaderContainer}>
+                  <Text style={styles.CHCTopText}>{item.label}</Text>
+                  <Text style={styles.CHCBotText}>As of {formattedDate}</Text>
                 </View>
-                <View style={styles.myAvg}>
-                  <Text style={styles.myAvgText}>My Average</Text>
-                  <Text style={styles.myAvgPerc}>60%</Text>
+                <View style={styles.averageContainer}>
+                  <View style={styles.levelAvg}>
+                    <Text style={styles.levelAvgText}>Level Average</Text>
+                    <Text style={styles.levelAvgPerc}>{item.levelAvg}</Text>
+                  </View>
+                  <View style={styles.myAvg}>
+                    <Text style={styles.myAvgText}>My Average</Text>
+                    <Text style={styles.myAvgPerc}>{item.myAvg}</Text>
+                  </View>
                 </View>
+                <LineChart
+                  width={305}
+                  spacing={33}
+                  data={barData}
+                  yAxisThickness={0}
+                  xAxisThickness={0}
+                  initialSpacing={7}
+                  endSpacing={7}
+                  adjustToWidth
+                  scrollAnimation={false}
+                  areaChart
+                  curved
+                  dataPointsColor="#358DD1"
+                  color="#358DD1"
+                  startFillColor="#2FDA74"
+                  xAxisColor="lightgray"
+                  hideYAxisText
+                  xAxisLabelTextStyle={{
+                    color: "#AFAFAF",
+                    fontFamily: "Quicksand-SemiBold",
+                  }}
+                  hideRules
+                  showReferenceLine1
+                  referenceLine1Position={3}
+                  referenceLine1Config={{
+                    color: "#AFAFAF",
+                    dashWidth: 1,
+                    dashGap: 10,
+                    width: 290,
+                  }}
+                  showReferenceLine2
+                  referenceLine2Position={6}
+                  referenceLine2Config={{
+                    color: "#AFAFAF",
+                    dashWidth: 1,
+                    dashGap: 10,
+                    width: 290,
+                  }}
+                  showReferenceLine3
+                  referenceLine3Position={9}
+                  referenceLine3Config={{
+                    color: "#AFAFAF",
+                    dashWidth: 1,
+                    dashGap: 10,
+                    width: 290,
+                  }}
+                />
               </View>
-              <LineChart
-                width={290}
-                hideRules
-                noOfSections={5}
-                data={barData}
-                frontColor={"#307D87"}
-                yAxisColor="lightgray"
-                xAxisColor="lightgray"
-                yAxisTextStyle={{
-                  color: "#AFAFAF",
-                  fontFamily: "Quicksand-SemiBold",
-                }}
-                xAxisLabelTextStyle={{
-                  color: "#AFAFAF",
-                  fontFamily: "Quicksand-SemiBold",
-                }}
-              />
-            </View>
-            <View>
-              <View style={styles.chartHeaderContainer}>
-                <Text style={styles.CHCTopText}>Fairway Hit Rate</Text>
-                <Text style={styles.CHCBotText}>As of {formattedDate}</Text>
-              </View>
-              <View style={styles.averageContainer}>
-                <View style={styles.levelAvg}>
-                  <Text style={styles.levelAvgText}>Level Average</Text>
-                  <Text style={styles.levelAvgPerc}>50%</Text>
-                </View>
-                <View style={styles.myAvg}>
-                  <Text style={styles.myAvgText}>My Average</Text>
-                  <Text style={styles.myAvgPerc}>60%</Text>
-                </View>
-              </View>
-              <LineChart
-                width={290}
-                hideRules
-                noOfSections={5}
-                data={barData}
-                frontColor={"#307D87"}
-                yAxisColor="lightgray"
-                xAxisColor="lightgray"
-                yAxisTextStyle={{
-                  color: "#AFAFAF",
-                  fontFamily: "Quicksand-SemiBold",
-                }}
-                xAxisLabelTextStyle={{
-                  color: "#AFAFAF",
-                  fontFamily: "Quicksand-SemiBold",
-                }}
-              />
-            </View>
+            ))}
           </Carousel>
+
+          )}
         </View>
       </View>
     </ScrollView>
@@ -348,17 +364,17 @@ const styles = StyleSheet.create({
     width: 91,
     height: 22,
     borderRadius: 4,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     paddingTop: 3,
     paddingHorizontal: 8,
     paddingBottom: 3,
   },
   breakDownButtonText: {
-    color: 'white',
-    fontFamily: 'Quicksand-SemiBold',
-    fontSize: 12
+    color: "white",
+    fontFamily: "Quicksand-SemiBold",
+    fontSize: 12,
   },
   scoreChart: {
     borderWidth: 1,
@@ -381,6 +397,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "#AFAFAF",
     lineHeight: 16,
+    marginTop: 5,
   },
   averageContainer: {
     position: "absolute",

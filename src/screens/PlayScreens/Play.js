@@ -16,11 +16,20 @@ import Avatar from "../../assets/Misc/Avatar.png";
 import GreenStar from "../../assets/Misc/GreenStar.png";
 import GrayStar from "../../assets/Misc/GrayStar.png";
 
+import NH from "../../assets/Locations/NH.png";
+import VA from "../../assets/Locations/VA.png";
 import SW from "../../assets/Locations/SW.png";
-import NH from '../../assets/Locations/NH.png'
+import PR from "../../assets/Locations/PR.jpg";
+import OC from "../../assets/Locations/OC.png";
+
+import { useFakeDates } from "../../context/FakeDates";
+
 
 function Play({ navigation }) {
   const fontsLoaded = useCustomFonts();
+
+  const { fakeDates } = useFakeDates();
+
 
   if (!fontsLoaded) {
     return null;
@@ -80,62 +89,62 @@ function Play({ navigation }) {
           <View style={styles.upComingEventContainer}>
             <Text style={styles.upComingEventText}>Upcoming Event</Text>
             <View style={styles.upComingEventNum}>
-              <Text style={styles.upComingEventNumText}>2</Text>
+              <Text style={styles.upComingEventNumText}>
+                {fakeDates.length}
+              </Text>
             </View>
           </View>
 
           <View style={styles.eventsContainer}>
-            <View style={styles.eventCrsCard}>
-              <View style={styles.starContainer}>
-                <Image source={GreenStar} />
-                <Image source={GreenStar} />
-                <Image source={GreenStar} />
-                <Image source={GreenStar} />
-                <Image source={GrayStar} />
-              </View>
-
-              <Image style={styles.eventCrsImage} source={NH} />
-
-              <View style={styles.eventCrsTContainer}>
-                <View style={styles.ECrsBox}>
-                  <Text style={styles.ECrsBoxTop}>North Hill</Text>
-                  <View style={styles.ECrsBoxBot}>
-                    <Text style={styles.ECrsBBText}>Tee Time</Text>
-                    <Text style={styles.ECrsBBDate}> 03.01.2024 10:00AM</Text>
-                  </View>
+            {fakeDates.map((date) => (
+              <View key={date.id} style={styles.eventCrsCard}>
+                <View style={styles.starContainer}>
+                  <Image source={GreenStar} />
+                  <Image source={GreenStar} />
+                  <Image source={GreenStar} />
+                  <Image source={GreenStar} />
+                  <Image source={GrayStar} />
                 </View>
 
-                <TouchableOpacity style={styles.letsPlayButton}>
-                  <Text style={styles.letsPlayText}>Play</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
+                <Image
+                  style={styles.eventCrsImage}
+                  source={
+                    date.image === "NH"
+                      ? NH
+                      : date.image === "SW"
+                      ? SW
+                      : date.image === "VA"
+                      ? VA
+                      : date.image === "PR"
+                      ? PR
+                      : OC
+                  }
+                />
 
-            <View style={styles.eventCrsCard}>
-              <View style={styles.starContainer}>
-                <Image source={GreenStar} />
-                <Image source={GreenStar} />
-                <Image source={GreenStar} />
-                <Image source={GreenStar} />
-                <Image source={GrayStar} />
-              </View>
-
-              <Image style={styles.eventCrsImage} source={SW} />
-
-              <View style={styles.eventCrsTContainer}>
-                <View style={styles.ECrsBox}>
-                  <Text style={styles.ECrsBoxTop}>Ventura Acres</Text>
-                  <View style={styles.ECrsBoxBot}>
-                    <Text style={styles.ECrsBBText}>Tee Time</Text>
-                    <Text style={styles.ECrsBBDate}> 03.24.2024 10:00AM</Text>
+                <View style={styles.eventCrsTContainer}>
+                  <View style={styles.ECrsBox}>
+                    <Text style={styles.ECrsBoxTop}>{date.name}</Text>
+                    <View style={styles.ECrsBoxBot}>
+                      <Text style={styles.ECrsBBText}>Tee Time</Text>
+                      <Text style={styles.ECrsBBDate}>
+                        {" "}
+                        {date.date} {date.time}
+                      </Text>
+                    </View>
                   </View>
-                </View>
 
-                <TouchableOpacity onPress={() => navigation.navigate('playva')} style={styles.letsPlayButton}>
-                  <Text style={styles.letsPlayText}>Play</Text>
-                </TouchableOpacity>
+                  <TouchableOpacity
+                    //navigate to play screen!!!!!
+                    onPress={() =>
+                      navigation.navigate(`play${date.tag}`)
+                    }
+                    style={styles.letsPlayButton}
+                  >
+                    <Text style={styles.letsPlayText}>Play</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
-            </View>
+            ))}
           </View>
         </View>
       </View>
@@ -255,6 +264,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 6,
     borderTopRightRadius: 6,
     height: 136,
+    width: 361
   },
   eventCrsTContainer: {
     flexDirection: "row",

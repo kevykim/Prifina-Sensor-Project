@@ -16,7 +16,7 @@ import GreenStar from "../../../../assets/Misc/GreenStar.png";
 import GrayStar from "../../../../assets/Misc/GrayStar.png";
 import NH from "../../../../assets/Locations/NH.png";
 
-import rain from "../../../../assets/Weather/rain.png";
+import sunny from "../../../../assets/Weather/sunny.png";
 import golficon from "../../../../assets/Misc/golficon.png";
 
 import { useRoute } from "@react-navigation/native";
@@ -133,16 +133,19 @@ function NHOverview({ navigation }) {
             <Image style={styles.golfIconSize} source={golficon} />
             <View style={styles.CMInnerBox}>
               <Text style={styles.CMInnerBoxTop}>Course maintenance</Text>
-              <Text style={styles.CMInnerBoxBot}>
-                Course opens at 11 a.m.
-              </Text>
+              <Text style={styles.CMInnerBoxBot}>Course opens at 11 a.m.</Text>
             </View>
           </View>
           <Text style={styles.CMRight}>Please plan accordingly</Text>
         </View>
 
         <View style={styles.VAWeatherContainer}>
-          <Image source={rain} />
+          <View style={styles.weatherBox}>
+            <Image
+              style={styles.weatherImage}
+              source={sunny}
+            />
+          </View>
           <View style={styles.VAWeatherInfo}>
             <Text style={styles.VAWTextTop}>Weather Impact</Text>
             <Text style={styles.VAWTextBot}>

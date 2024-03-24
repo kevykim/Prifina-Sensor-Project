@@ -7,12 +7,12 @@ import {
   TouchableOpacity,
   Pressable,
 } from "react-native";
+
 import { useCustomFonts } from "../../utils/CustomFonts";
 
 import Avatar from "../../assets/Misc/Avatar.png";
-import updateIcon from "../../assets/Misc/updateIcon.png";
+import calendarIcon from '../../assets/Misc/calendarIcon.png'
 import sunnyIcon from "../../assets/Weather/sunnyIcon.png";
-import greenSunny from "../../assets/Weather/greenSunny.png";
 
 import { LinearGradient } from "expo-linear-gradient";
 import { useRoute } from "@react-navigation/native";
@@ -20,17 +20,26 @@ import GreenStar from "../../assets/Misc/GreenStar.png";
 import GrayStar from "../../assets/Misc/GrayStar.png";
 
 import NH from "../../assets/Locations/NH.png";
+import VA from "../../assets/Locations/VA.png";
 import SW from "../../assets/Locations/SW.png";
+import PR from "../../assets/Locations/PR.jpg";
+import OC from "../../assets/Locations/OC.png";
+
+import { useFakeDates } from "../../context/FakeDates";
 
 function HomeCalendar({ navigation }) {
   const route = useRoute();
+
+  const { fakeDates } = useFakeDates();
 
   const fontsLoaded = useCustomFonts();
 
   const newDay = new Date();
   const month = newDay.getMonth() + 1;
   const day = newDay.getDate();
+  const year = newDay.getFullYear();
   const shortDate = `${month}.${day}`;
+
 
   if (!fontsLoaded) {
     return null;
@@ -51,13 +60,11 @@ function HomeCalendar({ navigation }) {
             </View>
 
             <View style={styles.updateContainer}>
-              <Image source={updateIcon} />
+              <Image source={calendarIcon} />
               <View>
-                <Text style={styles.updateContainerTextTop}>
-                  You achieved 2 strokes less than the last game.
-                </Text>
-                <Text style={styles.updateContainerTextBot}>
-                  Good job on improving your skill every day!
+                <Text style={styles.updateContainerText}>
+                  You have a scheduled game today! Press Play on the course card
+                  to begin and monitor your progress.
                 </Text>
               </View>
             </View>
@@ -71,14 +78,8 @@ function HomeCalendar({ navigation }) {
             }}
             style={styles.HBCards}
           >
-            <Image
-              source={sunnyIcon}
-            />
-            <Text
-              style={styles.HBCBot}
-            >
-              Today
-            </Text>
+            <Image source={sunnyIcon} />
+            <Text style={styles.HBCBot}>Today</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -133,62 +134,62 @@ function HomeCalendar({ navigation }) {
           <View style={styles.upComingEventContainer}>
             <Text style={styles.upComingEventText}>Upcoming Event</Text>
             <View style={styles.upComingEventNum}>
-              <Text style={styles.upComingEventNumText}>2</Text>
+              <Text style={styles.upComingEventNumText}>
+                {fakeDates.length}
+              </Text>
             </View>
           </View>
 
           <View style={styles.eventsContainer}>
-            <View style={styles.eventCrsCard}>
-              <View style={styles.starContainer}>
-                <Image source={GreenStar} />
-                <Image source={GreenStar} />
-                <Image source={GreenStar} />
-                <Image source={GreenStar} />
-                <Image source={GrayStar} />
-              </View>
-
-              <Image style={styles.eventCrsImage} source={NH} />
-
-              <View style={styles.eventCrsTContainer}>
-                <View style={styles.ECrsBox}>
-                  <Text style={styles.ECrsBoxTop}>North Hill</Text>
-                  <View style={styles.ECrsBoxBot}>
-                    <Text style={styles.ECrsBBText}>Tee Time</Text>
-                    <Text style={styles.ECrsBBDate}> 03.01.2024 10:00AM</Text>
-                  </View>
+            {fakeDates.map((date) => (
+              <View key={date.id} style={styles.eventCrsCard}>
+                <View style={styles.starContainer}>
+                  <Image source={GreenStar} />
+                  <Image source={GreenStar} />
+                  <Image source={GreenStar} />
+                  <Image source={GreenStar} />
+                  <Image source={GrayStar} />
                 </View>
 
-                <TouchableOpacity style={styles.contactButton}>
-                  <Text style={styles.contactText}>Contact</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
+                <Image
+                  style={styles.eventCrsImage}
+                  source={
+                    date.image === "NH"
+                      ? NH
+                      : date.image === "SW"
+                      ? SW
+                      : date.image === "VA"
+                      ? VA
+                      : date.image === "PR"
+                      ? PR
+                      : OC
+                  }
+                />
 
-            <View style={styles.eventCrsCard}>
-              <View style={styles.starContainer}>
-                <Image source={GreenStar} />
-                <Image source={GreenStar} />
-                <Image source={GreenStar} />
-                <Image source={GreenStar} />
-                <Image source={GrayStar} />
-              </View>
-
-              <Image style={styles.eventCrsImage} source={SW} />
-
-              <View style={styles.eventCrsTContainer}>
-                <View style={styles.ECrsBox}>
-                  <Text style={styles.ECrsBoxTop}>Ventura Acres</Text>
-                  <View style={styles.ECrsBoxBot}>
-                    <Text style={styles.ECrsBBText}>Tee Time</Text>
-                    <Text style={styles.ECrsBBDate}> 03.24.2024 10:00AM</Text>
+                <View style={styles.eventCrsTContainer}>
+                  <View style={styles.ECrsBox}>
+                    <Text style={styles.ECrsBoxTop}>{date.name}</Text>
+                    <View style={styles.ECrsBoxBot}>
+                      <Text style={styles.ECrsBBText}>Tee Time</Text>
+                      <Text style={styles.ECrsBBDate}>
+                        {" "}
+                        {date.date} {date.time}
+                      </Text>
+                    </View>
                   </View>
-                </View>
 
-                <TouchableOpacity style={styles.contactButton}>
-                  <Text style={styles.contactText}>Contact</Text>
-                </TouchableOpacity>
+                  <TouchableOpacity
+                    //navigate to play screen!!!!!
+                    onPress={() =>
+                      navigation.navigate("Play", { screen: `play${date.tag}` })
+                    }
+                    style={styles.contactButton}
+                  >
+                    <Text style={styles.contactText}>Play</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
-            </View>
+            ))}
           </View>
         </View>
       </View>
@@ -237,17 +238,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginTop: 15,
-    width: 305,
+    // width: 305,
   },
-  updateContainerTextTop: {
-    fontFamily: "Quicksand-Med",
-    fontSize: 12,
-    lineHeight: 20,
-    color: "white",
-  },
-  updateContainerTextBot: {
-    fontFamily: "Quicksand-Reg",
-    fontSize: 12,
+  updateContainerText: {
+    fontFamily: "Quicksand-SemiBold",
+    width: 290,
+    fontSize: 11,
     lineHeight: 20,
     color: "white",
   },
@@ -348,6 +344,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 6,
     borderTopRightRadius: 6,
     height: 136,
+    width: 361,
   },
   eventCrsTContainer: {
     flexDirection: "row",

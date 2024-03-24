@@ -16,7 +16,7 @@ import GreenStar from "../../../../assets/Misc/GreenStar.png";
 import GrayStar from "../../../../assets/Misc/GrayStar.png";
 import SW from "../../../../assets/Locations/SW.png";
 
-import rain from "../../../../assets/Weather/rain.png";
+import cloudy from '../../../../assets/Weather/cloudy.png'
 import golficon from "../../../../assets/Misc/golficon.png";
 
 import { useRoute } from "@react-navigation/native";
@@ -142,7 +142,9 @@ function SWOverview({ navigation }) {
         </View>
 
         <View style={styles.VAWeatherContainer}>
-          <Image source={rain} />
+          <View style={styles.weatherBox}>
+          <Image style={styles.weatherImage} source={cloudy} />
+          </View>
           <View style={styles.VAWeatherInfo}>
             <Text style={styles.VAWTextTop}>Weather Impact</Text>
             <Text style={styles.VAWTextBot}>

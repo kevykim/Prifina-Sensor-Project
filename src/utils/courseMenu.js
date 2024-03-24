@@ -17,7 +17,7 @@ import righty from '../assets/Misc/righty.png'
 import { useState } from "react";
 import CalculateScore from "./calculateScore";
 
-function CourseMenu({ modalShown, closeModal, navigation, navVar }) {
+function CourseMenu({ modalShown, closeModal, navigation, navVar, handicap, updateHandicap }) {
   const fontsLoaded = useCustomFonts();
   if (!fontsLoaded) {
     return null;
@@ -30,6 +30,19 @@ function CourseMenu({ modalShown, closeModal, navigation, navVar }) {
    const toggleSwitch = () => {
      setIsEnabled((previousState) => !previousState);
    };
+
+   const [yards, setYards] = useState(true)
+   const [meters, setMeters] = useState(false)
+
+   const toggleYards = () => {
+    setYards(true)
+    setMeters(false)
+   }
+
+   const toggleMeters = () => {
+    setYards(false)
+    setMeters(true)
+   }
 
   return (
     <Modal visible={modalShown} transparent animationType="fade">
@@ -63,13 +76,19 @@ function CourseMenu({ modalShown, closeModal, navigation, navVar }) {
               <View style={styles.HCPContainer}>
                 <Text style={styles.HCPText}>HCP</Text>
                 <View style={styles.HCPButtons}>
-                  <TouchableOpacity style={styles.minusButton}>
+                  <TouchableOpacity
+                    onPress={() => updateHandicap(handicap - 1)}
+                    style={styles.minusButton}
+                  >
                     <Text style={styles.mpText}>-</Text>
                   </TouchableOpacity>
                   <View style={styles.numDisplay}>
-                    <Text style={styles.numDisplayText}>10</Text>
+                    <Text style={styles.numDisplayText}>{handicap}</Text>
                   </View>
-                  <TouchableOpacity style={styles.plusButton}>
+                  <TouchableOpacity
+                    onPress={() => updateHandicap(handicap + 1)}
+                    style={styles.plusButton}
+                  >
                     <Text style={styles.mpText}>+</Text>
                   </TouchableOpacity>
                 </View>
@@ -77,11 +96,31 @@ function CourseMenu({ modalShown, closeModal, navigation, navVar }) {
               <View style={styles.unitContainer}>
                 <Text style={styles.unitText}>Unit</Text>
                 <View style={styles.unitButtons}>
-                  <TouchableOpacity style={styles.yd_mi}>
-                    <Text style={styles.yd_mi_text}>yd/mi</Text>
+                  <TouchableOpacity
+                    style={{
+                      ...styles.yd_mi,
+                      backgroundColor:
+                        yards === true && meters === false
+                          ? "#2FDA74"
+                          : "#AFAFAF",
+                    }}
+                  >
+                    <Text onPress={toggleYards} style={styles.yd_mi_text}>
+                      yd/mi
+                    </Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.m_km}>
-                    <Text style={styles.m_km_text}>m/km</Text>
+                  <TouchableOpacity
+                    style={{
+                      ...styles.m_km,
+                      backgroundColor:
+                        meters === true && yards === false
+                          ? "#2FDA74"
+                          : "#AFAFAF",
+                    }}
+                  >
+                    <Text onPress={toggleMeters} style={styles.m_km_text}>
+                      m/km
+                    </Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -91,10 +130,10 @@ function CourseMenu({ modalShown, closeModal, navigation, navVar }) {
 
             {/* <View style={{ height: 30, justifyContent: "space-between" }}> */}
             <View style={styles.modal_fourth_box}>
-              <View style={styles.smartWatchSettingsC}>
+              <TouchableOpacity style={styles.smartWatchSettingsC}>
                 <Text style={styles.SWSText}>Smart Watch Settings</Text>
                 <Image style={{ tintColor: "black" }} source={righty} />
-              </View>
+              </TouchableOpacity>
             </View>
             <View style={styles.modal_line}></View>
             {/* </View> */}
@@ -109,7 +148,7 @@ function CourseMenu({ modalShown, closeModal, navigation, navVar }) {
               <TouchableOpacity
                 onPress={() => {
                   setshowCalcModal(true);
-                //   closeModal(false);
+                  //   closeModal(false);
                 }}
                 style={styles.endRoundButton}
               >
@@ -123,7 +162,7 @@ function CourseMenu({ modalShown, closeModal, navigation, navVar }) {
               modalShown={showCalcModal}
               closeCalcModal={setshowCalcModal}
               navigation={navigation}
-              navVar={"playvasummary"}
+              navVar={navVar}
               closeMenu={closeModal}
             />
           )}
