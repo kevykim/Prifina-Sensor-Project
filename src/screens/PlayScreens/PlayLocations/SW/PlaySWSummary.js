@@ -38,7 +38,9 @@ function PlaySWSummary({ navigation, route }) {
           <View>
             <TouchableOpacity
               style={styles.backHome}
-              onPress={() => navigation.navigate("playswsround", {propDate : propDate})}
+              onPress={() =>
+                navigation.navigate("playswsround", { propDate: propDate })
+              }
             >
               <Text
                 style={{
@@ -71,9 +73,11 @@ function PlaySWSummary({ navigation, route }) {
             modalShown={showSave}
             closeModal={setShowSave}
             navigation={navigation}
-            propKey={'SW'}
-            propScore={'100'}
-            propTime={'8 hr 16 min'}
+            propKey={"SW"}
+            propScore={"100"}
+            propDate={propDate}
+            propName={"South West"}
+            propTime={"8 hr 16 min"}
             navVar={"homemyscore"}
           />
         )}

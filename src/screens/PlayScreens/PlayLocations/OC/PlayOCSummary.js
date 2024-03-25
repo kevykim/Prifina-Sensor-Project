@@ -73,6 +73,8 @@ function PlayOCSummary({ navigation, route }) {
             navigation={navigation}
             propKey={"OC"}
             propScore={"83"}
+            propDate={propDate}
+            propName={"Oakwood Clubs"}
             propTime={"6 hr 16 min"}
             navVar={"homemyscore"}
           />

@@ -22,9 +22,13 @@ import CalibScreen from "../../../../utils/calibScreen";
 import { useState } from "react";
 import styles from "../PlayStyles.js";
 
+import { useFakeDates } from "../../../../context/FakeDates.js";
+
 
 function PlayVA({ navigation, route }) {
   const { propDate } = route?.params || {};
+
+  const { singleDate } = useFakeDates();
 
   const fontsLoaded = useCustomFonts();
 
@@ -121,7 +125,7 @@ function PlayVA({ navigation, route }) {
             modalShown={showModal}
             closeModal={setShowModal}
             navigation={navigation}
-            propDate={propDate}
+            propDate={propDate || singleDate}
             navVar={"playvasround"}
           />
         )}

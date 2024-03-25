@@ -73,6 +73,8 @@ function PlayPRSummary({ navigation, route }) {
             navigation={navigation}
             propKey={"PR"}
             propScore={"96"}
+            propDate={propDate}
+            propName={"Pine Ridge"}
             propTime={"7 hr 16 min"}
             navVar={"homemyscore"}
           />

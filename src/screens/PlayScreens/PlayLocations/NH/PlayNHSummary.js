@@ -71,6 +71,8 @@ function PlayNHSummary({ navigation, route }) {
             navigation={navigation}
             propKey={'NH'}
             propScore={'63'}
+            propDate={propDate}
+            propName={'North Hill'}
             propTime={'5 hr 16 min'}
             navVar={"homemyscore"}
           />

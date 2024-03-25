@@ -11,10 +11,12 @@ function ScoreSave({ modalShown, closeModal, navigation, navVar, propKey, propSc
     return null;
   }
 
+  const [nmonth, nday, nyear] = propDate.split(".");
+
   useEffect(() => {
     setTimeout(() => {
       closeModal(false);
-      navigation.navigate(navVar, {propKey : propKey, propScore : propScore, propName : propName, propDate : propDate, propTime : propTime});
+      navigation.navigate(navVar, {propKey : propKey, propScore : propScore, propName : propName, propDate : `${nmonth}/${nday}/${nyear}`, propTime : propTime});
     }, 3000);
   }, []);
 

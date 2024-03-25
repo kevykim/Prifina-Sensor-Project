@@ -73,6 +73,8 @@ function PlayVASummary({ navigation, route }) {
             navigation={navigation}
             propKey={"VA"}
             propScore={"93"}
+            propDate={propDate}
+            propName={"Ventura Acres"}
             propTime={"6 hr 16 min"}
             navVar={"homemyscore"}
           />
