@@ -13,7 +13,7 @@ import watch from '../assets/Misc/watch.png'
 import { useCustomFonts } from "../utils/CustomFonts";
 import { useState } from "react";
 
-function CalibScreen({modalShown, closeModal, navigation, navVar}) {
+function CalibScreen({modalShown, closeModal, navigation, navVar, propDate}) {
 
     const [counter, setCounter] = useState(false)
 
@@ -50,7 +50,7 @@ function CalibScreen({modalShown, closeModal, navigation, navVar}) {
               <TouchableOpacity
                 style={styles.modal_yes}
                 onPress={() => {closeModal(false) 
-                navigation.navigate(navVar)
+                navigation.navigate(navVar, {propDate : propDate})
                 }}
               >
                 <Text style={styles.modal_button_text}>Yes</Text>

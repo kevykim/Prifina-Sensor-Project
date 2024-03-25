@@ -24,8 +24,10 @@ import React, { useEffect, useState } from "react";
 import startingRoundObj from "../StartingRoundObject";
 
 
-function PlayPRSRound({ navigation }) {
+function PlayPRSRound({ navigation, route }) {
   const fontsLoaded = useCustomFonts();
+
+  const { propDate } = route?.params || {};
 
   if (!fontsLoaded) {
     return null;
@@ -141,7 +143,7 @@ function PlayPRSRound({ navigation }) {
         )}
         <TouchableOpacity
           onPress={() =>
-            navigation.navigate("playprcourse", { propHole: currentCourseId })
+            navigation.navigate("playprcourse", { propHole: currentCourseId, propDate: propDate })
           }
           style={styles.beginButton}
         >

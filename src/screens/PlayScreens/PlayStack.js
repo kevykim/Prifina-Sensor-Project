@@ -26,6 +26,10 @@ import PlayOC from "./PlayLocations/OC/PlayOC";
 import PlayOCSRound from "./PlayLocations/OC/PlayOCSRound";
 import PlayOCCourse from "./PlayLocations/OC/PlayOCCourse";
 import PlayOCSummary from "./PlayLocations/OC/PlayOCSummary";
+import CalibScreen from "../../utils/calibScreen";
+import CalculateScore from "../../utils/calculateScore";
+import ScoreSave from "../../utils/ScoreSave";
+import CourseMenu from "../../utils/courseMenu";
 
 const Stack = createStackNavigator();
 
@@ -51,6 +55,11 @@ function PlayStack({ navigation }) {
       <Stack.Screen name='analyze' component={Analyze} />
       <Stack.Screen name='track' component={Track} />
       <Stack.Screen name='explore' component={Explore} />
+      
+      <Stack.Screen name='modal1' component={CalibScreen} />
+      <Stack.Screen name='modal2' component={CalculateScore} />
+      <Stack.Screen name='modal3' component={ScoreSave} />
+      <Stack.Screen name='modal4' component={CourseMenu} />
 
       <Stack.Screen name='playnh' component={PlayNH} />
       <Stack.Screen name='playva' component={PlayVA} />

@@ -21,7 +21,7 @@ import { useRoute } from "@react-navigation/native";
 
 
 function BookingSuccess({ navigation, route }) {
-    const { propDate, propTime, currScreen, propName, propImage } = route?.params
+    const { propDate, propTime, currScreen, propName, propImage } = route?.params || {};
 
   const fontsLoaded = useCustomFonts();
   const current = useRoute();

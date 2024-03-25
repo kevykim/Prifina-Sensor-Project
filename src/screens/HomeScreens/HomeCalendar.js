@@ -30,7 +30,7 @@ import { useFakeDates } from "../../context/FakeDates";
 function HomeCalendar({ navigation }) {
   const route = useRoute();
 
-  const { fakeDates } = useFakeDates();
+  const { fakeDates, setSingleDate } = useFakeDates();
 
   const fontsLoaded = useCustomFonts();
 
@@ -180,8 +180,10 @@ function HomeCalendar({ navigation }) {
 
                   <TouchableOpacity
                     //navigate to play screen!!!!!
-                    onPress={() =>
-                      navigation.navigate("Play", { screen: `play${date.tag}` })
+                    onPress={() => {
+                      setSingleDate(date.date)
+                      navigation.navigate("Play", { screen: `play${date.tag}`})
+                    }
                     }
                     style={styles.contactButton}
                   >

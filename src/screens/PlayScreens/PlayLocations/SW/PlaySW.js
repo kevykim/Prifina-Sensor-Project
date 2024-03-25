@@ -21,7 +21,13 @@ import styles from "../PlayStyles.js";
 
 import { useState } from "react";
 
-function PlaySW({ navigation }) {
+import { useFakeDates } from "../../../../context/FakeDates.js";
+
+function PlaySW({ navigation, route }) {
+  const { propDate } = route?.params || {};
+
+  const { singleDate } = useFakeDates();
+
   const fontsLoaded = useCustomFonts();
 
   const [showModal, setShowModal] = useState(false);
@@ -116,6 +122,7 @@ function PlaySW({ navigation }) {
             modalShown={showModal}
             closeModal={setShowModal}
             navigation={navigation}
+            propDate={propDate || singleDate}
             navVar={"playswsround"}
           />
         )}

@@ -14,18 +14,16 @@ import ScoreSave from "../../../../utils/ScoreSave";
 
 import styles from '../PlaySummaryStyles'
 
-function PlayNHSummary({ navigation }) {
+function PlayNHSummary({ navigation, route }) {
   const fontsLoaded = useCustomFonts();
+
+  const {propDate} = route?.params || {};
 
   if (!fontsLoaded) {
     return null;
   }
 
-  const currentDate = new Date();
-    const year = currentDate.getFullYear();
-    const month = String(currentDate.getMonth() + 1)
-    const day = String(currentDate.getDate())
-
+  const [month, day, year] = propDate.split(".");
 
   const formattedDate = `${year}.${month}.${day}`;
 
@@ -38,7 +36,7 @@ function PlayNHSummary({ navigation }) {
           <View>
             <TouchableOpacity
               style={styles.backHome}
-              onPress={() => navigation.navigate("playnhcourse")}
+              onPress={() => navigation.navigate("playnhsround", {propDate : propDate})}
             >
               <Text
                 style={{
@@ -71,6 +69,11 @@ function PlayNHSummary({ navigation }) {
             modalShown={showSave}
             closeModal={setShowSave}
             navigation={navigation}
+            propKey={'NH'}
+            propScore={'63'}
+            propDate={propDate}
+            propName={'North Hill'}
+            propTime={'5 hr 16 min'}
             navVar={"homemyscore"}
           />
         )}

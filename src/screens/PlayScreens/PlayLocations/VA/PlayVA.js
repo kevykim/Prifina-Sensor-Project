@@ -22,8 +22,14 @@ import CalibScreen from "../../../../utils/calibScreen";
 import { useState } from "react";
 import styles from "../PlayStyles.js";
 
+import { useFakeDates } from "../../../../context/FakeDates.js";
 
-function PlayVA({ navigation }) {
+
+function PlayVA({ navigation, route }) {
+  const { propDate } = route?.params || {};
+
+  const { singleDate } = useFakeDates();
+
   const fontsLoaded = useCustomFonts();
 
  const [showModal, setShowModal] = useState(false);
@@ -107,7 +113,10 @@ function PlayVA({ navigation }) {
           </View>
         </View>
 
-        <TouchableOpacity onPress={() => setShowModal(true)} style={styles.startRoundButton}>
+        <TouchableOpacity
+          onPress={() => setShowModal(true)}
+          style={styles.startRoundButton}
+        >
           <Text style={styles.startRoundButtonText}>Start Round</Text>
         </TouchableOpacity>
 
@@ -116,6 +125,7 @@ function PlayVA({ navigation }) {
             modalShown={showModal}
             closeModal={setShowModal}
             navigation={navigation}
+            propDate={propDate || singleDate}
             navVar={"playvasround"}
           />
         )}

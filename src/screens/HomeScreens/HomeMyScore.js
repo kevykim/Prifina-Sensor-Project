@@ -18,20 +18,90 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useRoute } from "@react-navigation/native";
 import download from "../../assets/Misc/download.png";
 
+import { useFakeDates } from "../../context/FakeDates";
 
-function HomeMyScore({ navigation }) {
-  const route = useRoute();
 
-  const fontsLoaded = useCustomFonts();
-
+function HomeMyScore({ navigation, route }) {
   const newDay = new Date();
   const month = newDay.getMonth() + 1;
   const day = newDay.getDate();
+  const year = newDay.getFullYear();
   const shortDate = `${month}.${day}`;
+
+  const {
+    propKey = "NH",
+    propScore = "102",
+    propTime = "5 hr 16 min",
+    propDate = `${month}/${day}/${year}`,
+    propName = "North Hill",
+  } = route?.params || {};
+  
+
+  const current = useRoute();
+
+  const fontsLoaded = useCustomFonts();
 
   if (!fontsLoaded) {
     return null;
   }
+
+  const { fakeScoreCards, fakeDates } = useFakeDates();
+
+  // const filteredDate = fakeDates.filter(el => el.image === propKey)
+
+  //  const longDate = () => {
+  //    const lastDate = filteredDate[filteredDate.length - 1].date;
+
+  //    const options = { month: "numeric", day: "numeric", year: "numeric" };
+  //    const newDate = new Date(year, month - 1, day).toLocaleDateString(
+  //      "en-US",
+  //      options
+  //    );
+  //    return newDate;
+  //  };
+
+  const renderScoreRow = (label, data, index) => (
+    <View
+      style={[
+        styles.ASCContainerRow,
+        label === "Hole" && {
+          borderTopLeftRadius: 4,
+          borderTopRightRadius: 4,
+          borderBottomWidth: 0,
+        },
+        label === "Par" && {
+          borderBottomWidth: 0,
+        },
+        label === "Handicap" && {
+          borderBottomWidth: 0,
+        },
+      ]}
+    >
+      <View
+        style={{
+          ...styles.ASCLabel,
+          borderTopRightRadius: 4,
+          borderTopLeftRadius: index === 0 ? 4 : 0,
+        }}
+      >
+        <Text style={styles.ASCTextBold}>{label}</Text>
+      </View>
+      {data.map((value, index) => (
+        <View
+          key={index}
+          style={
+            index === data.length - 1
+              ? { ...styles.ASCBorder, borderRightWidth: 0 }
+              : styles.ASCBorder
+          }
+        >
+          <Text style={label === "Hole" ? styles.ASCTextBold : styles.ASCText}>
+            {value}
+          </Text>
+        </View>
+      ))}
+    </View>
+  );
 
   return (
     <ScrollView style={styles.main}>
@@ -90,15 +160,15 @@ function HomeMyScore({ navigation }) {
           >
             <Text
               style={{
-                color: route.name === "homemyscore" ? "#2FDA74" : "black",
+                color: current.name === "homemyscore" ? "#2FDA74" : "black",
                 ...styles.HBCTop,
               }}
             >
-              102
+              {propScore}
             </Text>
             <Text
               style={{
-                color: route.name === "homemyscore" ? "#2FDA74" : "black",
+                color: current.name === "homemyscore" ? "#2FDA74" : "black",
                 ...styles.HBCBot,
               }}
             >
@@ -122,7 +192,9 @@ function HomeMyScore({ navigation }) {
         <View>
           <View>
             <View style={styles.SCHeader}>
-              <Text style={styles.SCHeaderText}>North Hill 3/23/24</Text>
+              <Text style={styles.SCHeaderText}>
+                {propName} {propDate}
+              </Text>
               <TouchableOpacity style={styles.downloadButton}>
                 <Text style={styles.downloadButtonText}>Download</Text>
                 <Image source={download} />
@@ -132,295 +204,45 @@ function HomeMyScore({ navigation }) {
             <View style={styles.scoreChart}>
               <View style={styles.scoreChartHeaderContainer}>
                 <View style={styles.scoreChartHLeft}>
-                  <Text style={styles.scoreChartHLeftGray}>5 hr 16 min</Text>
+                  <Text style={styles.scoreChartHLeftGray}>{propTime}</Text>
                   <Text style={styles.scoreChartHLeftBlack}>18 holes</Text>
                 </View>
-                <Text style={styles.scoreChartHRight}>108</Text>
+                <Text style={styles.scoreChartHRight}>{propScore}</Text>
               </View>
 
               <View style={styles.ASCContainer}>
-                <View style={styles.ASCContainerRowFirst}>
-                  <View style={styles.ASCLabel}>
-                    <Text style={styles.ASCTextBold}>Hole</Text>
+                {fakeScoreCards[propKey].map((row, index) => (
+                  <View
+                    key={index}
+                    style={
+                      index === fakeScoreCards[propKey].length - 5
+                        ? styles.ASCContainer
+                        : styles.none
+                    }
+                  >
+                    {renderScoreRow(row.label, row.values, index)}
                   </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCTextBold}>1</Text>
+                ))}
+                <View style={styles.BPBDContainer}>
+                  <View style={styles.BPBDCard}>
+                    <View style={styles.boxGreen}></View>
+                    <Text style={styles.BPBDText}>Buddy</Text>
                   </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCTextBold}>2</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCTextBold}>3</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCTextBold}>4</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCTextBold}>5</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCTextBold}>6</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCTextBold}>7</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCTextBold}>8</Text>
-                  </View>
-                  <View style={styles.ASCBorderLast}>
-                    <Text style={styles.ASCTextBold}>9</Text>
-                  </View>
-                </View>
 
-                <View style={styles.ASCContainerRowSecond}>
-                  <View style={styles.ASCLabel}>
-                    <Text style={styles.ASCTextBold}>Handicap</Text>
+                  <View style={styles.BPBDCardMid}>
+                    <View style={styles.boxDrkGreen}></View>
+                    <Text style={styles.BPBDText}>Par</Text>
                   </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>4</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>4</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>3</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>5</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>4</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>4</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>5</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>5</Text>
-                  </View>
-                  <View style={styles.ASCBorderLast}>
-                    <Text style={styles.ASCText}>4</Text>
-                  </View>
-                </View>
-                <View style={styles.ASCContainerRowSecond}>
-                  <View style={styles.ASCLabel}>
-                    <Text style={styles.ASCTextBold}>Par</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>4</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>4</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>3</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>5</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>4</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>4</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>5</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>5</Text>
-                  </View>
-                  <View style={styles.ASCBorderLast}>
-                    <Text style={styles.ASCText}>4</Text>
-                  </View>
-                </View>
-                <View style={styles.ASCContainerRowThird}>
-                  <View style={styles.ASCLabel}>
-                    <Text style={styles.ASCTextBold}>Score</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>+1</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>+1</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>0</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>+1</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>+1</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>0</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>+1</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>0</Text>
-                  </View>
-                  <View style={styles.ASCBorderLast}>
-                    <Text style={styles.ASCText}>+2</Text>
-                  </View>
-                </View>
-              </View>
 
-              <View style={{ ...styles.ASCContainer, marginBottom: 5 }}>
-                <View style={styles.ASCContainerRowFirst}>
-                  <View style={styles.ASCLabel}>
-                    <Text style={styles.ASCTextBold}>Hole</Text>
+                  <View style={styles.BPBDCard}>
+                    <View style={styles.boxGray}></View>
+                    <Text style={styles.BPBDText}>Bogey</Text>
                   </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCTextBold}>10</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCTextBold}>11</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCTextBold}>12</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCTextBold}>13</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCTextBold}>14</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCTextBold}>15</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCTextBold}>16</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCTextBold}>17</Text>
-                  </View>
-                  <View style={styles.ASCBorderLast}>
-                    <Text style={styles.ASCTextBold}>18</Text>
-                  </View>
-                </View>
 
-                <View style={styles.ASCContainerRowSecond}>
-                  <View style={styles.ASCLabel}>
-                    <Text style={styles.ASCTextBold}>Handicap</Text>
+                  <View style={styles.BPBDCardLast}>
+                    <View style={styles.boxDrkGray}></View>
+                    <Text style={styles.BPBDText}>Double Bogey</Text>
                   </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>4</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>4</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>3</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>5</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>4</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>4</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>5</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>5</Text>
-                  </View>
-                  <View style={styles.ASCBorderLast}>
-                    <Text style={styles.ASCText}>4</Text>
-                  </View>
-                </View>
-                <View style={styles.ASCContainerRowSecond}>
-                  <View style={styles.ASCLabel}>
-                    <Text style={styles.ASCTextBold}>Par</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>4</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>4</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>3</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>5</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>4</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>4</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>5</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>5</Text>
-                  </View>
-                  <View style={styles.ASCBorderLast}>
-                    <Text style={styles.ASCText}>4</Text>
-                  </View>
-                </View>
-                <View style={styles.ASCContainerRowThird}>
-                  <View style={styles.ASCLabel}>
-                    <Text style={styles.ASCTextBold}>Score</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>+1</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>+1</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>0</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>+1</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>+1</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>0</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>+1</Text>
-                  </View>
-                  <View style={styles.ASCBorderRight}>
-                    <Text style={styles.ASCText}>0</Text>
-                  </View>
-                  <View style={styles.ASCBorderLast}>
-                    <Text style={styles.ASCText}>+2</Text>
-                  </View>
-                </View>
-              </View>
-
-              <View style={styles.BPBDContainer}>
-                <View style={styles.BPBDCard}>
-                  <View style={styles.boxGreen}></View>
-                  <Text style={styles.BPBDText}>Buddy</Text>
-                </View>
-
-                <View style={styles.BPBDCardMid}>
-                  <View style={styles.boxDrkGreen}></View>
-                  <Text style={styles.BPBDText}>Par</Text>
-                </View>
-
-                <View style={styles.BPBDCard}>
-                  <View style={styles.boxGray}></View>
-                  <Text style={styles.BPBDText}>Bogey</Text>
-                </View>
-
-                <View style={styles.BPBDCardLast}>
-                  <View style={styles.boxDrkGray}></View>
-                  <Text style={styles.BPBDText}>Double Bogey</Text>
                 </View>
               </View>
             </View>
@@ -525,7 +347,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 
-
   SCHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -558,6 +379,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 24,
     paddingVertical: 12,
+    marginBottom: 150,
   },
   scoreChartHeaderContainer: {
     height: 62,
@@ -587,32 +409,12 @@ const styles = StyleSheet.create({
   },
 
   ASCContainer: {
-    height: 145,
+    height: 45,
   },
-  ASCContainerRowFirst: {
+  ASCContainerRow: {
     flexDirection: "row",
     alignItems: "center",
     borderWidth: 0.3,
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4,
-    borderColor: "#AFAFAF",
-  },
-  ASCContainerRowSecond: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderRightWidth: 0.3,
-    borderLeftWidth: 0.3,
-    borderBottomWidth: 0.3,
-    borderColor: "#AFAFAF",
-  },
-  ASCContainerRowThird: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderBottomWidth: 0.3,
-    borderLeftWidth: 0.3,
-    borderRightWidth: 0.3,
-    borderBottomLeftRadius: 4,
-    borderBottomRightRadius: 4,
     borderColor: "#AFAFAF",
   },
   ASCLabel: {
@@ -631,23 +433,18 @@ const styles = StyleSheet.create({
     fontFamily: "Quicksand-Reg",
     fontSize: 12,
   },
-  ASCBorderRight: {
+  ASCBorder: {
+    width: 26.5,
+    height: 32,
+    justifyContent: "center",
+    alignItems: "center",
     borderRightWidth: 0.3,
-    width: 26.5,
-    height: 32,
-    justifyContent: "center",
-    alignItems: "center",
     borderColor: "#AFAFAF",
-  },
-  ASCBorderLast: {
-    width: 26.5,
-    height: 32,
-    justifyContent: "center",
-    alignItems: "center",
   },
   BPBDContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
+    marginTop: 17,
   },
   BPBDCard: {
     width: 45,
@@ -698,8 +495,6 @@ const styles = StyleSheet.create({
     height: 8,
     backgroundColor: "#202020",
   },
-
-  
 });
 
 export default HomeMyScore;

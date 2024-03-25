@@ -136,7 +136,7 @@ function Play({ navigation }) {
                   <TouchableOpacity
                     //navigate to play screen!!!!!
                     onPress={() =>
-                      navigation.navigate(`play${date.tag}`)
+                      navigation.navigate(`play${date.tag}`, {propDate : date.date})
                     }
                     style={styles.letsPlayButton}
                   >

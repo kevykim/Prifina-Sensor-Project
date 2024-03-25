@@ -24,8 +24,6 @@ import PR from "../../assets/Locations/PR.jpg";
 
 function Locate({ navigation }) {
   const route = useRoute();
-  // function Locate({navigation, route}) {
-  // const { propName } = route?.params;
 
   const fontsLoaded = useCustomFonts();
 

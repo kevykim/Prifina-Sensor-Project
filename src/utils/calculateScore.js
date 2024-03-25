@@ -10,7 +10,7 @@ import { useCustomFonts } from "../utils/CustomFonts";
 import LottieView from 'lottie-react-native'
 import { useEffect } from "react";
 
-function CalculateScore({ modalShown, closeCalcModal, navigation, closeMenu, navVar }) {
+function CalculateScore({ modalShown, closeCalcModal, navigation, closeMenu, navVar, propDate }) {
   const fontsLoaded = useCustomFonts();
   if (!fontsLoaded) {
     return null;
@@ -20,8 +20,8 @@ useEffect(() => {
     setTimeout(() => {
         closeMenu(false)
         closeCalcModal(false)
-        navigation.navigate(navVar)
-    }, 3000)
+        navigation.navigate(navVar, {propDate : propDate})
+    }, 3500)
 }, [])
 
 
@@ -29,9 +29,9 @@ useEffect(() => {
   return (
     <Modal visible={modalShown} transparent animationType="fade">
       <View style={styles.modal_container}>
-            <View style={{ height: 250}}>
+            <View style={{ height: 200, justifyContent: 'center', alignItems: 'center'}}>
           <LottieView
-            style={{ flex: 1}}
+            style={{ flex: 1, width: 125}}
             source={require("../assets/Animation/LoadingCircle.json")}
             autoPlay
             loop

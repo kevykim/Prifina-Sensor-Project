@@ -14,17 +14,16 @@ import ScoreSave from "../../../../utils/ScoreSave";
 
 import styles from "../PlaySummaryStyles";
 
-function PlayOCSummary({ navigation }) {
+function PlayOCSummary({ navigation, route }) {
   const fontsLoaded = useCustomFonts();
+
+  const { propDate } = route?.params || {};
 
   if (!fontsLoaded) {
     return null;
   }
 
-  const currentDate = new Date();
-  const year = currentDate.getFullYear();
-  const month = String(currentDate.getMonth() + 1);
-  const day = String(currentDate.getDate());
+  const [month, day, year] = propDate.split(".");
 
   const formattedDate = `${year}.${month}.${day}`;
 
@@ -37,7 +36,9 @@ function PlayOCSummary({ navigation }) {
           <View>
             <TouchableOpacity
               style={styles.backHome}
-              onPress={() => navigation.navigate("playoccourse")}
+              onPress={() =>
+                navigation.navigate("playocsround", { propDate: propDate })
+              }
             >
               <Text
                 style={{
@@ -70,6 +71,11 @@ function PlayOCSummary({ navigation }) {
             modalShown={showSave}
             closeModal={setShowSave}
             navigation={navigation}
+            propKey={"OC"}
+            propScore={"83"}
+            propDate={propDate}
+            propName={"Oakwood Clubs"}
+            propTime={"6 hr 16 min"}
             navVar={"homemyscore"}
           />
         )}

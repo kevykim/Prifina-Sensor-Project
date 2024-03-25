@@ -14,18 +14,16 @@ import ScoreSave from "../../../../utils/ScoreSave";
 
 import styles from "../PlaySummaryStyles";
 
-
-function PlayVASummary({ navigation }) {
+function PlayVASummary({ navigation, route }) {
   const fontsLoaded = useCustomFonts();
+
+  const { propDate } = route?.params || {};
 
   if (!fontsLoaded) {
     return null;
   }
 
-  const currentDate = new Date();
-  const year = currentDate.getFullYear();
-  const month = String(currentDate.getMonth() + 1);
-  const day = String(currentDate.getDate());
+  const [month, day, year] = propDate.split(".");
 
   const formattedDate = `${year}.${month}.${day}`;
 
@@ -38,7 +36,9 @@ function PlayVASummary({ navigation }) {
           <View>
             <TouchableOpacity
               style={styles.backHome}
-              onPress={() => navigation.navigate("playvacourse")}
+              onPress={() =>
+                navigation.navigate("playvasround", { propDate: propDate })
+              }
             >
               <Text
                 style={{
@@ -71,6 +71,11 @@ function PlayVASummary({ navigation }) {
             modalShown={showSave}
             closeModal={setShowSave}
             navigation={navigation}
+            propKey={"VA"}
+            propScore={"93"}
+            propDate={propDate}
+            propName={"Ventura Acres"}
+            propTime={"6 hr 16 min"}
             navVar={"homemyscore"}
           />
         )}
