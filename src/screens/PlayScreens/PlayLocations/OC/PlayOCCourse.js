@@ -24,7 +24,7 @@ import startingRoundObj from "../StartingRoundObject";
 import styles from "../PlayCourseStyles";
 
 function PlayOCCourse({ navigation, route }) {
-  const { propHole } = route?.params;
+  const { propHole, propDate } = route?.params || {};
   const fontsLoaded = useCustomFonts();
 
   if (!fontsLoaded) {
@@ -46,7 +46,9 @@ function PlayOCCourse({ navigation, route }) {
           <View>
             <TouchableOpacity
               style={styles.backPlay}
-              onPress={() => navigation.navigate("playocsround")}
+              onPress={() =>
+                navigation.navigate("playocsround", { propDate: propDate })
+              }
             >
               <Image style={{ tintColor: "white" }} source={leftArrow} />
             </TouchableOpacity>
@@ -66,6 +68,7 @@ function PlayOCCourse({ navigation, route }) {
               modalShown={showModal}
               closeModal={setShowModal}
               navigation={navigation}
+              propDate={propDate}
               navVar={"playocsummary"}
             />
           )}

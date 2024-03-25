@@ -21,7 +21,9 @@ import styles from '../PlayStyles.js'
 
 import { useState } from "react";
 
-function PlayNH({ navigation }) {
+function PlayNH({ navigation, route }) {
+  const {propDate} = route?.params || {};
+
   const fontsLoaded = useCustomFonts();
 
   const [showModal, setShowModal] = useState(false);
@@ -114,6 +116,7 @@ function PlayNH({ navigation }) {
             modalShown={showModal}
             closeModal={setShowModal}
             navigation={navigation}
+            propDate={propDate}
             navVar={"playnhsround"}
           />
         )}

@@ -14,17 +14,16 @@ import ScoreSave from "../../../../utils/ScoreSave";
 
 import styles from "../PlaySummaryStyles";
 
-function PlayPRSummary({ navigation }) {
+function PlayPRSummary({ navigation, route }) {
   const fontsLoaded = useCustomFonts();
+
+  const { propDate } = route?.params || {};
 
   if (!fontsLoaded) {
     return null;
   }
 
-  const currentDate = new Date();
-  const year = currentDate.getFullYear();
-  const month = String(currentDate.getMonth() + 1);
-  const day = String(currentDate.getDate());
+  const [month, day, year] = propDate.split(".");
 
   const formattedDate = `${year}.${month}.${day}`;
 
@@ -37,7 +36,9 @@ function PlayPRSummary({ navigation }) {
           <View>
             <TouchableOpacity
               style={styles.backHome}
-              onPress={() => navigation.navigate("playprcourse")}
+              onPress={() =>
+                navigation.navigate("playprsround", { propDate: propDate })
+              }
             >
               <Text
                 style={{
@@ -70,6 +71,9 @@ function PlayPRSummary({ navigation }) {
             modalShown={showSave}
             closeModal={setShowSave}
             navigation={navigation}
+            propKey={"PR"}
+            propScore={"96"}
+            propTime={"7 hr 16 min"}
             navVar={"homemyscore"}
           />
         )}

@@ -10,7 +10,7 @@ import { useCustomFonts } from "../utils/CustomFonts";
 import LottieView from 'lottie-react-native'
 import { useEffect } from "react";
 
-function CalculateScore({ modalShown, closeCalcModal, navigation, closeMenu, navVar }) {
+function CalculateScore({ modalShown, closeCalcModal, navigation, closeMenu, navVar, propDate }) {
   const fontsLoaded = useCustomFonts();
   if (!fontsLoaded) {
     return null;
@@ -20,7 +20,7 @@ useEffect(() => {
     setTimeout(() => {
         closeMenu(false)
         closeCalcModal(false)
-        navigation.navigate(navVar)
+        navigation.navigate(navVar, {propDate : propDate})
     }, 3000)
 }, [])
 

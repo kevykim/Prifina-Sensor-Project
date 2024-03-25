@@ -5,7 +5,7 @@ import { useCustomFonts } from "./CustomFonts";
 import LottieView from "lottie-react-native";
 import { useEffect } from "react";
 
-function ScoreSave({ modalShown, closeModal, navigation, navVar }) {
+function ScoreSave({ modalShown, closeModal, navigation, navVar, propKey, propScore, propName, propDate, propTime }) {
   const fontsLoaded = useCustomFonts();
   if (!fontsLoaded) {
     return null;
@@ -14,7 +14,7 @@ function ScoreSave({ modalShown, closeModal, navigation, navVar }) {
   useEffect(() => {
     setTimeout(() => {
       closeModal(false);
-      navigation.navigate(navVar);
+      navigation.navigate(navVar, {propKey : propKey, propScore : propScore, propName : propName, propDate : propDate, propTime : propTime});
     }, 3000);
   }, []);
 

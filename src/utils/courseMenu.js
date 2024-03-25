@@ -17,7 +17,7 @@ import righty from '../assets/Misc/righty.png'
 import { useState } from "react";
 import CalculateScore from "./calculateScore";
 
-function CourseMenu({ modalShown, closeModal, navigation, navVar, handicap, updateHandicap }) {
+function CourseMenu({ modalShown, closeModal, navigation, navVar, handicap, updateHandicap, propDate }) {
   const fontsLoaded = useCustomFonts();
   if (!fontsLoaded) {
     return null;
@@ -164,6 +164,7 @@ function CourseMenu({ modalShown, closeModal, navigation, navVar, handicap, upda
               navigation={navigation}
               navVar={navVar}
               closeMenu={closeModal}
+              propDate={propDate}
             />
           )}
         </View>

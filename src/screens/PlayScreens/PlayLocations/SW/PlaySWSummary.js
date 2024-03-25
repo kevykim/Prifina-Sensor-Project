@@ -14,17 +14,18 @@ import ScoreSave from "../../../../utils/ScoreSave";
 
 import styles from "../PlaySummaryStyles";
 
-function PlaySWSummary({ navigation }) {
+function PlaySWSummary({ navigation, route }) {
+
+  const { propDate } = route?.params || {};
+
   const fontsLoaded = useCustomFonts();
 
   if (!fontsLoaded) {
     return null;
   }
 
-  const currentDate = new Date();
-  const year = currentDate.getFullYear();
-  const month = String(currentDate.getMonth() + 1);
-  const day = String(currentDate.getDate());
+   const [month, day, year] = propDate.split(".");
+
 
   const formattedDate = `${year}.${month}.${day}`;
 
@@ -37,7 +38,7 @@ function PlaySWSummary({ navigation }) {
           <View>
             <TouchableOpacity
               style={styles.backHome}
-              onPress={() => navigation.navigate("playswcourse")}
+              onPress={() => navigation.navigate("playswsround", {propDate : propDate})}
             >
               <Text
                 style={{
@@ -70,6 +71,9 @@ function PlaySWSummary({ navigation }) {
             modalShown={showSave}
             closeModal={setShowSave}
             navigation={navigation}
+            propKey={'SW'}
+            propScore={'100'}
+            propTime={'8 hr 16 min'}
             navVar={"homemyscore"}
           />
         )}

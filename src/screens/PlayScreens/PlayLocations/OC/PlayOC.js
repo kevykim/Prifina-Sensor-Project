@@ -21,7 +21,9 @@ import styles from "../PlayStyles.js";
 
 import { useState } from "react";
 
-function PlayOC({ navigation }) {
+function PlayOC({ navigation, route }) {
+  const { propDate } = route?.params || {};
+
   const fontsLoaded = useCustomFonts();
 
   const [showModal, setShowModal] = useState(false);
@@ -116,6 +118,7 @@ function PlayOC({ navigation }) {
             modalShown={showModal}
             closeModal={setShowModal}
             navigation={navigation}
+            propDate={propDate}
             navVar={"playocsround"}
           />
         )}

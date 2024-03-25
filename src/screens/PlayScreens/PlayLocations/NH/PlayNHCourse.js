@@ -24,8 +24,9 @@ import startingRoundObj from "../StartingRoundObject";
 import styles from "../PlayCourseStyles";
 
 function PlayNHCourse({ navigation, route }) {
-  const { propHole } = route?.params;
+  const { propHole, propDate } = route?.params || {}
   const fontsLoaded = useCustomFonts();
+
 
   if (!fontsLoaded) {
     return null;
@@ -46,7 +47,7 @@ function PlayNHCourse({ navigation, route }) {
           <View>
             <TouchableOpacity
               style={styles.backPlay}
-              onPress={() => navigation.navigate("playnhsround")}
+              onPress={() => navigation.navigate("playnhsround", {propDate : propDate})}
             >
               <Image style={{ tintColor: "white" }} source={leftArrow} />
             </TouchableOpacity>
@@ -66,6 +67,7 @@ function PlayNHCourse({ navigation, route }) {
               modalShown={showModal}
               closeModal={setShowModal}
               navigation={navigation}
+              propDate={propDate}
               navVar={"playnhsummary"}
             />
           )}
