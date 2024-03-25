@@ -17,15 +17,15 @@ function ScoreSave({ modalShown, closeModal, navigation, navVar, propKey, propSc
     setTimeout(() => {
       closeModal(false);
       navigation.navigate(navVar, {propKey : propKey, propScore : propScore, propName : propName, propDate : `${nmonth}/${nday}/${nyear}`, propTime : propTime});
-    }, 3000);
+    }, 3500);
   }, []);
 
   return (
     <Modal visible={modalShown} transparent animationType="fade">
       <View style={styles.modal_container}>
-        <View style={{ height: 250 }}>
+        <View style={{ height: 200 }}>
           <LottieView
-            style={{ flex: 1 }}
+            style={{ flex: 1, width: 125, justifyContent: 'center', alignItems: 'center' }}
             source={require("../assets/Animation/LoadingCircle.json")}
             autoPlay
             loop

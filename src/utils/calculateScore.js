@@ -21,7 +21,7 @@ useEffect(() => {
         closeMenu(false)
         closeCalcModal(false)
         navigation.navigate(navVar, {propDate : propDate})
-    }, 3000)
+    }, 3500)
 }, [])
 
 
@@ -29,9 +29,9 @@ useEffect(() => {
   return (
     <Modal visible={modalShown} transparent animationType="fade">
       <View style={styles.modal_container}>
-            <View style={{ height: 250}}>
+            <View style={{ height: 200, justifyContent: 'center', alignItems: 'center'}}>
           <LottieView
-            style={{ flex: 1}}
+            style={{ flex: 1, width: 125}}
             source={require("../assets/Animation/LoadingCircle.json")}
             autoPlay
             loop
