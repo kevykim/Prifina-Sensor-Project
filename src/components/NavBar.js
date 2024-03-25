@@ -11,7 +11,7 @@ import PlayIcon from '../assets/NavIcons/PlayIcon.png'
 
 
 
-
+import navy from '../assets/NavIcons/navy.png'
 
 
 
@@ -40,13 +40,18 @@ function NavBar () {
             tabBarStyle: styles.nav,
             headerShown: false,
             tabBarShowLabel: false,
+            tabBarBackground: () => (
+              <Image style={styles.navImage} source={navy} />
+            ),
           }}
         >
           <Tab.Screen
             options={{
               // source={focused ? :}
               tabBarIcon: ({ focused }) => (
-                <View style={styles.navContainer}>
+                <View
+                  style={styles.navContainer}
+                >
                   <Image
                     source={HomeIcon}
                     style={[
@@ -72,7 +77,9 @@ function NavBar () {
           <Tab.Screen
             options={{
               tabBarIcon: ({ focused }) => (
-                <View style={styles.navContainer}>
+                <View
+                  style={styles.navContainer}
+                >
                   <Image
                     source={TrainingIcon}
                     style={[
@@ -98,7 +105,9 @@ function NavBar () {
           <Tab.Screen
             options={{
               tabBarIcon: ({ focused }) => (
-                <View style={styles.halfCircle}>
+                <View
+                  style={styles.halfCircle}
+                >
                   <View style={styles.actionBtn}>
                     <Image
                       source={PlayIcon}
@@ -112,7 +121,7 @@ function NavBar () {
                         color: focused ? "white" : "black",
                         fontSize: 12,
                         position: "absolute",
-                        top: 70,
+                        top: 65,
                         fontFamily: "Quicksand-SemiBold",
                       }}
                     >
@@ -128,7 +137,9 @@ function NavBar () {
           <Tab.Screen
             options={{
               tabBarIcon: ({ focused }) => (
-                <View style={styles.navContainer}>
+                <View
+                  style={styles.navContainer}
+                >
                   <Image
                     source={BookingIcon}
                     style={[
@@ -154,7 +165,9 @@ function NavBar () {
           <Tab.Screen
             options={{
               tabBarIcon: ({ focused }) => (
-                <View style={styles.navContainer}>
+                <View
+                  style={styles.navContainer}
+                >
                   <Image
                     source={ScorecardIcon}
                     style={[
@@ -178,18 +191,24 @@ function NavBar () {
             component={ScorecardStack}
           />
         </Tab.Navigator>
-        {/* <TouchableOpacity style={styles.fab}>
-          <Image source={PlayIcon} style={styles.fabIcon} />
-        </TouchableOpacity>
-
-        <View style={styles.curve} /> */}
       </React.Fragment>
     );
   };
   
   const styles = StyleSheet.create({
+    navImage: {
+      width: 336,
+      bottom: 0,
+      shadowColor: "black",
+      shadowOffset: {
+        width: 1,
+        height: 1,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 0.5,
+      borderRadius: 25
+    },
     nav: {
-      backgroundColor: "#2FDA74",
       position: "absolute",
       borderTopWidth: 0,
       height: 72,
@@ -198,25 +217,18 @@ function NavBar () {
       width: 336,
       right: 30,
       borderRadius: 25,
-      shadowColor: "black",
-      shadowOffset: {
-        width: 0,
-        height: 2,
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 3.84,
     },
     navContainer: {
       alignItems: "center",
       justifyContent: "space-between",
       height: 40,
-      top: 15,
+      top: 25,
     },
     navIcon: {},
     halfCircle: {
       position: "absolute",
       alignSelf: "center",
-      backgroundColor: "white",
+      backgroundColor: "transparent",
       width: 70,
       height: 70,
       borderRadius: 35,
@@ -225,16 +237,16 @@ function NavBar () {
     },
     actionBtn: {
       backgroundColor: "#2FDA74",
-      width: 60,
-      height: 60,
+      width: 56,
+      height: 56,
       alignItems: "center",
       justifyContent: "center",
       borderRadius: 30,
       position: "absolute",
       bottom: 20,
       right: 0,
-      top: 5,
-      left: 5,
+      top: 15,
+      left: 8.5,
       borderWidth: 5,
       borderColor: "transparent",
     },
