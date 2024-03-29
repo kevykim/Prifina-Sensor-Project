@@ -16,11 +16,20 @@ import GreenStar from "../../../../assets/Misc/GreenStar.png";
 import GrayStar from "../../../../assets/Misc/GrayStar.png";
 import PR from "../../../../assets/Locations/PR.jpg";
 
+import PR1 from '../../../../assets/PR_Mini/PR1.jpg'
+import PR2 from '../../../../assets/PR_Mini/PR2.png'
+import PR3 from "../../../../assets/PR_Mini/PR3.png";
+import PR4 from "../../../../assets/PR_Mini/PR4.png";
+
+
 import rainCloud from "../../../../assets/Weather/rainCloud.png";
 import golficon from "../../../../assets/Misc/golficon.png";
 
 import { useRoute } from "@react-navigation/native";
 import styles from '../OverviewStyles.js';
+
+import { useState } from "react";
+
 
 function PROverview({ navigation }) {
   const fontsLoaded = useCustomFonts();
@@ -29,6 +38,16 @@ function PROverview({ navigation }) {
   if (!fontsLoaded) {
     return null;
   }
+
+      const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+
+      const images = [PR, PR1, PR2, PR3, PR4];
+
+      const handleImagePress = (index) => {
+        setSelectedImageIndex(index);
+      };
+
+
 
   return (
     <ScrollView contentContainerStyle={styles.main}>
@@ -106,7 +125,10 @@ function PROverview({ navigation }) {
           <View style={styles.VAPlayedContainer}>
             <Text style={styles.VAPlayedText}>Played 5 times</Text>
           </View>
-          <Image style={styles.VABigImage} source={PR} />
+          <Image
+            style={styles.VABigImage}
+            source={images[selectedImageIndex]}
+          />
         </View>
 
         <View style={{ height: 100 }}>
@@ -115,11 +137,14 @@ function PROverview({ navigation }) {
             horizontal
             showsHorizontalScrollIndicator={false}
           >
-            <Image source={PR} style={styles.VASImage} />
-            <Image source={PR} style={styles.VASImage} />
-            <Image source={PR} style={styles.VASImage} />
-            <Image source={PR} style={styles.VASImage} />
-            <Image source={PR} style={styles.VASImage} />
+            {images.map((image, index) => (
+              <TouchableOpacity
+                key={index}
+                onPress={() => handleImagePress(index)}
+              >
+                <Image source={image} style={styles.VASImage} />
+              </TouchableOpacity>
+            ))}
           </ScrollView>
         </View>
 
@@ -132,9 +157,7 @@ function PROverview({ navigation }) {
             <Image style={styles.golfIconSize} source={golficon} />
             <View style={styles.CMInnerBox}>
               <Text style={styles.CMInnerBoxTop}>Course Hours Today</Text>
-              <Text style={styles.CMInnerBoxBot}>
-                Open from 9 a.m - 8 p.m
-              </Text>
+              <Text style={styles.CMInnerBoxBot}>Open from 9 a.m - 8 p.m</Text>
             </View>
           </View>
           <Text style={styles.CMRight}>Please plan accordingly</Text>
@@ -142,13 +165,13 @@ function PROverview({ navigation }) {
 
         <View style={styles.VAWeatherContainer}>
           <View style={styles.weatherBox}>
-          <Image style={styles.weatherImage} source={rainCloud} />
+            <Image style={styles.weatherImage} source={rainCloud} />
           </View>
           <View style={styles.VAWeatherInfo}>
             <Text style={styles.VAWTextTop}>Weather Impact</Text>
             <Text style={styles.VAWTextBot}>
-              80% chance of heavy rain between 11 a.m and 3 p.m Rain can affect swing
-              and distance, plan for adjustments
+              80% chance of heavy rain between 11 a.m and 3 p.m Rain can affect
+              swing and distance, plan for adjustments
             </Text>
           </View>
         </View>
