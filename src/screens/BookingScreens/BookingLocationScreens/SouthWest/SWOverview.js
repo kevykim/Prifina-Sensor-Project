@@ -16,11 +16,20 @@ import GreenStar from "../../../../assets/Misc/GreenStar.png";
 import GrayStar from "../../../../assets/Misc/GrayStar.png";
 import SW from "../../../../assets/Locations/SW.png";
 
+import SW1 from '../../../../assets/SW_Mini/SW1.png'
+import SW2 from "../../../../assets/SW_Mini/SW2.png";
+import SW3 from "../../../../assets/SW_Mini/SW3.jpg";
+import SW4 from "../../../../assets/SW_Mini/SW4.png";
+
+
 import cloudy from '../../../../assets/Weather/cloudy.png'
 import golficon from "../../../../assets/Misc/golficon.png";
 
 import { useRoute } from "@react-navigation/native";
 import styles from '../OverviewStyles.js';
+
+import { useState } from "react";
+
 
 
 function SWOverview({ navigation }) {
@@ -30,6 +39,15 @@ function SWOverview({ navigation }) {
   if (!fontsLoaded) {
     return null;
   }
+
+   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+
+   const images = [SW, SW1, SW2, SW3, SW4];
+
+   const handleImagePress = (index) => {
+     setSelectedImageIndex(index);
+   };
+
 
   return (
     <ScrollView contentContainerStyle={styles.main}>
@@ -107,7 +125,10 @@ function SWOverview({ navigation }) {
           <View style={styles.VAPlayedContainer}>
             <Text style={styles.VAPlayedText}>Played 7 times</Text>
           </View>
-          <Image style={styles.VABigImage} source={SW} />
+          <Image
+            style={styles.VABigImage}
+            source={images[selectedImageIndex]}
+          />
         </View>
 
         <View style={{ height: 100 }}>
@@ -116,11 +137,14 @@ function SWOverview({ navigation }) {
             horizontal
             showsHorizontalScrollIndicator={false}
           >
-            <Image source={SW} style={styles.VASImage} />
-            <Image source={SW} style={styles.VASImage} />
-            <Image source={SW} style={styles.VASImage} />
-            <Image source={SW} style={styles.VASImage} />
-            <Image source={SW} style={styles.VASImage} />
+            {images.map((image, index) => (
+              <TouchableOpacity
+                key={index}
+                onPress={() => handleImagePress(index)}
+              >
+                <Image source={image} style={styles.VASImage} />
+              </TouchableOpacity>
+            ))}
           </ScrollView>
         </View>
 
@@ -143,14 +167,14 @@ function SWOverview({ navigation }) {
 
         <View style={styles.VAWeatherContainer}>
           <View style={styles.weatherBox}>
-          <Image style={styles.weatherImage} source={cloudy} />
+            <Image style={styles.weatherImage} source={cloudy} />
           </View>
           <View style={styles.VAWeatherInfo}>
             <Text style={styles.VAWTextTop}>Weather Impact</Text>
             <Text style={styles.VAWTextBot}>
-              Cloudy skies until 3 p.m with light wind conditions.
-              Be aware for potential changes in
-              wind direction and speed throughout the round.
+              Cloudy skies until 3 p.m with light wind conditions. Be aware for
+              potential changes in wind direction and speed throughout the
+              round.
             </Text>
           </View>
         </View>

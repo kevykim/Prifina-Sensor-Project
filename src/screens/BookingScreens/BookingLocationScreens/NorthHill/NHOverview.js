@@ -16,10 +16,18 @@ import GreenStar from "../../../../assets/Misc/GreenStar.png";
 import GrayStar from "../../../../assets/Misc/GrayStar.png";
 import NH from "../../../../assets/Locations/NH.png";
 
+import NH1 from '../../../../assets/NH_Mini/NH1.png'
+import NH2 from "../../../../assets/NH_Mini/NH2.png";
+import NH3 from "../../../../assets/NH_Mini/NH3.png";
+import NH4 from "../../../../assets/NH_Mini/NH4.png";
+
+
 import sunny from "../../../../assets/Weather/sunny.png";
 import golficon from "../../../../assets/Misc/golficon.png";
 
 import { useRoute } from "@react-navigation/native";
+
+import { useState } from "react";
 
 import styles from '../OverviewStyles.js'
 
@@ -30,6 +38,14 @@ function NHOverview({ navigation }) {
   if (!fontsLoaded) {
     return null;
   }
+
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+
+  const images = [NH, NH1, NH2, NH3, NH4]
+
+  const handleImagePress = (index) => {
+    setSelectedImageIndex(index);
+  };
 
   return (
     <ScrollView contentContainerStyle={styles.main}>
@@ -107,7 +123,12 @@ function NHOverview({ navigation }) {
           <View style={styles.VAPlayedContainer}>
             <Text style={styles.VAPlayedText}>Played 8 times</Text>
           </View>
-          <Image style={styles.VABigImage} source={NH} />
+          <Image
+            style={styles.VABigImage}
+            source={
+             images[selectedImageIndex]
+            }
+          />
         </View>
 
         <View style={{ height: 100 }}>
@@ -116,11 +137,14 @@ function NHOverview({ navigation }) {
             horizontal
             showsHorizontalScrollIndicator={false}
           >
-            <Image source={NH} style={styles.VASImage} />
-            <Image source={NH} style={styles.VASImage} />
-            <Image source={NH} style={styles.VASImage} />
-            <Image source={NH} style={styles.VASImage} />
-            <Image source={NH} style={styles.VASImage} />
+            {images.map((image, index) => (
+              <TouchableOpacity
+                key={index}
+                onPress={() => handleImagePress(index)}
+              >
+                <Image source={image} style={styles.VASImage} />
+              </TouchableOpacity>
+            ))}
           </ScrollView>
         </View>
 
@@ -141,10 +165,7 @@ function NHOverview({ navigation }) {
 
         <View style={styles.VAWeatherContainer}>
           <View style={styles.weatherBox}>
-            <Image
-              style={styles.weatherImage}
-              source={sunny}
-            />
+            <Image style={styles.weatherImage} source={sunny} />
           </View>
           <View style={styles.VAWeatherInfo}>
             <Text style={styles.VAWTextTop}>Weather Impact</Text>
