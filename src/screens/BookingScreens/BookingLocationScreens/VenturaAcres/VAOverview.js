@@ -16,10 +16,19 @@ import GreenStar from "../../../../assets/Misc/GreenStar.png";
 import GrayStar from "../../../../assets/Misc/GrayStar.png";
 import VA from '../../../../assets/Locations/VA.png';
 
+import VA1 from '../../../../assets/VA_Mini/VA1.jpg'
+import VA2 from "../../../../assets/VA_Mini/VA2.jpg";
+import VA3 from "../../../../assets/VA_Mini/VA3.jpg";
+import VA4 from "../../../../assets/VA_Mini/VA4.jpg";
+
+
 import rain from '../../../../assets/Weather/rain.png';
 import golficon from '../../../../assets/Misc/golficon.png';
 
 import { useRoute } from "@react-navigation/native";
+
+import { useState } from "react";
+
 
 function VAOverview({ navigation }) {
   const fontsLoaded = useCustomFonts();
@@ -28,6 +37,15 @@ function VAOverview({ navigation }) {
   if (!fontsLoaded) {
     return null;
   }
+
+   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+
+   const images = [VA, VA1, VA2, VA3, VA4];
+
+   const handleImagePress = (index) => {
+     setSelectedImageIndex(index);
+   };
+
 
   return (
     <ScrollView contentContainerStyle={styles.main}>
@@ -105,7 +123,7 @@ function VAOverview({ navigation }) {
           <View style={styles.VAPlayedContainer}>
             <Text style={styles.VAPlayedText}>Played 8 times</Text>
           </View>
-          <Image style={styles.VABigImage} source={VA} />
+          <Image style={styles.VABigImage} source={images[selectedImageIndex]} />
         </View>
 
         <View style={{ height: 100 }}>
@@ -114,11 +132,14 @@ function VAOverview({ navigation }) {
             horizontal
             showsHorizontalScrollIndicator={false}
           >
-            <Image source={VA} style={styles.VASImage} />
-            <Image source={VA} style={styles.VASImage} />
-            <Image source={VA} style={styles.VASImage} />
-            <Image source={VA} style={styles.VASImage} />
-            <Image source={VA} style={styles.VASImage} />
+            {images.map((image, index) => (
+              <TouchableOpacity
+                key={index}
+                onPress={() => handleImagePress(index)}
+              >
+                <Image source={image} style={styles.VASImage} />
+              </TouchableOpacity>
+            ))}
           </ScrollView>
         </View>
 

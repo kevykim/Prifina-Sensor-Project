@@ -16,12 +16,21 @@ import GreenStar from "../../../../assets/Misc/GreenStar.png";
 import GrayStar from "../../../../assets/Misc/GrayStar.png";
 import OC from "../../../../assets/Locations/OC.png";
 
+import OC1 from '../../../../assets/OC_Mini/OC1.png'
+import OC2 from "../../../../assets/OC_Mini/OC2.png";
+import OC3 from "../../../../assets/OC_Mini/OC3.png";
+import OC4 from "../../../../assets/OC_Mini/OC4.jpg";
+
+
 import windy from "../../../../assets/Weather/windy.png";
 import golficon from "../../../../assets/Misc/golficon.png";
 
 import { useRoute } from "@react-navigation/native";
 
 import styles from '../OverviewStyles.js';
+
+import { useState } from "react";
+
 
 function OCOverview({ navigation }) {
   const fontsLoaded = useCustomFonts();
@@ -30,6 +39,16 @@ function OCOverview({ navigation }) {
   if (!fontsLoaded) {
     return null;
   }
+
+    const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+
+    const images = [OC, OC1, OC2, OC3, OC4];
+
+    const handleImagePress = (index) => {
+      setSelectedImageIndex(index);
+    };
+
+
 
   return (
     <ScrollView contentContainerStyle={styles.main}>
@@ -107,7 +126,10 @@ function OCOverview({ navigation }) {
           <View style={styles.VAPlayedContainer}>
             <Text style={styles.VAPlayedText}>Played 3 times</Text>
           </View>
-          <Image style={styles.VABigImage} source={OC} />
+          <Image
+            style={styles.VABigImage}
+            source={images[selectedImageIndex]}
+          />
         </View>
 
         <View style={{ height: 100 }}>
@@ -116,11 +138,14 @@ function OCOverview({ navigation }) {
             horizontal
             showsHorizontalScrollIndicator={false}
           >
-            <Image source={OC} style={styles.VASImage} />
-            <Image source={OC} style={styles.VASImage} />
-            <Image source={OC} style={styles.VASImage} />
-            <Image source={OC} style={styles.VASImage} />
-            <Image source={OC} style={styles.VASImage} />
+            {images.map((image, index) => (
+              <TouchableOpacity
+                key={index}
+                onPress={() => handleImagePress(index)}
+              >
+                <Image source={image} style={styles.VASImage} />
+              </TouchableOpacity>
+            ))}
           </ScrollView>
         </View>
 
@@ -143,7 +168,7 @@ function OCOverview({ navigation }) {
 
         <View style={styles.VAWeatherContainer}>
           <View style={styles.weatherBox}>
-          <Image style={styles.weatherImage} source={windy} />
+            <Image style={styles.weatherImage} source={windy} />
           </View>
           <View style={styles.VAWeatherInfo}>
             <Text style={styles.VAWTextTop}>Weather Impact</Text>
